@@ -5,31 +5,47 @@
 ## Summary
 
 The n X n bishop graph is a rook graph in rotated coordinates. Using that, this
-note extends eight OEIS sequences on the bishop graph, most untouched since 2017:
+note extends five OEIS sequences on the bishop graph, untouched since 2017:
 
-| sequence | counts | published | now | new |
+| sequence | counts | published to | now to | new |
 |---|---|---|---|---|
-| A290719 | connected induced subgraphs, black | 9 | 11 | +2 |
-| A290769 | connected induced subgraphs, white | 8 | 10 | +2 |
-| A291595 | connected induced subgraphs, bishop | 9 | 11 | +2 |
-| A289164 | dominating sets, black | 15 | 20 | +5 |
-| A289170 | dominating sets, white | 14 | 19 | +5 |
-| A295898 | dominating sets, bishop | 12 | 20 | +8 |
-| A289145 | connected dominating sets, black | 8 | 10 | +2 |
-| A289169 | connected dominating sets, white | 7 | 9 | +2 |
+| A290719 | connected induced subgraphs, black | n=9 | n=11 | +2 |
+| A290769 | connected induced subgraphs, white | n=9 | n=11 | +2 |
+| A291595 | connected induced subgraphs, bishop | n=9 | n=11 | +2 |
+| A289145 | connected dominating sets, black | n=8 | n=10 | +2 |
+| A289169 | connected dominating sets, white | n=8 | n=10 | +2 |
 
-Twenty-eight new terms. None of these entries carried a b-file, a program, a
-formula or a comment; each linked only to MathWorld. So this also supplies the
-first published method.
+Measured against each entry's **published b-file**, not its DATA line — see the
+correction below for why that distinction cost a day.
 
-**Sample new values**
+**Ten new terms.** None of these entries carried a program, a formula or a
+comment; each linked only to MathWorld. So this also supplies the first published
+method.
 
     A290719  a(10) = 1090550900687379      a(11) = 2265142469367980614
     A290769  a(10) = 1090550900687379      a(11) = 1134335726831043925
     A291595  a(10) = 2181101801374758      a(11) = 3399478196199024539
     A289145  a(9)  = 2014079802496         a(10) = 1073633875253120
-    A289164  a(16) = 340115205725187501595775418307712321805
-             a(20) = 1606872367964501668870983512803403644032444670824447498637689
+    A289169  a(9)  = 1011850062768         a(10) = 1073633875253120
+
+### A correction, and the process fix it forced
+
+The dominating-set sequences A289164, A289170 and A295898 were also computed here,
+to n=21, and are **not** contributions: their published b-files already reach
+n=50. OEIS truncates the DATA line near 260 characters, so those entries *display*
+12 to 15 terms while holding 50. The bishop shortlist was checked for exactly this;
+the domination sequences were picked up later from a grouped listing and were not.
+
+The check is now mechanical rather than remembered: `tools/probe_upstream_bfiles.py`
+records how far every published b-file goes, and a test refuses to let a staged
+file count as a contribution unless it exceeds that. Reading the DATA line as the
+term count is the single easiest way to waste a day on this kind of work.
+
+**What that computation did buy:** every one of the twenty overlapping terms
+agrees with the published b-file exactly, including a(20) at 61 digits and a(21)
+at 67. An independent author reached n=50 by an undisclosed method and we agree
+throughout, which is far stronger evidence for the engine than the fifteen DATA
+terms it was originally checked against.
 
 ## 1. The reduction
 
@@ -102,7 +118,7 @@ and no algorithm changes that.
 
 ## 4. Verification
 
-Five levels, all re-run from cold by `verify_all.py` (83 checks plus 115 tests).
+Five levels, all re-run from cold by `verify_all.py`, plus the pytest suite.
 
 - **L0** The reduction is re-derived exhaustively for n=1..12 in both colours: every
   cell pair is checked for agreement between diagonal-sharing and class-sharing.
@@ -149,7 +165,7 @@ positions.
 
 | predicate | what the state must record | states at ceiling | reaches |
 |---|---|---|---|
-| dominating sets | occupancy, 2 per class | 1125035 | **n = 18** |
+| dominating sets | occupancy, 2 per class | 1125035 | **n = 21** |
 | connected induced subgraphs | a partition of the frontier | 1343614 | n = 11 |
 | total dominating sets | population capped at 2, 6 per class | 914611 | n = 11 |
 

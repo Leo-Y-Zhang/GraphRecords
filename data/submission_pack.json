@@ -1,0 +1,90 @@
+[
+ {
+  "id": "A289145",
+  "first_n": 1,
+  "last_n": 10,
+  "total": 10,
+  "data_terms": 10,
+  "upstream_bfile_rows": 8,
+  "data_line": "1, 3, 16, 128, 4528, 176192, 25823200, 3695526272, 2014079802496, 1073633875253120",
+  "extensions": "a(11) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "connected dominating sets of the black bishop graph"
+ },
+ {
+  "id": "A289164",
+  "first_n": 1,
+  "last_n": 20,
+  "total": 20,
+  "data_terms": 15,
+  "upstream_bfile_rows": 50,
+  "data_line": "1, 3, 25, 201, 6979, 233727, 31262125, 4103802933, 2141080094839, 1107896230202475, 2284899650399760961, 4697484584102406799521, 38572957675399837886746123, 316392839278535985537956881623, 10375350180532286630209934837828053",
+  "extensions": "a(16) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "dominating sets of the black bishop graph"
+ },
+ {
+  "id": "A289169",
+  "first_n": 2,
+  "last_n": 10,
+  "total": 9,
+  "data_terms": 9,
+  "upstream_bfile_rows": 7,
+  "data_line": "3, 9, 128, 2394, 176192, 13140504, 3695526272, 1011850062768, 1073633875253120",
+  "extensions": "a(11) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "connected dominating sets of the white bishop graph"
+ },
+ {
+  "id": "A289170",
+  "first_n": 2,
+  "last_n": 20,
+  "total": 19,
+  "data_terms": 14,
+  "upstream_bfile_rows": 49,
+  "data_line": "3, 11, 201, 3413, 233727, 15544607, 4103802933, 1069035156713, 1107896230202475, 1142044772648964275, 4697484584102406799521, 19284763179499969013836925, 316392839278535985537956881623, 5187559573137612606140331666573383",
+  "extensions": "a(16) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "dominating sets of the white bishop graph"
+ },
+ {
+  "id": "A290719",
+  "first_n": 1,
+  "last_n": 11,
+  "total": 11,
+  "data_terms": 11,
+  "upstream_bfile_rows": 9,
+  "data_line": "1, 3, 22, 168, 5251, 194751, 27478594, 3852814320, 2065546517563, 1090550900687379, 2265142469367980614",
+  "extensions": "a(12) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "connected induced subgraphs of the black bishop graph"
+ },
+ {
+  "id": "A290769",
+  "first_n": 2,
+  "last_n": 11,
+  "total": 10,
+  "data_terms": 10,
+  "upstream_bfile_rows": 8,
+  "data_line": "3, 13, 168, 2844, 194751, 14062789, 3852814320, 1039212524160, 1090550900687379, 1134335726831043925",
+  "extensions": "a(12) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "connected induced subgraphs of the white bishop graph"
+ },
+ {
+  "id": "A291595",
+  "first_n": 1,
+  "last_n": 11,
+  "total": 11,
+  "data_terms": 11,
+  "upstream_bfile_rows": 9,
+  "data_line": "1, 6, 35, 336, 8095, 389502, 41541383, 7705628640, 3104759041723, 2181101801374758, 3399478196199024539",
+  "extensions": "a(12) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "connected induced subgraphs of the bishop graph"
+ },
+ {
+  "id": "A295898",
+  "first_n": 1,
+  "last_n": 20,
+  "total": 20,
+  "data_terms": 12,
+  "upstream_bfile_rows": 50,
+  "data_line": "1, 9, 275, 40401, 23819327, 54628310529, 485957447109875, 16841198512899402489, 2288889894721295267504207, 1227434056896855478379496125625, 2609457701766492960629180224228668275, 22066361417879761780103839321116134285829441",
+  "extensions": "a(13) onwards from _Leo Y. Zhang_, <DATE ON SUBMISSION DAY>",
+  "description": "dominating sets of the bishop graph"
+ }
+]

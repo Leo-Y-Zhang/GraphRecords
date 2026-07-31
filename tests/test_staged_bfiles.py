@@ -5,13 +5,16 @@ offset, and every published term reproduced unchanged. A Windows checkout will
 happily rewrite these to CRLF, which is how the MathRecords b-files went wrong,
 so .gitattributes pins them and this test catches any regression.
 """
+import json
 import pathlib
 
 import pytest
 from theseus.targets import offset_start, terms_by_n
 
-STAGE = pathlib.Path(__file__).resolve().parents[1] / "OEIS-upload"
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+STAGE = ROOT / "OEIS-upload"
 STAGED = sorted(STAGE.glob("b*.txt")) if STAGE.is_dir() else []
+UPSTREAM = ROOT / "data" / "upstream_bfiles.json"
 
 
 def _aid(path):
@@ -48,3 +51,34 @@ def test_bfile_indices_and_published_terms(path):
         assert values[n] == term, (
             f"{path.name} altered published term a({n}): {values[n]} != {term}"
         )
+
+
+@pytest.mark.skipif(not STAGED, reason="nothing staged yet")
+@pytest.mark.parametrize("path", STAGED, ids=lambda p: p.name)
+def test_staged_file_actually_extends_the_published_bfile(path):
+    """A staged file must go beyond the PUBLISHED b-file, not just beyond DATA.
+
+    OEIS truncates the DATA line near 260 characters, so an entry can show 15
+    terms while its uploaded b-file holds 50. Three sequences were staged here on
+    exactly that misreading and turned out to be known to n=50 already. Refresh
+    the snapshot with tools/probe_upstream_bfiles.py before staging anything.
+    """
+    assert UPSTREAM.is_file(), (
+        "data/upstream_bfiles.json missing - run tools/probe_upstream_bfiles.py"
+    )
+    upstream = json.loads(UPSTREAM.read_text(encoding="utf-8"))
+    aid = _aid(path)
+    assert aid in upstream, f"{aid} not probed - run tools/probe_upstream_bfiles.py"
+
+    last_published = upstream[aid]["last_n"]
+    mine = [
+        int(r.split()[0])
+        for r in path.read_text(encoding="ascii").splitlines()
+        if r.strip()
+    ]
+    if last_published is None:
+        return                      # no published b-file, so anything extends it
+    assert max(mine) > last_published, (
+        f"{path.name} reaches n={max(mine)} but the published b-file already "
+        f"reaches n={last_published} - this is not a contribution"
+    )
