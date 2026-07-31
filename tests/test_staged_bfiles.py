@@ -7,6 +7,7 @@ so .gitattributes pins them and this test catches any regression.
 """
 import json
 import pathlib
+import re
 
 import pytest
 from theseus.targets import offset_start, terms_by_n
@@ -96,3 +97,41 @@ def test_staged_file_actually_extends_the_published_bfile(path):
         f"{path.name} reaches n={max(mine)} but the published b-file already "
         f"reaches n={last_published} - this is not a contribution"
     )
+
+
+PACK = ROOT / "data" / "submission_pack.json"
+_EXT_FIRST = re.compile(r"a\((\d+)\)")
+
+
+@pytest.mark.skipif(not PACK.is_file(), reason="no submission pack built yet")
+def test_extensions_line_claims_only_genuinely_new_terms():
+    """The EXTENSIONS line must start exactly one past the published b-file.
+
+    This is the last artifact before an editor sees it, and it is where
+    over-claiming would actually do harm: an EXTENSIONS line starting too low
+    takes credit for terms somebody else published. Guarded end to end --
+    probe -> staged b-file -> EXTENSIONS line.
+    """
+    upstream = json.loads(UPSTREAM.read_text(encoding="utf-8"))
+    pack = json.loads(PACK.read_text(encoding="utf-8"))
+    assert pack, "submission pack is empty"
+
+    for rec in pack:
+        aid = rec["id"]
+        assert aid in upstream, f"{aid} in the pack but never probed"
+        rows, last_published = upstream[aid].get("rows"), upstream[aid]["last_n"]
+        assert rows is not None, f"{aid}: upstream extent UNKNOWN - re-probe"
+
+        ext = rec.get("extensions")
+        if not ext:
+            continue                       # nothing claimed, nothing to check
+        m = _EXT_FIRST.search(ext)
+        assert m, f"{aid}: cannot read a starting term from {ext!r}"
+        first_claimed = int(m.group(1))
+
+        expected = 1 if last_published is None else last_published + 1
+        assert first_claimed == expected, (
+            f"{aid}: EXTENSIONS claims from a({first_claimed}) but the published "
+            f"b-file reaches n={last_published}, so the first genuinely new term "
+            f"is a({expected}). Claiming lower takes credit for someone else's work."
+        )
