@@ -11,6 +11,27 @@ in rotated coordinates, which collapses subset counting from O(2^(n^2/2)) to a
 frontier DP over O(n) classes per side. Full reasoning in
 `docs/superpowers/specs/2026-07-31-oeis-board-graph-enumeration-design.md`.
 
+## MEMORY IS THE WALL, NOT TIME
+
+Both blow-ups were memory, not runtime: domination n=21 held 5.6 GB, connected
+dominating n=11 held 4.6 GB. State counts grow only ~2.2x per step, so the fix is
+a cheaper state, not a faster loop.
+
+**Done for `theseus/domination.py`:** the DP state is packed into ONE integer
+(hit mask | requirement mask << ny | placed bit << 2ny). A two-element tuple key
+carries ~60 bytes of object overhead on top of the ints it holds, and with
+millions of live states that overhead was the entire problem. Identical state
+counts, all 15 published terms still reproduced, and n=18 went 46.7s -> 34.6s.
+
+**Still to do:** `theseus/connected_domination.py` uses the same tuple keys AND a
+labels tuple per state, so it carries even more overhead. Pack labels at 4 bits
+per y-class with the requirement mask above them, only if the domination n=21
+attempt shows the packing bought real headroom.
+
+**Expectation, stated honestly:** packing buys roughly 2-3x in memory, which is
+one or two more terms per sequence, not five. Growth is exponential; the wall
+moves, it does not disappear.
+
 ## LOAD DISCIPLINE — read before launching anything
 
 **Run extension jobs ONE AT A TIME.** Three concurrent jobs took free RAM from
