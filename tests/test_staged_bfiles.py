@@ -70,14 +70,28 @@ def test_staged_file_actually_extends_the_published_bfile(path):
     aid = _aid(path)
     assert aid in upstream, f"{aid} not probed - run tools/probe_upstream_bfiles.py"
 
+    rows = upstream[aid].get("rows")
     last_published = upstream[aid]["last_n"]
     mine = [
         int(r.split()[0])
         for r in path.read_text(encoding="ascii").splitlines()
         if r.strip()
     ]
-    if last_published is None:
-        return                      # no published b-file, so anything extends it
+
+    # ABSENT and UNKNOWN both arrive as last_n = None and must NOT be conflated.
+    # The probe reports rows=0 when the server actually said there is no b-file,
+    # and rows=None when it could not tell (dropped connection, rate limit, HTML
+    # error page). Treating "could not tell" as "nothing is published upstream"
+    # is what lets a submission take credit for someone else's terms, so it fails
+    # here rather than passing quietly.
+    assert rows is not None, (
+        f"{aid}: upstream extent is UNKNOWN, not absent - the probe could not "
+        f"read a b-file. Re-run tools/probe_upstream_bfiles.py; do not stage on "
+        f"an unverified absence."
+    )
+    if rows == 0:
+        assert last_published is None
+        return                      # genuinely no published b-file
     assert max(mine) > last_published, (
         f"{path.name} reaches n={max(mine)} but the published b-file already "
         f"reaches n={last_published} - this is not a contribution"

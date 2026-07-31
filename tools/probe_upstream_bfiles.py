@@ -35,10 +35,21 @@ def probe(aid):
         print(f"  {aid}: probe failed ({exc}) - treating as UNKNOWN, not as absent")
         return None, None
     if "<html" in body[:200].lower():
-        return 0, None
+        # An HTML body is the server answering with a page instead of a b-file:
+        # an error, a rate limit or an interstitial. It is not the sequence
+        # saying it has no b-file. Reporting 0 here asserts "nothing is published
+        # upstream", which is exactly the claim that lets a submission take
+        # credit for terms someone else published, so it is UNKNOWN.
+        print(f"  {aid}: server returned HTML, not a b-file - treating as UNKNOWN, "
+              f"not as absent")
+        return None, None
     idx = [int(ln.split()[0]) for ln in body.splitlines()
            if ln.strip() and not ln.startswith("#")]
-    return (len(idx), max(idx)) if idx else (0, None)
+    if not idx:
+        # A 200 with a parseable but empty body is still not evidence of absence.
+        print(f"  {aid}: b-file fetched but contained no index rows - UNKNOWN")
+        return None, None
+    return len(idx), max(idx)
 
 
 def main():
