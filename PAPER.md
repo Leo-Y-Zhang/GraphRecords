@@ -134,13 +134,27 @@ Five levels, all re-run from cold by `verify_all.py`, plus the pytest suite.
   terms of A291595; reflection makes the colour classes congruent for even n, so
   `black(n) = white(n)` there; and they must differ for odd n.
 
-**Confidence in the new terms.** a(10) is confirmed three independent ways: the
-peeling algorithm, the frontier DP on the black board, and the frontier DP on the
-*white* board, which must agree at even n by the reflection identity and does
-(1090550900687379 from all three). a(11) currently rests on two runs of the
-frontier DP plus the odd-n identity `black(11) != white(11)`; that is
-reproducibility rather than independence, and the peeling cross-check at n=11 is
-outstanding. It is recorded here as computed, not as independently confirmed.
+### Confidence, stated per term rather than in aggregate
+
+An earlier draft of the automation was going to record "every staged term now
+rests on two independent algorithms". **That would have been false**, and it is
+worth saying why: the peeling cross-check covers two terms of ONE sequence, while
+ten terms are staged across five. Aggregate confidence claims hide exactly this.
+
+| term(s) | rests on | independent second algorithm? |
+|---|---|---|
+| A290719 a(10) | peeling + frontier(black) + frontier(white), which must agree at even n | **yes, three ways** |
+| A290769 a(10) | same value as A290719 a(10) by the even-n reflection isomorphism | **yes**, inherited |
+| A290719 a(11) | two runs of the frontier DP, plus `black(11) != white(11)` as required at odd n | **no** — peeling cross-check outstanding |
+| A290769 a(11) | frontier DP on the white board, plus the same odd-n check | **no** |
+| A291595 a(10), a(11) | derived as black + white; the identity is verified against all 9 published terms | inherits the rows above |
+| A289145, A289169 a(9) | the composed connectivity+domination DP; brute force to n=6, all published terms to n=8; the two boards differ as odd n requires | **no** |
+| A289145, A289169 a(10) | as above, and **the two boards return the identical value**, as the even-n isomorphism requires | partial — same algorithm, independent input |
+
+So: **one term is confirmed three ways, one inherits that, and the rest rest on a
+single algorithm** that has never disagreed with brute force or with published
+data. That is good evidence. It is not the same thing as independent confirmation,
+and the two should not be blurred into one sentence.
 
 ## 5. A second collapse: domination
 
