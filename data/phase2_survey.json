@@ -1,0 +1,2134 @@
+{
+ "A001230": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more,nice",
+  "name": "Number of undirected closed knight's tours on a 2n X 2n chessboard.",
+  "nterms": 4,
+  "offset": "1,3"
+ },
+ "A003012": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum number of cubes of side length 2 that can be packed into a 3-dimensional torus of side length 2*n+1.",
+  "nterms": 7,
+  "offset": "0,3"
+ },
+ "A006075": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more,nice",
+  "name": "Minimal number of knights needed to cover an n X n board.",
+  "nterms": 21,
+  "offset": "1,2"
+ },
+ "A075550": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Irredundance number for kings graph K(n).",
+  "nterms": 9,
+  "offset": "1,4"
+ },
+ "A075709": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Upper irredundance number for kings graph K_n on n^2 nodes.",
+  "nterms": 11,
+  "offset": "1,3"
+ },
+ "A093427": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of different two-dimensional burst patterns in the grid graph with eight neighbors.",
+  "nterms": 6,
+  "offset": "1,2"
+ },
+ "A094087": {
+  "families": [
+   "king graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Domination number of the Cartesian product of two n-cycles.",
+  "nterms": 30,
+  "offset": "1,2"
+ },
+ "A101201": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximal number of kings in the toroidal king's graph on an n X n board such that each king is attacking no more than four other kings.",
+  "nterms": 12,
+  "offset": "1,2"
+ },
+ "A103139": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Woolbright sequence: the maximum number of kings on an n X n chessboard such that every single king is attacking a number of other kings that is smaller or equal to the number of empty spaces around it.",
+  "nterms": 11,
+  "offset": "1,2"
+ },
+ "A103315": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum dominating sets for the n X n knight graph.",
+  "nterms": 18,
+  "offset": "1,3"
+ },
+ "A112675": {
+  "families": [
+   "triangular grid graph"
+  ],
+  "keyword": "more,nonn",
+  "name": "Number of directed Hamiltonian paths on a triangular grid, n vertices on each side.",
+  "nterms": 14,
+  "offset": "1,2"
+ },
+ "A158651": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of directed Hamiltonian paths on the n X n king graph.",
+  "nterms": 11,
+  "offset": "1,2"
+ },
+ "A165134": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of directed Hamiltonian paths in the n X n knight graph.",
+  "nterms": 8,
+  "offset": "1,5"
+ },
+ "A165143": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "more,nonn",
+  "name": "Length of longest cyclic knight path on an n X n chessboard that is determined (up to starting point and direction) by the fields visited.",
+  "nterms": 8,
+  "offset": "3,1"
+ },
+ "A179094": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Disorder number of the n X n grid graph.",
+  "nterms": 17,
+  "offset": "1,2"
+ },
+ "A182517": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Chromatic invariant of the square grid graph G_(n,n).",
+  "nterms": 10,
+  "offset": "1,3"
+ },
+ "A193346": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,hard,more,bref",
+  "name": "Number of (directed) Hamiltonian paths on the n X n X n grid graph.",
+  "nterms": 4,
+  "offset": "1,2"
+ },
+ "A222199": {
+  "families": [
+   "torus grid graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of Hamiltonian cycles in the graph C_n X C_n.",
+  "nterms": 8,
+  "offset": "3,1"
+ },
+ "A234620": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,bref,hard,more",
+  "name": "Numbers of undirected cycles in the n X n X n grid graph.",
+  "nterms": 3,
+  "offset": "1,2"
+ },
+ "A236753": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of simple (non-intersecting) directed paths on the grid graph P_n X P_n.",
+  "nterms": 12,
+  "offset": "1,2"
+ },
+ "A244506": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of ways to place the maximal number of points that can be placed on a j X j X j triangular grid, j=3n-2, so that no pair of them has distance sqrt(3).",
+  "nterms": 10,
+  "offset": "1,2"
+ },
+ "A247413": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,cons,more,nice",
+  "name": "Decimal expansion of the entropy constant related to A063443.",
+  "nterms": 18,
+  "offset": "1,2"
+ },
+ "A251419": {
+  "families": [
+   "grid graph",
+   "king graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Domination number of the n-triangle grid graph TG_n having n vertices along each side.",
+  "nterms": 40,
+  "offset": "1,3"
+ },
+ "A251533": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Clique covering number of obtuse knights graph N_n.",
+  "nterms": 19,
+  "offset": "1,2"
+ },
+ "A251534": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Domination number of the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 26,
+  "offset": "1,2"
+ },
+ "A255436": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of distinct, connected, order-n subgraphs of the infinite knight graph.",
+  "nterms": 8,
+  "offset": "2,3"
+ },
+ "A261752": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Minimum number of knights on an n X n chessboard such that every square is attacked.",
+  "nterms": 29,
+  "offset": "4,1"
+ },
+ "A268838": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) Hamiltonian paths in the torus grid graph C_n X C_n.",
+  "nterms": 8,
+  "offset": "1,2"
+ },
+ "A276291": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of directed Hamiltonian paths on the n X n torus grid graph.",
+  "nterms": 6,
+  "offset": "3,1"
+ },
+ "A279407": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Domination number for knight graph on an n X n toroidal board.",
+  "nterms": 16,
+  "offset": "1,2"
+ },
+ "A280984": {
+  "families": [
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Minimum number of dominoes on an n X n chessboard needed to prevent placement of another domino.",
+  "nterms": 33,
+  "offset": "1,2"
+ },
+ "A286869": {
+  "families": [
+   "grid graph",
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the grid graph P_n X P_n.",
+  "nterms": 10,
+  "offset": "1,1"
+ },
+ "A286871": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the n X n king graph.",
+  "nterms": 12,
+  "offset": "1,1"
+ },
+ "A286881": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in the n X n king graph.",
+  "nterms": 12,
+  "offset": "1,2"
+ },
+ "A286882": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in the n X n knight graph.",
+  "nterms": 7,
+  "offset": "1,3"
+ },
+ "A287071": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of dominating sets on the n X n knight graph.",
+  "nterms": 9,
+  "offset": "1,3"
+ },
+ "A287225": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of matchings in the n X n knight graph.",
+  "nterms": 11,
+  "offset": "1,3"
+ },
+ "A287228": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of matchings in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 10,
+  "offset": "1,4"
+ },
+ "A287229": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of independent vertex sets and vertex covers in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 14,
+  "offset": "1,1"
+ },
+ "A287595": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal matchings in the n X n grid graph.",
+  "nterms": 13,
+  "offset": "0,3"
+ },
+ "A288027": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal edge covers in the grid graph P_n X P_n.",
+  "nterms": 9,
+  "offset": "1,2"
+ },
+ "A288032": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,changed",
+  "name": "Number of (undirected) paths in the n X n grid graph.",
+  "nterms": 13,
+  "offset": "1,2"
+ },
+ "A288033": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) paths in the n X n king graph.",
+  "nterms": 10,
+  "offset": "1,2"
+ },
+ "A288148": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) paths in the n-triangular grid graph.",
+  "nterms": 13,
+  "offset": "0,2"
+ },
+ "A289200": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal matchings in the n X n knight graph.",
+  "nterms": 6,
+  "offset": "1,3"
+ },
+ "A289201": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal independent vertex sets (and minimal vertex covers) in the n X n knight graph.",
+  "nterms": 10,
+  "offset": "1,3"
+ },
+ "A289202": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximum matchings in the n X n knight graph.",
+  "nterms": 10,
+  "offset": "1,3"
+ },
+ "A289204": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) paths in the n X n knight graph.",
+  "nterms": 6,
+  "offset": "1,3"
+ },
+ "A289743": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of (non-null) connected induced subgraphs in the n X n X n grid graph.",
+  "nterms": 4,
+  "offset": "1,2"
+ },
+ "A289901": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) cycles in the n-triangular honeycomb acute knight graph.",
+  "nterms": 14,
+  "offset": "1,4"
+ },
+ "A289902": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of dominating sets in the n-triangular honeycomb acute knight graph.",
+  "nterms": 13,
+  "offset": "1,3"
+ },
+ "A289903": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Domination number of the n-triangular honeycomb acute knight graph.",
+  "nterms": 61,
+  "offset": "1,2"
+ },
+ "A289906": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Edge cover number of the n-triangular honeycomb acute knight graph.",
+  "nterms": 20,
+  "offset": "1,3"
+ },
+ "A290331": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) paths in the n-triangular honeycomb acute knight graph.",
+  "nterms": 12,
+  "offset": "1,3"
+ },
+ "A290382": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in the n X n grid graph.",
+  "nterms": 10,
+  "offset": "1,2"
+ },
+ "A290614": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal independent vertex sets (and minimal vertex covers) in the n-triangular honeycomb acute knight graph.",
+  "nterms": 20,
+  "offset": "1,3"
+ },
+ "A290617": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal independent vertex sets (and minimal vertex covers) in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 14,
+  "offset": "1,4"
+ },
+ "A290765": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (non-null) connected induced subgraphs in the n X n knight graph.",
+  "nterms": 8,
+  "offset": "1,2"
+ },
+ "A290784": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (non-null) connected induced subgraphs in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 8,
+  "offset": "1,2"
+ },
+ "A290785": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the n X n knight graph.",
+  "nterms": 6,
+  "offset": "1,1"
+ },
+ "A290790": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal irredundant sets in the n X n grid graph.",
+  "nterms": 8,
+  "offset": "1,2"
+ },
+ "A290874": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 6,
+  "offset": "1,4"
+ },
+ "A291098": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal irredundant sets in the n X n king graph.",
+  "nterms": 9,
+  "offset": "1,2"
+ },
+ "A291099": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal irredundant sets in the n X n knight graph.",
+  "nterms": 6,
+  "offset": "1,3"
+ },
+ "A291594": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (non-null) connected induced subgraphs in the n-triangular honeycomb acute knight graph.",
+  "nterms": 13,
+  "offset": "1,2"
+ },
+ "A291705": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of connected dominating sets in the n X n knight graph.",
+  "nterms": 7,
+  "offset": "1,4"
+ },
+ "A292139": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,bref",
+  "name": "Number of (undirected) paths in the n X n X n grid graph.",
+  "nterms": 3,
+  "offset": "1,2"
+ },
+ "A292702": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of independent vertex sets and vertex covers in the n X n X n grid graph.",
+  "nterms": 6,
+  "offset": "1,1"
+ },
+ "A295173": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Chromatic invariants of the n X n X n grid graph.",
+  "nterms": 3,
+  "offset": "1,2"
+ },
+ "A295177": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Chromatic invariant of the n X n king graph.",
+  "nterms": 10,
+  "offset": "1,2"
+ },
+ "A295178": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "sign,more",
+  "name": "Chromatic invariant of the n X n knight graph.",
+  "nterms": 5,
+  "offset": "1,2"
+ },
+ "A295190": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Chromatic invariant of the n-triangular grid graph.",
+  "nterms": 12,
+  "offset": "0,4"
+ },
+ "A295191": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Chromatic invariant of the n X n torus grid graph.",
+  "nterms": 3,
+  "offset": "3,1"
+ },
+ "A295194": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "sign,more",
+  "name": "Chromatic invariant on the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A295428": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in the n X n torus grid graph.",
+  "nterms": 5,
+  "offset": "3,1"
+ },
+ "A295429": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of connected minimal dominating sets in the n X n torus grid graph.",
+  "nterms": 8,
+  "offset": "3,1"
+ },
+ "A296527": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) cycles in the n X n torus grid graph.",
+  "nterms": 7,
+  "offset": "3,1"
+ },
+ "A296781": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Detour index of the n X n knight graph.",
+  "nterms": 3,
+  "offset": "4,1"
+ },
+ "A297385": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of Eulerian cycles in the n X n torus grid graph.",
+  "nterms": 7,
+  "offset": "1,1"
+ },
+ "A297485": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal matchings in the n-triangular grid graph.",
+  "nterms": 11,
+  "offset": "0,2"
+ },
+ "A297486": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal matchings in the n X n torus grid graph.",
+  "nterms": 7,
+  "offset": "3,1"
+ },
+ "A297488": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,bref",
+  "name": "Number of maximal matchings in the n X n X n grid graph.",
+  "nterms": 3,
+  "offset": "1,2"
+ },
+ "A297489": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal matchings in the n X n king graph.",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A297557": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximum independent vertex sets in the n-triangular grid graph.",
+  "nterms": 38,
+  "offset": "0,2"
+ },
+ "A297563": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximum matchings in the n X n X n grid graph.",
+  "nterms": 4,
+  "offset": "1,2"
+ },
+ "A297572": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum dominating sets in the n-triangular grid graph.",
+  "nterms": 21,
+  "offset": "0,2"
+ },
+ "A297666": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of chordless cycles in the n X n knight graph.",
+  "nterms": 9,
+  "offset": "1,4"
+ },
+ "A297669": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of chordless cycles in the n X n torus grid graph.",
+  "nterms": 7,
+  "offset": "3,1"
+ },
+ "A297671": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of chordless cycles in the n-triangular grid graph.",
+  "nterms": 19,
+  "offset": "0,5"
+ },
+ "A298106": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of connected dominating sets in the n X n torus grid graph.",
+  "nterms": 5,
+  "offset": "3,1"
+ },
+ "A298124": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of connected induced subgraphs in the n X n torus grid graph.",
+  "nterms": 6,
+  "offset": "3,1"
+ },
+ "A299709": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximum independent vertex sets (and minimum vertex covers) in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 20,
+  "offset": "1,5"
+ },
+ "A301649": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of longest cycles in the n X n knight graph.",
+  "nterms": 6,
+  "offset": "1,4"
+ },
+ "A302131": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) paths in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 7,
+  "offset": "1,4"
+ },
+ "A302335": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Constant coefficient of the quadratic polynomials giving the numbers of 2k-cycles in the n X n grid graph for n >= k-1.",
+  "nterms": 15,
+  "offset": "1,3"
+ },
+ "A302401": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Total domination number of the n X n king graph.",
+  "nterms": 21,
+  "offset": "2,1"
+ },
+ "A302486": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Total domination number of the n-triangular grid graph.",
+  "nterms": 24,
+  "offset": "1,1"
+ },
+ "A302508": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Total domination number of the n X n X n grid graph.",
+  "nterms": 7,
+  "offset": "2,1"
+ },
+ "A303142": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n X n grid graph.",
+  "nterms": 30,
+  "offset": "1,2"
+ },
+ "A303156": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n X n king graph.",
+  "nterms": 19,
+  "offset": "1,2"
+ },
+ "A303161": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n X n grid graph.",
+  "nterms": 15,
+  "offset": "1,2"
+ },
+ "A303210": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of total dominating sets in the n X n torus grid graph.",
+  "nterms": 6,
+  "offset": "3,1"
+ },
+ "A303213": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n X n torus grid graph.",
+  "nterms": 10,
+  "offset": "3,1"
+ },
+ "A303228": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n-triangular grid graph.",
+  "nterms": 9,
+  "offset": "1,1"
+ },
+ "A303897": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of total dominating sets in the n X n X n grid graph.",
+  "nterms": 6,
+  "offset": "1,2"
+ },
+ "A303899": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n X n X n grid graph.",
+  "nterms": 6,
+  "offset": "1,2"
+ },
+ "A304552": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of total dominating sets in the n-triangular honeycomb acute knight graph.",
+  "nterms": 14,
+  "offset": "1,4"
+ },
+ "A304554": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of total dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 11,
+  "offset": "1,5"
+ },
+ "A304557": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n-triangular honeycomb acute knight graph.",
+  "nterms": 8,
+  "offset": "1,4"
+ },
+ "A304559": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 8,
+  "offset": "1,5"
+ },
+ "A304562": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n-triangular grid graph.",
+  "nterms": 19,
+  "offset": "1,1"
+ },
+ "A304563": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n-triangular honeycomb acute knight graph.",
+  "nterms": 14,
+  "offset": "1,4"
+ },
+ "A304565": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 12,
+  "offset": "1,5"
+ },
+ "A306282": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,tabl,more",
+  "name": "Triangle read by rows: T(n,k) is the number of (directed) Hamiltonian paths in the n X k knight graph.",
+  "nterms": 33,
+  "offset": "1,9"
+ },
+ "A307025": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,tabl,more",
+  "name": "Number of (undirected) paths in the m X n knight graph (triangle read by rows with m = 1..n and n = 1..).",
+  "nterms": 25,
+  "offset": "1,5"
+ },
+ "A307919": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) paths in the n X n torus grid graph.",
+  "nterms": 4,
+  "offset": "3,1"
+ },
+ "A308131": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Number of (undirected) Hamiltonian paths in the n X n knight graph.",
+  "nterms": 8,
+  "offset": "1,5"
+ },
+ "A308156": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) cycles in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 7,
+  "offset": "1,5"
+ },
+ "A308280": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of (undirected) Hamiltonian paths in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 8,
+  "offset": "1,6"
+ },
+ "A308373": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,bref,more",
+  "name": "Number of irredundant sets in the n X n X n grid graph.",
+  "nterms": 3,
+  "offset": "1,1"
+ },
+ "A308374": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,bref,more",
+  "name": "Number of maximal irredundant sets in the n X n X n grid graph.",
+  "nterms": 3,
+  "offset": "1,2"
+ },
+ "A308586": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of (undirected) Hamiltonian paths on the n X n X n grid graph.",
+  "nterms": 4,
+  "offset": "1,2"
+ },
+ "A321250": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal independent vertex sets in the n X n torus grid graph.",
+  "nterms": 11,
+  "offset": "1,2"
+ },
+ "A321486": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal matchings in the n-triangular honeycomb acute knight graph.",
+  "nterms": 14,
+  "offset": "1,4"
+ },
+ "A323549": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum total dominating sets in the n X n knight graph.",
+  "nterms": 16,
+  "offset": "1,4"
+ },
+ "A331968": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Maximum number of unit squares of a snake-like polyomino in an n X n square box.",
+  "nterms": 17,
+  "offset": "1,2"
+ },
+ "A332391": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n X n king graph.",
+  "nterms": 10,
+  "offset": "1,2"
+ },
+ "A333759": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of self-avoiding closed paths in the n X n grid graph which pass through all vertices on four (left, right, upper, lower) sides of the graph.",
+  "nterms": 8,
+  "offset": "2,3"
+ },
+ "A336833": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,tabl,more",
+  "name": "Triangle read by rows, 1 <= k <= n: T(n,k) is the number of graceful labelings of the n X k grid graph.",
+  "nterms": 10,
+  "offset": "1,2"
+ },
+ "A337796": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,bref",
+  "name": "Total number of graceful labelings of the n X n grid graph.",
+  "nterms": 4,
+  "offset": "1,2"
+ },
+ "A342373": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Total domination number of the n-triangular honeycomb acute knight graph.",
+  "nterms": 23,
+  "offset": "3,1"
+ },
+ "A342374": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Total domination number of the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 20,
+  "offset": "5,1"
+ },
+ "A342576": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Independent domination number for knight graph on an n X n board.",
+  "nterms": 21,
+  "offset": "1,2"
+ },
+ "A346143": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal irredundant sets in the n-triangular grid graph.",
+  "nterms": 8,
+  "offset": "0,2"
+ },
+ "A346961": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n X n knight graph.",
+  "nterms": 9,
+  "offset": "1,4"
+ },
+ "A347504": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,bref",
+  "name": "Number of dominating sets in the n X n X n grid graph.",
+  "nterms": 3,
+  "offset": "1,2"
+ },
+ "A347510": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 7,
+  "offset": "1,4"
+ },
+ "A347554": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum dominating sets in the n X n king graph.",
+  "nterms": 22,
+  "offset": "1,2"
+ },
+ "A347557": {
+  "families": [
+   "grid graph",
+   "king graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum dominating sets in the torus grid graph C_n square C_n.",
+  "nterms": 15,
+  "offset": "3,1"
+ },
+ "A347613": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,bref,more",
+  "name": "Number of maximal irredundant sets in the torus grid graph C_n square C_n.",
+  "nterms": 3,
+  "offset": "3,1"
+ },
+ "A347632": {
+  "families": [
+   "grid graph",
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum dominating sets in the n X n grid graph.",
+  "nterms": 22,
+  "offset": "1,2"
+ },
+ "A347639": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in the n-triangular grid graph.",
+  "nterms": 11,
+  "offset": "0,2"
+ },
+ "A347640": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in n-triangular honeycomb acute knight graph.",
+  "nterms": 7,
+  "offset": "1,3"
+ },
+ "A347723": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the n X n torus grid graph.",
+  "nterms": 4,
+  "offset": "3,1"
+ },
+ "A347724": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the n-triangular grid graph.",
+  "nterms": 11,
+  "offset": "0,1"
+ },
+ "A347995": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal irredundant sets in the n-triangular honeycomb acute knight graph.",
+  "nterms": 7,
+  "offset": "1,3"
+ },
+ "A347997": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal irredundant sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 7,
+  "offset": "1,4"
+ },
+ "A348000": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n X n torus grid graph.",
+  "nterms": 5,
+  "offset": "3,1"
+ },
+ "A351388": {
+  "families": [
+   "grid graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum k for which the grid graph P_2 X P_k is a subgraph of the n X n knight graph.",
+  "nterms": 9,
+  "offset": "3,2"
+ },
+ "A351389": {
+  "families": [
+   "grid graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum k for which the grid graph P_3 X P_k is a subgraph of the n X n knight graph.",
+  "nterms": 12,
+  "offset": "3,3"
+ },
+ "A351390": {
+  "families": [
+   "grid graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum k for which the grid graph P_4 X P_k is a subgraph of the n X n knight graph.",
+  "nterms": 15,
+  "offset": "3,3"
+ },
+ "A351391": {
+  "families": [
+   "grid graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum k for which the grid graph P_2 X P_k is an induced subgraph of the n X n knight graph.",
+  "nterms": 16,
+  "offset": "3,2"
+ },
+ "A351392": {
+  "families": [
+   "grid graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum k for which the grid graph P_3 X P_k is an induced subgraph of the n X n knight graph.",
+  "nterms": 22,
+  "offset": "3,3"
+ },
+ "A351393": {
+  "families": [
+   "grid graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum k for which the grid graph P_4 X P_k is an induced subgraph of the n X n knight graph.",
+  "nterms": 34,
+  "offset": "3,3"
+ },
+ "A351591": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal edge coverings of the n-triangular honeycomb acute knight graph.",
+  "nterms": 8,
+  "offset": "1,4"
+ },
+ "A357357": {
+  "families": [
+   "grid graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Length of the longest induced cycle in the n X n grid graph.",
+  "nterms": 17,
+  "offset": "1,2"
+ },
+ "A357358": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Length of the longest induced cycle in the n X n torus grid graph.",
+  "nterms": 12,
+  "offset": "3,1"
+ },
+ "A357359": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum number of nodes in an induced path (or chordless path or snake path) in the n X n torus grid graph.",
+  "nterms": 7,
+  "offset": "3,1"
+ },
+ "A357500": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Largest number of nodes of an induced path in the n X n knight graph.",
+  "nterms": 8,
+  "offset": "1,3"
+ },
+ "A357501": {
+  "families": [
+   "king graph",
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Length of longest induced cycle in the n X n king graph.",
+  "nterms": 17,
+  "offset": "1,2"
+ },
+ "A358177": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of Eulerian orientations of a (labeled) 2n-dimensional hypercube graph, Q_2n. Q_2n is also the n-dimensional torus grid graph (C_4)^n.",
+  "nterms": 4,
+  "offset": "0,2"
+ },
+ "A358697": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of self-avoiding closed paths in the 6 X n grid graph which pass through all vertices on four (left, right, upper, lower) sides of the graph.",
+  "nterms": 12,
+  "offset": "2,2"
+ },
+ "A360200": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of induced paths in the n X n grid graph.",
+  "nterms": 15,
+  "offset": "1,2"
+ },
+ "A360914": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximum induced cycles in the n X n grid graph.",
+  "nterms": 17,
+  "offset": "1,4"
+ },
+ "A360919": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximum induced trees in the n X n grid graph.",
+  "nterms": 15,
+  "offset": "1,2"
+ },
+ "A360921": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Maximum number of vertices in an induced tree in the n X n grid graph.",
+  "nterms": 15,
+  "offset": "1,2"
+ },
+ "A361453": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of colorings of the n X n knight graph up to permutation of the colors.",
+  "nterms": 6,
+  "offset": "1,2"
+ },
+ "A362016": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Maximal number of unmarked cells with at least 3 marked neighboring cells in the n X n kings' graph.",
+  "nterms": 15,
+  "offset": "1,3"
+ },
+ "A362498": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of vertex cuts in the n X n knight graph.",
+  "nterms": 8,
+  "offset": "1,3"
+ },
+ "A362520": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of vertex cuts in the n-triangular grid graph.",
+  "nterms": 11,
+  "offset": "0,3"
+ },
+ "A362797": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of vertex cuts in the n X n torus grid graph.",
+  "nterms": 6,
+  "offset": "3,1"
+ },
+ "A362808": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimal vertex cuts in the n X n torus grid graph.",
+  "nterms": 4,
+  "offset": "3,1"
+ },
+ "A363815": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Number of minors in the n X n knight graph.",
+  "nterms": 4,
+  "offset": "1,2"
+ },
+ "A364665": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Lower independence number of the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 25,
+  "offset": "1,2"
+ },
+ "A364666": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Lower independence number of the n X n X n grid graph.",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A366559": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Number of minors in the n X n grid graph.",
+  "nterms": 4,
+  "offset": "1,2"
+ },
+ "A366778": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of nonequivalent cycles of length 2n in the (2n+1) X (2n+1) knight graph.",
+  "nterms": 7,
+  "offset": "2,1"
+ },
+ "A367928": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Lower matching number of the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 51,
+  "offset": "1,4"
+ },
+ "A368499": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of non-congruent simple polygons with 2n sides on the unbounded chessboard such that each side is an edge of the corresponding knight graph.",
+  "nterms": 7,
+  "offset": "2,1"
+ },
+ "A368800": {
+  "families": [
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Lower independence number of the n X n torus grid graph C_n square C_n.",
+  "nterms": 19,
+  "offset": "3,1"
+ },
+ "A368896": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Lower matching number of the n X n knight graph.",
+  "nterms": 10,
+  "offset": "1,3"
+ },
+ "A369692": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Connected domination number of the n X n grid graph.",
+  "nterms": 16,
+  "offset": "1,2"
+ },
+ "A370227": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of chordless cycles in the n-triangular honeycomb acute knight graph.",
+  "nterms": 20,
+  "offset": "1,8"
+ },
+ "A370230": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of chordless cycles in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 11,
+  "offset": "1,5"
+ },
+ "A370428": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Connected domination number of the n X n king graph.",
+  "nterms": 16,
+  "offset": "1,4"
+ },
+ "A373393": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum connected dominating sets in the n-triangular grid graph.",
+  "nterms": 17,
+  "offset": "0,2"
+ },
+ "A375419": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of maximal matchings in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 8,
+  "offset": "1,4"
+ },
+ "A375569": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "a(n) = number of minimum dominating sets in the stacked prism graph C_n X P_n.",
+  "nterms": 24,
+  "offset": "1,2"
+ },
+ "A375601": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "a(n) = domination number of the stacked prism graph C_n X P_n.",
+  "nterms": 24,
+  "offset": "1,2"
+ },
+ "A378763": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Lower matching number for the n X n torus grid graph.",
+  "nterms": 14,
+  "offset": "3,1"
+ },
+ "A379177": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Lower matching number of the n X n X n grid graph.",
+  "nterms": 5,
+  "offset": "1,2"
+ },
+ "A379353": {
+  "families": [
+   "grid graph",
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Connected domination number of the n-triangular grid graph.",
+  "nterms": 17,
+  "offset": "0,3"
+ },
+ "A380859": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum connected dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 11,
+  "offset": "1,6"
+ },
+ "A381560": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 16,
+  "offset": "1,5"
+ },
+ "A381730": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum connected dominating sets in the n X n grid graph.",
+  "nterms": 16,
+  "offset": "1,2"
+ },
+ "A381796": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of connected dominating sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 7,
+  "offset": "1,6"
+ },
+ "A382047": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Connected domination number of the n X n knight graph.",
+  "nterms": 8,
+  "offset": "4,1"
+ },
+ "A382090": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Connected domination number of the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 8,
+  "offset": "6,1"
+ },
+ "A382206": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum connected dominating sets in the n X n king graph.",
+  "nterms": 16,
+  "offset": "1,2"
+ },
+ "A382207": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum connected dominating sets in the n X n knight graph.",
+  "nterms": 10,
+  "offset": "1,4"
+ },
+ "A382530": {
+  "families": [
+   "torus grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum connected dominating sets in the n X n torus grid graph.",
+  "nterms": 5,
+  "offset": "3,1"
+ },
+ "A384616": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,tabl,more",
+  "name": "A(m,n) is the maximum sum of absolute differences of the labels of adjacent vertices of the grid graph P_m X P_n where the m*n labels are exactly 1, 2, ..., m*n.",
+  "nterms": 9,
+  "offset": "1,3"
+ },
+ "A387799": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of fundamentally different graceful labelings of the n X n grid graph.",
+  "nterms": 4,
+  "offset": "1,3"
+ },
+ "A387910": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of fundamentally different graceful labelings of the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 5,
+  "offset": "1,5"
+ },
+ "A389237": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of fundamentally different graceful labelings of the n X n knight graph.",
+  "nterms": 4,
+  "offset": "1,3"
+ },
+ "A390122": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of directed cycles in the n X n grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,3"
+ },
+ "A391009": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of (undirected) Hamiltonian paths on the 9 X n knight graph.",
+  "nterms": 8,
+  "offset": "1,3"
+ },
+ "A391479": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Maximum number of vertices in a uniquely traceable induced subgraph of the n X n grid graph.",
+  "nterms": 8,
+  "offset": "0,3"
+ },
+ "A391825": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of partitions of the vertices of the n X n grid graph into dominating sets.",
+  "nterms": 8,
+  "offset": "1,2"
+ },
+ "A391918": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the n-triangular honeycomb acute knight graph.",
+  "nterms": 13,
+  "offset": "1,1"
+ },
+ "A391976": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 6,
+  "offset": "1,1"
+ },
+ "A392418": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of mutual-visibility sets in the n X n grid graph.",
+  "nterms": 7,
+  "offset": "1,1"
+ },
+ "A393922": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,bref,more",
+  "name": "Number of Hamiltonian cycles in the n-triangular honeycomb obtuse knight graph.",
+  "nterms": 9,
+  "offset": "1,8"
+ },
+ "A394065": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of undirected paths in the n X n grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A394066": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of directed paths in the n X n grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A394067": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of undirected cycles in the n X n grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,3"
+ },
+ "A394659": {
+  "families": [
+   "triangular grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of independent vertex sets of size 7 in the n-triangular grid graph.",
+  "nterms": 20,
+  "offset": "1,5"
+ },
+ "A395462": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of undirected self-avoiding paths in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A396337": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of directed self-avoiding paths in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A396482": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of undirected Hamiltonian paths in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A396483": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of undirected Hamiltonian cycles in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A397016": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of undirected self-avoiding cycles in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A397017": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of directed self-avoiding cycles in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A397059": {
+  "families": [
+   "king graph"
+  ],
+  "keyword": "nonn,more,hard",
+  "name": "Number of free polyplets (king-move connected sets of n cells on the square grid, adjacent if they share an edge or a corner) whose king-adjacency graph is a tree.",
+  "nterms": 11,
+  "offset": "1,2"
+ },
+ "A397189": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of directed Hamiltonian paths in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A397190": {
+  "families": [
+   "grid graph",
+   "torus grid graph"
+  ],
+  "keyword": "nonn,walk,hard,more,changed",
+  "name": "Number of directed Hamiltonian cycles in the n X n torus grid graph, reduced for symmetry (with rotations, reflections, and translations not counted as distinct).",
+  "nterms": 7,
+  "offset": "1,2"
+ },
+ "A397747": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of assembly trees for the n X n grid graph.",
+  "nterms": 5,
+  "offset": "1,2"
+ },
+ "A397749": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more",
+  "name": "Number of minimum independent dominating sets in the n X n grid graph.",
+  "nterms": 22,
+  "offset": "1,2"
+ },
+ "A397797": {
+  "families": [
+   "knight graph"
+  ],
+  "keyword": "nonn,hard,more",
+  "name": "Number of free ouroboros polyknights with 2*n cells.",
+  "nterms": 6,
+  "offset": "1,2"
+ },
+ "A398272": {
+  "families": [
+   "grid graph"
+  ],
+  "keyword": "nonn,more,new",
+  "name": "Number of minimum feedback vertex sets in the n X n grid graph.",
+  "nterms": 16,
+  "offset": "1,2"
+ }
+}
