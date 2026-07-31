@@ -1,0 +1,102 @@
+{
+ "A295428": {
+  "keyword": "nonn,more",
+  "name": "Number of minimal dominating sets in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   48,
+   130,
+   10255,
+   543926,
+   54837748
+  ]
+ },
+ "A295429": {
+  "keyword": "nonn,more",
+  "name": "Number of connected minimal dominating sets in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   6,
+   8,
+   200,
+   648,
+   0,
+   0,
+   12636,
+   64520
+  ]
+ },
+ "A298106": {
+  "keyword": "nonn,more",
+  "name": "Number of connected dominating sets in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   325,
+   28853,
+   8823571,
+   9582831839,
+   37120192089023
+  ]
+ },
+ "A298124": {
+  "keyword": "nonn,more",
+  "name": "Number of connected induced subgraphs in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   397,
+   37293,
+   12746301,
+   15822272735,
+   71947571249709,
+   1200506645405599669
+  ]
+ },
+ "A303210": {
+  "keyword": "nonn,more",
+  "name": "Number of total dominating sets in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   334,
+   33489,
+   11343461,
+   14511093444,
+   67561889987621,
+   1157220349268282289
+  ]
+ },
+ "A347723": {
+  "keyword": "nonn,more",
+  "name": "Number of irredundant sets in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   94,
+   3239,
+   287611,
+   66850612
+  ]
+ },
+ "A348000": {
+  "keyword": "nonn,more",
+  "name": "Number of minimal total dominating sets in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   51,
+   144,
+   12405,
+   239121,
+   19226025
+  ]
+ },
+ "A382530": {
+  "keyword": "nonn,more",
+  "name": "Number of minimum connected dominating sets in the n X n torus grid graph.",
+  "offset": "3,1",
+  "terms": [
+   6,
+   192,
+   200,
+   54288,
+   666400
+  ]
+ }
+}
