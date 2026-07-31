@@ -34,7 +34,7 @@
   - `bishop_adjacent(a: tuple[int,int], b: tuple[int,int]) -> bool`
   - `adjacency_masks(cells, adjacent) -> list[int]` — bitmask neighbours, index-aligned to `cells`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 # tests/test_boards.py
@@ -66,12 +66,12 @@ def test_white_3x3_is_a_four_cycle():
     assert [bin(m).count("1") for m in nbr] == [2, 2, 2, 2]
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_boards.py -v`
 Expected: FAIL, `ModuleNotFoundError: No module named 'theseus'`
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 # theseus/boards.py
@@ -115,12 +115,12 @@ def adjacency_masks(cells, adjacent):
     return nbr
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_boards.py -v`
 Expected: PASS, 5 passed
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -143,7 +143,7 @@ git commit -m "Add board construction for bishop graphs"
   - `verify_isomorphism(n: int, colour: str) -> None` — raises `AssertionError` on any violation
   - `class_grid(n: int, colour: str) -> tuple[list[list[int]], int, int]` — returns `(grid, nx, ny)` where `grid[i][j]` is the number of cells in x-class `i` and y-class `j`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 # tests/test_reduction.py
@@ -179,12 +179,12 @@ def test_each_x_class_meets_a_contiguous_y_interval():
         assert used == list(range(used[0], used[-1] + 1))
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_reduction.py -v`
 Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.reduction'`
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 # theseus/reduction.py
@@ -247,12 +247,12 @@ def class_grid(n, colour):
     return grid, len(xs), len(ys)
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_reduction.py -v`
 Expected: PASS, 28 passed
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -274,7 +274,7 @@ git commit -m "Add bishop to rook reduction with exhaustive isomorphism check"
   - `connected_induced_count(nbr: list[int]) -> int`
   - `brute_connected_bishop(n: int, colour: str) -> int`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 # tests/test_brute.py
@@ -303,12 +303,12 @@ def test_single_cell_board():
     assert brute_connected_bishop(1, "white") == 0
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_brute.py -v`
 Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.brute'`
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 # theseus/brute.py
@@ -349,12 +349,12 @@ def brute_connected_bishop(n, colour):
     return connected_induced_count(adjacency_masks(cells, bishop_adjacent))
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_brute.py -v`
 Expected: PASS, 9 passed
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -378,7 +378,7 @@ git commit -m "Add exhaustive reference counter for connected induced subgraphs"
   - `load_targets() -> dict[str, dict]` — keyed by A-number, each with `name`, `offset`, `keyword`, `terms` (list of `int`)
   - `published_terms(aid: str) -> list[int]`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 # tests/test_targets.py
@@ -405,12 +405,12 @@ def test_offset_recorded_for_every_target():
         assert rec["offset"], aid
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_targets.py -v`
 Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.targets'`
 
-- [ ] **Step 3: Write the fetcher and the loader**
+- [x] **Step 3: Write the fetcher and the loader**
 
 ```python
 # tools/fetch_targets.py
@@ -490,17 +490,17 @@ def published_terms(aid):
     return load_targets()[aid]["terms"]
 ```
 
-- [ ] **Step 4: Generate the snapshot**
+- [x] **Step 4: Generate the snapshot**
 
 Run: `cd /c/dev/Theseus && python tools/fetch_targets.py`
 Expected: `wrote ...data/targets.json with 110 sequences` (a slightly larger count is fine if OEIS has grown; a much smaller one means the search failed, so stop and investigate)
 
-- [ ] **Step 5: Run tests to verify they pass**
+- [x] **Step 5: Run tests to verify they pass**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_targets.py -v`
 Expected: PASS, 4 passed
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -522,7 +522,7 @@ git commit -m "Snapshot the bishop graph family and add offline target loader"
 
 **Why this exists:** it is slow (about 9^n) but structurally different from the frontier DP in Task 6, so it serves as the independent cross-check at verification level L3.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 # tests/test_connected_peeling.py
@@ -543,12 +543,12 @@ def test_reproduces_published_black_bishop(n):
     assert peeling_connected(n, "black") == published_terms("A290719")[n - 1]
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_peeling.py -v`
 Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.connected'`
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 # theseus/connected.py
@@ -625,12 +625,12 @@ def peeling_connected(n, colour):
     return sum(C(X, Y) for X in range(1, 1 << nx) for Y in range(1, 1 << ny))
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_peeling.py -v`
 Expected: PASS, 20 passed. The n=8 case takes roughly 4 seconds.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -654,7 +654,7 @@ git commit -m "Add exact support peeling counter validated to eight published te
 
 **Algorithm.** Process x-classes in order, carrying a partition of the y-classes into connected blocks, with a distinguished label for "untouched". At x-class `i`, choose a non-empty subset `T` of the y-classes it meets, contributing `prod over j in T of (2**grid[i][j] - 1)` and merging every block meeting `T` into one; or place nothing, contributing 1. Because each x-class meets a contiguous y-interval (asserted in Task 2), a y-class below the current interval can never be touched again. If such a finalised y-class sits in a block separate from any still-active block, no future merge can join them, so that state can never reach a single component and is pruned. At the end, count states whose touched y-classes form exactly one block.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 # tests/test_connected_frontier.py
@@ -679,12 +679,12 @@ def test_reproduces_every_published_white_bishop_term(n):
     assert frontier_connected(n, "white") == published_terms("A290769")[n - 1]
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_frontier.py -v`
 Expected: FAIL, `ImportError: cannot import name 'frontier_connected'`
 
-- [ ] **Step 3: Append the implementation**
+- [x] **Step 3: Append the implementation**
 
 ```python
 # appended to theseus/connected.py
@@ -772,14 +772,14 @@ def frontier_state_peak(n, colour):
     return _frontier_run(n, colour)[1]
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_frontier.py -v`
 Expected: PASS, 34 passed
 
 If any case fails, do NOT adjust the expected values — they are published data. Debug the DP against `peeling_connected` at the smallest failing n, where both are cheap.
 
-- [ ] **Step 5: Measure state growth and record it**
+- [x] **Step 5: Measure state growth and record it**
 
 Run:
 ```bash
@@ -793,7 +793,7 @@ for n in range(1, 15):
 ```
 Expected: peak state counts and timings printed per n. Stop at whatever n exceeds about 10 minutes or 4 GB. Record the table in `PAPER.md` in Task 9.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -813,7 +813,7 @@ git commit -m "Add frontier partition DP validated against peeling and published
 
 **Why this exists:** L0-L3 could all share a modelling error. The bishop graph having exactly two components is a fact about the problem, not about our code, so it catches errors the other levels cannot.
 
-- [ ] **Step 1: Write the test**
+- [x] **Step 1: Write the test**
 
 ```python
 # tests/test_identities.py
@@ -834,12 +834,12 @@ def test_white_board_is_empty_at_n_equals_one():
     assert frontier_connected(1, "white") == 0
 ```
 
-- [ ] **Step 2: Run the test**
+- [x] **Step 2: Run the test**
 
 Run: `cd /c/dev/Theseus && python -m pytest tests/test_identities.py -v`
 Expected: PASS, 10 passed
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -859,7 +859,7 @@ git commit -m "Add cross sequence identity gate for the two bishop components"
 - Consumes: everything above
 - Produces: an executable gate that exits non-zero on any failure
 
-- [ ] **Step 1: Write the gate**
+- [x] **Step 1: Write the gate**
 
 ```python
 # verify_all.py
@@ -938,7 +938,7 @@ if __name__ == "__main__":
     sys.exit(main())
 ```
 
-- [ ] **Step 2: Write the README**
+- [x] **Step 2: Write the README**
 
 ```markdown
 # Theseus
@@ -970,12 +970,12 @@ claim written in prose here or anywhere else.
 - `verify_all.py` - the gate
 ```
 
-- [ ] **Step 3: Run the gate**
+- [x] **Step 3: Run the gate**
 
 Run: `cd /c/dev/Theseus && python verify_all.py`
 Expected: final line `verify_all: ALL <N> CHECKS PASSED`, exit code 0
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 cd /c/dev/Theseus
@@ -995,7 +995,7 @@ git commit -m "Add the verification gate and repository README"
 **Interfaces:**
 - Consumes: `frontier_connected`, `frontier_state_peak`, `published_terms`
 
-- [ ] **Step 1: Write the extension driver**
+- [x] **Step 1: Write the extension driver**
 
 ```python
 # tools/extend.py
@@ -1060,12 +1060,12 @@ if __name__ == "__main__":
     main()
 ```
 
-- [ ] **Step 2: Run the extension**
+- [x] **Step 2: Run the extension**
 
 Run: `cd /c/dev/Theseus && python tools/extend.py --limit 20 --budget 1800`
 Expected: every published term reproduced, then `NEW` lines for each term beyond the published data, then staged b-file paths. If it aborts on a published term, stop and debug — do not stage.
 
-- [ ] **Step 3: Verify the staged b-files are LF-only**
+- [x] **Step 3: Verify the staged b-files are LF-only**
 
 Run:
 ```bash
@@ -1081,7 +1081,7 @@ for p in sorted(pathlib.Path('OEIS-upload').glob('b*.txt')):
 ```
 Expected: every file reports `LF-ok no-BOM trailing-LF`
 
-- [ ] **Step 4: Write PAPER.md**
+- [x] **Step 4: Write PAPER.md**
 
 Record, with the actual numbers produced in Task 6 Step 5 and Task 9 Step 2:
 the reduction theorem and its proof (copy from `theseus/reduction.py`); the two
@@ -1092,7 +1092,7 @@ infeasible and why. State plainly that this extends terms, and does not achieve
 an order-of-magnitude increase, because square-board counts grow doubly
 exponentially.
 
-- [ ] **Step 5: Write the staging README**
+- [x] **Step 5: Write the staging README**
 
 ```
 # OEIS-upload
@@ -1109,7 +1109,7 @@ entry does not already define; full first names rather than initials in LINKS;
 never alter existing lines; wrap multi-paragraph comments with (Start) / (End).
 ```
 
-- [ ] **Step 6: Re-run the gate and commit**
+- [x] **Step 6: Re-run the gate and commit**
 
 Run: `cd /c/dev/Theseus && python verify_all.py`
 Expected: `verify_all: ALL <N> CHECKS PASSED`, exit code 0
