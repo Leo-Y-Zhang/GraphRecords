@@ -47,3 +47,13 @@ output to published data indexes by n, never by list position.
 
 Nothing here has been submitted to OEIS, and nothing will be without explicit
 per-submission authorisation.
+
+## Verified from a clean clone
+
+2026-07-31: cloned fresh from GitHub into an empty directory and run cold —
+**189 gate checks + 300 tests, exit 0**, with no local state of any kind. The
+staged b-files also come out of a fresh Windows checkout **LF-only**, which is
+what `.gitattributes` is for: git would otherwise rewrite them to CRLF and
+silently violate the OEIS b-file spec.
+
+    git clone --branch phase1-bishop-family <repo> && cd Theseus && python verify_all.py

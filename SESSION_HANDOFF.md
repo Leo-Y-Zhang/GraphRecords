@@ -123,6 +123,8 @@ and the two-component identity holds for all 9 published terms of A291595.
 Phase 1 is COMPLETE and written up. Nothing is half-done. If you pick this up:
 
 1. **Before anything else**, run `python verify_all.py` and confirm exit 0.
+   (Verified 2026-07-31 from a CLEAN CLONE: 189 checks + 300 tests, exit 0, no
+   local state, and the staged b-files come out of a fresh checkout LF-only.)
 2. **Before staging any new sequence**, run `tools/probe_upstream_bfiles.py`.
    Reading the DATA line as the term count already cost a day once.
 3. The ten staged terms wait on A217058 being accepted, then one submission at a
