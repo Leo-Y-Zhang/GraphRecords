@@ -16,20 +16,25 @@ Since phi is injective the class grid is 0/1, so "place at least one cell in thi
 """
 from theseus.reduction import class_grid
 
-
-# The DP state is packed into ONE integer, the same fix that let the domination
-# sweep reach n=21 after the tuple-keyed version was killed holding 5.6 GB:
+# The DP state is a single `bytes` key:
 #
-#     bits [0, LBITS*ny)              block label per y-class, 0 = untouched
-#     bits [LBITS*ny, LBITS*ny+ny)    requirement mask
-#     bits above that                 the block this x-class is building, 0 = none
+#     key[0:ny]        one block label per y-class, 0 = untouched
+#     key[ny:ny+4]     requirement mask, little-endian
+#     key[ny+4]        the block this x-class is building, 0 = none (transient)
 #
-# A tuple key costs ~60 bytes of object overhead and a labels TUPLE costs another
-# 56 + 8*ny on top of that, so this sweep was carrying more overhead per state
-# than the domination one did. Five bits per label allows 31 blocks, comfortably
-# above the at-most-ny that the stranded-block prune permits.
-LBITS = 5
-LMASK = (1 << LBITS) - 1
+# Three representations were measured on a 12-y-class state before choosing:
+#
+#     tuple(labels) + int   ~556 bytes    unpack n/a
+#     packed integer        ~ 36 bytes    unpack 0.493 us
+#     bytes                 ~ 49 bytes    unpack 0.079 us
+#
+# The integer is marginally smaller, but this sweep rebuilds a labels LIST on
+# every transition, so it paid for that with hand-rolled shift loops and ran 2x
+# slower than the tuple version it replaced. `bytes` keeps ~11x of the tuple's
+# memory saving while `list(key)` and `bytes(labels)` do the conversion at C
+# speed, which is 6x faster than the shifts. Memory was the wall here (n=11 died
+# holding 4.6 GB) but paying 2x in time to fix it was a bad trade.
+REQ_WIDTH = 4
 
 
 def _canonical_with(labels, cur):
@@ -47,18 +52,7 @@ def _canonical_with(labels, cur):
             w = remap[v] = nxt
             nxt += 1
         out.append(w)
-    return tuple(out), (remap[cur] if cur is not None else None)
-
-
-def _pack_labels(labels):
-    v = 0
-    for j, x in enumerate(labels):
-        v |= x << (LBITS * j)
-    return v
-
-
-def _unpack_labels(packed, ny):
-    return [(packed >> (LBITS * j)) & LMASK for j in range(ny)]
+    return out, remap[cur] if cur else 0
 
 
 def _cds_run(n, colour):
@@ -72,11 +66,8 @@ def _cds_run(n, colour):
         used = [j for j, v in enumerate(grid[i]) if v]
         intervals.append((used[0], used[-1]) if used else (0, -1))
 
-    RSH = LBITS * ny                      # where the requirement mask starts
-    CSH = RSH + ny                        # where the carried block id starts
-    req_mask_all = (1 << ny) - 1
-
-    states = {0: 1}                       # packed: labels | req << RSH
+    zero_req = (0).to_bytes(REQ_WIDTH, "little")
+    states = {bytes(ny) + zero_req: 1}
     peak = 1
 
     for i in range(nx):
@@ -85,22 +76,21 @@ def _cds_run(n, colour):
         cols_mask = sum(1 << j for j in cols)
 
         future_lo = min((intervals[k][0] for k in range(i + 1, nx)), default=ny)
-        done_mask = (1 << future_lo) - 1
+        keep_mask = ~((1 << future_lo) - 1)
 
         # Decide this x-class one y-class at a time rather than enumerating all
         # 2^|cols| subsets: the middle x-class of a large board meets ~n
         # y-classes, and that enumeration dominates the runtime even though the
-        # state count stays modest. `cur` is the block this x-class is building,
-        # or None while it has placed nothing.
-        partial = dict(states)            # carried block id starts at 0 = none
+        # state count stays modest.
+        partial = {k + b"\x00": v for k, v in states.items()}
         for j in cols:
             step = {}
             get = step.get
             for key, count in partial.items():
                 step[key] = get(key, 0) + count                 # skip this y-class
 
-                labels = _unpack_labels(key, ny)
-                cur = (key >> CSH) & LMASK
+                labels = list(key[:ny])
+                cur = key[ny + REQ_WIDTH]
                 if cur == 0:
                     if labels[j]:
                         ncur = labels[j]
@@ -117,18 +107,16 @@ def _cds_run(n, colour):
                     else:
                         labels[j] = cur
                 canon, ncur = _canonical_with(labels, ncur)
-                nk = (_pack_labels(canon)
-                      | (((key >> RSH) & req_mask_all) << RSH)
-                      | (ncur << CSH))
+                nk = bytes(canon) + key[ny:ny + REQ_WIDTH] + bytes((ncur,))
                 step[nk] = get(nk, 0) + count
             partial = step
 
         nxt = {}
+        get = nxt.get
         for key, count in partial.items():
-            labels = _unpack_labels(key, ny)
-            req = (key >> RSH) & req_mask_all
-            cur = (key >> CSH) & LMASK
-            r = req if cur else req | cols_mask
+            labels = list(key[:ny])
+            req = int.from_bytes(key[ny:ny + REQ_WIDTH], "little")
+            r = req if key[ny + REQ_WIDTH] else req | cols_mask
 
             # a finalised y-class that was required must actually be occupied
             bad = False
@@ -146,17 +134,16 @@ def _cds_run(n, colour):
             if len(stranded) > 1 or (stranded and active):
                 continue
 
-            nxt_key = _pack_labels(labels) | ((r & ~done_mask) << RSH)
-            nxt[nxt_key] = nxt.get(nxt_key, 0) + count
+            nk = key[:ny] + (r & keep_mask).to_bytes(REQ_WIDTH, "little")
+            nxt[nk] = get(nk, 0) + count
         states = nxt
         peak = max(peak, len(states))
 
     total = 0
     for key, count in states.items():
-        if (key >> RSH) & req_mask_all:
+        if int.from_bytes(key[ny:ny + REQ_WIDTH], "little"):
             continue
-        labels = _unpack_labels(key, ny)
-        if len({v for v in labels if v}) == 1:
+        if len({v for v in key[:ny] if v}) == 1:
             total += count
     return total, peak
 
