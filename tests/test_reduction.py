@@ -33,3 +33,16 @@ def test_each_x_class_meets_a_contiguous_y_interval():
 def test_both_is_rejected():
     with pytest.raises(ValueError):
         rook_coords(4, "both")
+
+
+@pytest.mark.parametrize("n", range(1, 13))
+@pytest.mark.parametrize("colour", ["black", "white"])
+def test_class_grid_is_zero_one(n, colour):
+    """phi is injective, so an (x-class, y-class) pair holds at most one cell.
+
+    The domination counters rely on this: it makes a cell subset the same thing
+    as a subset of the occupied grid positions, so per-class counts are just
+    populations rather than multiplicities.
+    """
+    grid, nx, ny = class_grid(n, colour)
+    assert all(v in (0, 1) for row in grid for v in row)
