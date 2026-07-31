@@ -5,23 +5,31 @@
 ## Summary
 
 The n X n bishop graph is a rook graph in rotated coordinates. Using that, this
-note extends three OEIS sequences that had stood unchanged since 2017 and are
-flagged `keyword:more` by OEIS itself:
+note extends eight OEIS sequences on the bishop graph, most untouched since 2017:
 
-| sequence | graph | published | now | new terms |
+| sequence | counts | published | now | new |
 |---|---|---|---|---|
-| A290719 | black bishop | 9 (n=1..9) | 11 (n=1..11) | a(10), a(11) |
-| A290769 | white bishop | 8 (n=2..9) | 10 (n=2..11) | a(10), a(11) |
-| A291595 | bishop | 9 (n=1..9) | 11 (n=1..11) | a(10), a(11) |
+| A290719 | connected induced subgraphs, black | 9 | 11 | +2 |
+| A290769 | connected induced subgraphs, white | 8 | 10 | +2 |
+| A291595 | connected induced subgraphs, bishop | 9 | 11 | +2 |
+| A289164 | dominating sets, black | 15 | 20 | +5 |
+| A289170 | dominating sets, white | 14 | 19 | +5 |
+| A295898 | dominating sets, bishop | 12 | 20 | +8 |
+| A289145 | connected dominating sets, black | 8 | 10 | +2 |
+| A289169 | connected dominating sets, white | 7 | 9 | +2 |
 
-None of the three carried a b-file, a program, a formula or a comment; each
-linked only to MathWorld. So this also supplies the first published method.
+Twenty-eight new terms. None of these entries carried a b-file, a program, a
+formula or a comment; each linked only to MathWorld. So this also supplies the
+first published method.
 
-**New values**
+**Sample new values**
 
     A290719  a(10) = 1090550900687379      a(11) = 2265142469367980614
     A290769  a(10) = 1090550900687379      a(11) = 1134335726831043925
     A291595  a(10) = 2181101801374758      a(11) = 3399478196199024539
+    A289145  a(9)  = 2014079802496         a(10) = 1073633875253120
+    A289164  a(16) = 340115205725187501595775418307712321805
+             a(20) = 1606872367964501668870983512803403644032444670824447498637689
 
 ## 1. The reduction
 
@@ -160,6 +168,19 @@ per-class combinations from 9 to 6 and n=10 from 36 s to 6.6 s.
 terms of A303145, so this method cannot extend it. Recorded rather than hidden:
 the reduction is not a universal win, and knowing which predicates it fails on is
 part of the result.
+
+### Composing both collapses
+
+Connected dominating sets need connectivity *and* domination, and the two compose
+more cheaply than they should. In the connectivity sweep a y-class carries a
+non-zero block label exactly when it holds a chosen cell -- which is precisely
+what domination asks. So domination contributes one requirement bit per y-class
+rather than a whole extra dimension, and the combined counter still reaches n=10
+against 8 published terms.
+
+There is no full-bishop version of that sequence and there cannot be: a connected
+set lies inside one component, so it can never dominate the other. OEIS has black
+and white variants only, which the test suite asserts.
 
 ### Composition differs by predicate
 
