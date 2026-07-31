@@ -123,6 +123,44 @@ def minimal_dominating_count(nbr):
     return total
 
 
+def connected_dominating_count(nbr):
+    """Non-empty subsets that dominate and induce a connected subgraph."""
+    m = len(nbr)
+    closed = [nbr[i] | (1 << i) for i in range(m)]
+    full = (1 << m) - 1
+    total = 0
+    for mask in range(1, 1 << m):
+        covered = 0
+        f = mask
+        while f:
+            bit = f & -f
+            covered |= closed[bit.bit_length() - 1]
+            f ^= bit
+        if covered != full:
+            continue
+        low = mask & -mask
+        seen = frontier = low
+        while frontier:
+            reached = 0
+            f = frontier
+            while f:
+                bit = f & -f
+                reached |= nbr[bit.bit_length() - 1]
+                f ^= bit
+            frontier = reached & mask & ~seen
+            seen |= frontier
+        if seen == mask:
+            total += 1
+    return total
+
+
+def brute_connected_dominating_bishop(n, colour):
+    cells = bishop_cells(n, colour)
+    if not cells:
+        return 0
+    return connected_dominating_count(adjacency_masks(cells, bishop_adjacent))
+
+
 def brute_minimal_dominating_bishop(n, colour):
     cells = bishop_cells(n, colour)
     if not cells:
