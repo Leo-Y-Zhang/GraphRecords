@@ -20,6 +20,7 @@ import time
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from theseus.connected import frontier_connected            # noqa: E402
+from theseus.memguard import start as memguard_start        # noqa: E402
 from theseus.targets import offset_start, terms_by_n        # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -70,7 +71,10 @@ def main():
     ap.add_argument("--limit", type=int, default=20)
     ap.add_argument("--budget", type=float, default=1800.0,
                     help="stop a sequence once a single term exceeds this many seconds")
+    ap.add_argument("--mem-floor", type=float, default=1.0,
+                    help="abort if free RAM falls below this many GB")
     args = ap.parse_args()
+    memguard_start(floor_gb=args.mem_floor, label="connected subgraph extension")
 
     computed = {}
     for aid, colour in COLOUR_SEQUENCES.items():
