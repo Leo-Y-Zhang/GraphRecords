@@ -11,6 +11,36 @@ in rotated coordinates, which collapses subset counting from O(2^(n^2/2)) to a
 frontier DP over O(n) classes per side. Full reasoning in
 `docs/superpowers/specs/2026-07-31-oeis-board-graph-enumeration-design.md`.
 
+## LOAD DISCIPLINE — read before launching anything
+
+**Run extension jobs ONE AT A TIME.** Three concurrent jobs took free RAM from
+5.8 GB to 0.9 GB and the guards started firing. Use the serial chain:
+
+    python -u tools/extend_domination.py --limit 20 --budget 900
+    python -u tools/extend_cds.py        --limit 10 --budget 900
+
+Known-safe limits, from where the blow-ups actually happened:
+`extend_domination --limit 20` (a(21) ballooned to 5.6 GB),
+`extend_cds --limit 10` (a(11) reached 4.6 GB),
+`extend.py --limit 11` for connected subgraphs (n=12 is the wall).
+
+**Guard bug fixed 2026-07-31:** a watchdog triggering on low free RAM alone kills
+whatever it is watching, not whatever caused the shortage -- it killed a job
+holding 0.86 GB while the 4.58 GB hog survived. `ram_guard.ps1` now requires
+free RAM low AND the target itself large (`-MinTargetGB`).
+
+## Third predicate: connected dominating sets
+
+`theseus/connected_domination.py`. Composes both collapses. Connectivity gives
+the frontier partition; domination costs only a requirement bit, because a
+y-class carries a non-zero block label exactly when it holds a chosen cell, which
+is what domination already asks. Reproduces all 8 published terms of A289145 and
+all 7 of A289169; reaches n=10.
+
+There is deliberately no full-bishop version: a connected set lies in one
+component and cannot dominate the other, and OEIS has no such sequence, which the
+test suite asserts.
+
 ## Second predicate: domination (2026-07-31, later)
 
 `theseus/domination.py`. Support-collapse lemma: a set dominates iff its support
