@@ -1,0 +1,4 @@
+# OEIS b-files MUST be LF-only with no BOM. A Windows checkout would otherwise
+# convert them to CRLF and silently violate the spec, which is exactly how the
+# MathRecords b-files went wrong. Force LF on checkout for anything staged here.
+OEIS-upload/*.txt text eol=lf
