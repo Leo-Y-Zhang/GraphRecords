@@ -11,6 +11,29 @@ in rotated coordinates, which collapses subset counting from O(2^(n^2/2)) to a
 frontier DP over O(n) classes per side. Full reasoning in
 `docs/superpowers/specs/2026-07-31-oeis-board-graph-enumeration-design.md`.
 
+## Second predicate: domination (2026-07-31, later)
+
+`theseus/domination.py`. Support-collapse lemma: a set dominates iff its support
+is a vertex cover of the cell bipartite graph, so domination depends only on
+which classes are occupied. Reaches **n=18** where connected subgraphs reach 11.
+
+Extending A289164 (15 published terms), A289170 (14), A295898 (12, derived as the
+**product** -- domination multiplies across components where connected subgraphs
+add). Run in `bench/out/extend_dom.log`.
+
+**Sharp rule found, and it is the interesting part of the write-up:** predicates
+needing only *occupancy* collapse; predicates needing class *populations* do not.
+Total domination (open neighbourhood, so a chosen cell must not cover itself)
+needs 6 states per class and stalls at n=11 against 16 published terms -- it
+**cannot** extend its own sequences. That negative result is recorded in PAPER.md
+on purpose.
+
+Two performance lessons, both worth reusing:
+- Enumerating all `2^|cols|` subsets per state is the trap. Deciding y-classes
+  one at a time cut n=13 from 30.67 s to 0.39 s (79x).
+- Store a *deficit*, never a raw requirement. Once a class saturates, several
+  requirement values behave identically; merging them cut n=10 from 36 s to 6.6 s.
+
 ## Confirmed result
 
 **A290719 a(10) = 1090550900687379** - a term not in OEIS. Confirmed three ways:

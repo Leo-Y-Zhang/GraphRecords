@@ -118,7 +118,62 @@ frontier DP plus the odd-n identity `black(11) != white(11)`; that is
 reproducibility rather than independence, and the peeling cross-check at n=11 is
 outstanding. It is recorded here as computed, not as independently confirmed.
 
-## 5. Honest limits
+## 5. A second collapse: domination
+
+In a rook graph the closed neighbourhood of a cell is the **whole** of its
+x-class together with the **whole** of its y-class. So a cell is dominated
+exactly when its x-class or its y-class contains a chosen cell.
+
+**Lemma.** A cell subset S dominates iff `(x-support(S), y-support(S))` is a
+vertex cover of the bipartite graph whose edges are the cells. In particular
+domination depends only on which classes S touches, never on which cells it uses
+inside them.
+
+Both statements are tested against brute force before use. The sweep then needs
+only one bit per live y-class ("has S touched it") plus one requirement bit,
+because an x-class left empty forces every y-class it meets to be touched.
+
+Since `phi` is injective, each (x-class, y-class) pair holds at most one cell, so
+the class grid is 0/1 and a cell subset is just a subset of occupied grid
+positions.
+
+### When the reduction pays, and when it does not
+
+| predicate | what the state must record | states at ceiling | reaches |
+|---|---|---|---|
+| dominating sets | occupancy, 2 per class | 1125035 | **n = 18** |
+| connected induced subgraphs | a partition of the frontier | 1343614 | n = 11 |
+| total dominating sets | population capped at 2, 6 per class | 914611 | n = 11 |
+
+The rule is sharp: **predicates that depend only on which classes are occupied
+collapse; predicates that need class populations do not.** Total domination uses
+the open neighbourhood, so a chosen cell does not cover itself, and the sweep
+must distinguish "one chosen cell here" from "two or more". That single extra
+level costs seven terms of reach.
+
+Recording a *deficit* rather than a raw requirement matters: once a class
+saturates at 2 every requirement on it is already met, so the three states
+(count 2, requirement 0/1/2) behave identically forever. Merging them cuts the
+per-class combinations from 9 to 6 and n=10 from 36 s to 6.6 s.
+
+**Negative result.** Total domination reaches only n=11 against 16 published
+terms of A303145, so this method cannot extend it. Recorded rather than hidden:
+the reduction is not a universal win, and knowing which predicates it fails on is
+part of the result.
+
+### Composition differs by predicate
+
+The two colour components combine differently depending on the predicate, which
+gives independent checks that cost nothing:
+
+- connected subgraphs **add**: a connected subgraph lies in one component, so
+  `A291595 = A290719 + A290769`
+- dominating sets **multiply**: a set dominates a disjoint union iff it
+  dominates each part, so `A295898 = A289164 * A289170`
+
+Both are enforced by the gate against every published term.
+
+## 6. Honest limits
 
 - Nothing here is a proof of the counts; it is verified computation. The strongest
   claim is that two algorithms and five checks agree.

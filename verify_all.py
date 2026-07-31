@@ -12,10 +12,19 @@ here or anywhere else.
 import subprocess
 import sys
 
-from theseus.brute import brute_connected_bishop
+from theseus.brute import (
+    brute_connected_bishop,
+    brute_dominating_bishop,
+    brute_total_dominating_bishop,
+)
 from theseus.connected import frontier_connected, peeling_connected
-from theseus.reduction import verify_isomorphism
+from theseus.domination import dominating_sets, total_dominating_sets
+from theseus.reduction import class_grid, verify_isomorphism
 from theseus.targets import terms_by_n
+
+# total domination is far more expensive than plain domination and cannot reach
+# its own published ceiling; the gate checks it only as far as it stays cheap
+TOTAL_LIMIT = 9
 
 CHECKS = []
 
@@ -67,6 +76,42 @@ def main():
         check(
             f"L4 colours isomorphic on even board n={n}",
             frontier_connected(n, "black") == frontier_connected(n, "white"),
+        )
+
+    # the class grid must be 0/1 -- the domination counters rely on it
+    for n in range(1, 13):
+        for colour in ("black", "white"):
+            grid, _, _ = class_grid(n, colour)
+            check(
+                f"L0 class grid is 0/1 n={n} {colour}",
+                all(v in (0, 1) for row in grid for v in row),
+            )
+
+    # domination: fast vs exhaustive, then against published terms
+    for n in range(1, 7):
+        for colour in ("black", "white"):
+            check(
+                f"L1 dominating == brute n={n} {colour}",
+                dominating_sets(n, colour) == brute_dominating_bishop(n, colour),
+            )
+            check(
+                f"L1 total dominating == brute n={n} {colour}",
+                total_dominating_sets(n, colour)
+                == brute_total_dominating_bishop(n, colour),
+            )
+    for aid, colour in (("A289164", "black"), ("A289170", "white")):
+        for n, term in sorted(terms_by_n(aid).items()):
+            check(f"L2 {aid} a({n})", dominating_sets(n, colour) == term)
+    for aid, colour in (("A303145", "black"), ("A303147", "white")):
+        for n, term in sorted(terms_by_n(aid).items()):
+            if n <= TOTAL_LIMIT:
+                check(f"L2 {aid} a({n})", total_dominating_sets(n, colour) == term)
+
+    # L4: dominating sets MULTIPLY across the two components (connected ones add)
+    for n, term in sorted(terms_by_n("A295898").items()):
+        check(
+            f"L4 A295898 a({n}) == black * white",
+            dominating_sets(n, "black") * dominating_sets(n, "white") == term,
         )
 
     # the test suite is part of the gate
