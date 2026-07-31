@@ -32,8 +32,18 @@ def _dominating_run(n, colour):
         used = [j for j, v in enumerate(grid[i]) if v]
         intervals.append((used[0], used[-1]) if used else (0, -1))
 
+    # The state is packed into ONE integer rather than a tuple:
+    #     bits 0..ny-1      hit mask
+    #     bits ny..2ny-1    requirement mask
+    #     bit  2ny          this x-class has placed something (transient)
+    # A two-element tuple key costs about 60 bytes of object overhead on top of
+    # the ints it holds, and at n=21 that overhead was what pushed the run to
+    # 5.6 GB and got it killed. One integer key removes it.
     full = (1 << ny) - 1
-    states = {(0, 0): 1}                # (hit mask, required mask)
+    SH = ny
+    PLACED = 1 << (2 * ny)
+
+    states = {0: 1}
     peak = 1
 
     for i in range(nx):
@@ -48,34 +58,37 @@ def _dominating_run(n, colour):
         # Decide the y-classes of this x-class ONE AT A TIME rather than
         # enumerating all 2^|cols| subsets: the middle x-class of a large board
         # meets ~n y-classes, and 2^n options per state dominates the runtime
-        # even though the state count itself stays small. The extra flag records
-        # whether this x-class has placed anything, which is what decides
-        # afterwards if it contributes requirements.
-        partial = {(hit, req, False): count for (hit, req), count in states.items()}
+        # even though the state count itself stays small. The PLACED bit records
+        # whether this x-class took anything, which decides afterwards whether it
+        # contributes requirements.
+        partial = states
         for j in cols:
-            ways = (1 << grid[i][j]) - 1
+            bit = 1 << j
             step = {}
-            for (h, r, placed), count in partial.items():
-                key = (h, r, placed)
-                step[key] = step.get(key, 0) + count            # place nothing here
-                key = (h | (1 << j), r, True)
-                step[key] = step.get(key, 0) + count * ways     # place at least one
+            get = step.get
+            for key, count in partial.items():
+                step[key] = get(key, 0) + count                  # take nothing here
+                nk = key | bit | PLACED
+                step[nk] = get(nk, 0) + count                    # take this cell
             partial = step
 
         nxt = {}
-        for (h, r, placed), count in partial.items():
-            if not placed:
+        get = nxt.get
+        for key, count in partial.items():
+            h = key & full
+            r = (key >> SH) & full
+            if not key & PLACED:
                 r |= cols_mask          # an empty x-class forces its y-classes
             if (r & done) & ~(h & done):    # a finalised requirement unmet
                 continue
-            key = (h & live, r & live)
-            nxt[key] = nxt.get(key, 0) + count
+            nk = (h & live) | ((r & live) << SH)
+            nxt[nk] = get(nk, 0) + count
         states = nxt
         peak = max(peak, len(states))
 
     total = 0
-    for (hit, req), count in states.items():
-        if req & ~hit:
+    for key, count in states.items():
+        if ((key >> SH) & full) & ~(key & full):
             continue
         total += count
     return total, peak
