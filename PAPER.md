@@ -1,0 +1,129 @@
+# Connected induced subgraphs of the n X n bishop graph
+
+**2026-07-31** · verify with `python verify_all.py`
+
+## Summary
+
+The n X n bishop graph is a rook graph in rotated coordinates. Using that, this
+note extends three OEIS sequences that had stood unchanged since 2017 and are
+flagged `keyword:more` by OEIS itself:
+
+| sequence | graph | published | now | new terms |
+|---|---|---|---|---|
+| A290719 | black bishop | 9 (n=1..9) | 11 (n=1..11) | a(10), a(11) |
+| A290769 | white bishop | 8 (n=2..9) | 10 (n=2..11) | a(10), a(11) |
+| A291595 | bishop | 9 (n=1..9) | 11 (n=1..11) | a(10), a(11) |
+
+None of the three carried a b-file, a program, a formula or a comment; each
+linked only to MathWorld. So this also supplies the first published method.
+
+**New values**
+
+    A290719  a(10) = 1090550900687379      a(11) = 2265142469367980614
+    A290769  a(10) = 1090550900687379      a(11) = 1134335726831043925
+    A291595  a(10) = 2181101801374758      a(11) = 3399478196199024539
+
+## 1. The reduction
+
+**Theorem.** Let `B` be the cells of one colour on the n X n board and define
+
+    phi(r, c) = ((r + c) // 2, (r - c + n) // 2).
+
+Then `phi` is injective on `B`, and distinct cells of `B` share a diagonal if and
+only if their images agree in the first coordinate or in the second.
+
+*Proof.* Within one colour `r+c` has fixed parity, hence so does `r-c`. On values
+of a single parity both `t -> t // 2` and `t -> (t + n) // 2` are strictly
+monotone, therefore injective. Two cells share an anti-diagonal iff `r+c` agrees,
+i.e. iff the first coordinates agree; they share a main diagonal iff `r-c` agrees,
+i.e. iff the second coordinates agree. Since `(r+c, r-c)` determines `(r, c)`,
+`phi` is injective. []
+
+So the single-colour bishop graph **is** the rook graph on the image cells:
+adjacent exactly when sharing an x-class or a y-class. A bishop cannot change the
+parity of `r+c`, so the full bishop graph is the disjoint union of the black and
+white ones and has exactly two components.
+
+The consequence that matters: a cell subset is connected in a rook graph iff the
+bipartite graph it induces between x-classes and y-classes is connected, because
+all cells sharing a class are mutually adjacent. Counting moves from `O(2^|B|)`
+subsets of cells to work over `O(n)` classes per side.
+
+## 2. Two algorithms
+
+**Exact-support peeling** (`peeling_connected`). Let `B(X, Y)` count cell subsets
+whose x-support is exactly `X` and y-support exactly `Y`, obtained from
+`2^cells(X',Y')` by Mobius inversion over sub-masks, and `C(X, Y)` those that are
+also connected. Peeling off the component containing the lowest x-class of `X`:
+
+    C(X,Y) = B(X,Y) - sum over X1 containing lowx, Y1 nonempty, (X1,Y1) != (X,Y)
+                         of C(X1,Y1) * B(X \ X1, Y \ Y1)
+
+Cost is about `9^n`. Kept as an independent reference, not for production.
+
+**Frontier partition DP** (`frontier_connected`). Sweep the x-classes carrying a
+partition of the y-classes into connected blocks, label 0 meaning untouched. At
+each x-class choose a non-empty subset `T` of the y-classes it meets, weighted by
+`prod over j in T of (2^grid[i][j] - 1)`, and merge every block meeting `T`.
+
+Each x-class meets a *contiguous* y-interval, so a y-class below every remaining
+interval can never be touched again. A block confined to that finalised region can
+never merge with anything else, so any state carrying such a stranded block is
+dropped. That pruning is what keeps the state count far below the Bell number of
+the frontier width.
+
+## 3. Measured cost
+
+Peak live DP states and wall time, black board:
+
+| n | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| states | 2 | 2 | 10 | 11 | 101 | 151 | 1596 | 3136 | 39955 | 86321 | 1343614 |
+| secs | 0 | 0 | 0 | 0 | 0 | 0.01 | 0.09 | 0.43 | 9.73 | 53.5 | 1604.7 |
+
+White board: `0, 4, 4, 29, 38, 380, 660, 7529, 15923, 225187, 494815` states, with
+n=11 in 691.9 s.
+
+For scale, the peeling counter needs 510.7 s for n=10 where the frontier DP needs
+53.5 s, and brute force over all `2^50` subsets is out of reach entirely.
+
+**Ceiling.** States grow by roughly a factor of 2.5 to 15 per step, so n=12 needs
+several GB and n=13 is out of reach on this machine. This work adds terms; it does
+not add an order of magnitude, because these counts grow doubly exponentially in n
+and no algorithm changes that.
+
+## 4. Verification
+
+Five levels, all re-run from cold by `verify_all.py` (83 checks plus 115 tests).
+
+- **L0** The reduction is re-derived exhaustively for n=1..12 in both colours: every
+  cell pair is checked for agreement between diagonal-sharing and class-sharing.
+- **L1** The frontier DP is checked against brute-force enumeration over all cell
+  subsets for n=1..6, both colours.
+- **L2** Every published term of A290719 (9) and A290769 (8) is reproduced exactly,
+  indexed by each sequence's true offset. Offsets are **not** uniform here:
+  A290719 begins at n=1, A290769 at n=2, since a 1 X 1 board has no white cells.
+- **L3** The frontier DP and the peeling counter, which share no code path beyond
+  the class grid, agree for n=1..8 in both colours.
+- **L4** Structural identities that follow from the problem rather than the code:
+  the two components give `black(n) + white(n) = bishop(n)` against all 9 published
+  terms of A291595; reflection makes the colour classes congruent for even n, so
+  `black(n) = white(n)` there; and they must differ for odd n.
+
+**Confidence in the new terms.** a(10) is confirmed three independent ways: the
+peeling algorithm, the frontier DP on the black board, and the frontier DP on the
+*white* board, which must agree at even n by the reflection identity and does
+(1090550900687379 from all three). a(11) currently rests on two runs of the
+frontier DP plus the odd-n identity `black(11) != white(11)`; that is
+reproducibility rather than independence, and the peeling cross-check at n=11 is
+outstanding. It is recorded here as computed, not as independently confirmed.
+
+## 5. Honest limits
+
+- Nothing here is a proof of the counts; it is verified computation. The strongest
+  claim is that two algorithms and five checks agree.
+- The method is specific to bishop graphs. Local board graphs (grid, king, knight)
+  need a different engine, planned separately.
+- The fixed-width strip sequences, where a transfer matrix yields a linear
+  recurrence and thousands of terms, are already well covered by Alois P. Heinz
+  and Seiichi Manyama; this work deliberately does not compete there.
