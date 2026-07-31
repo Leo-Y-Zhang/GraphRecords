@@ -14,12 +14,10 @@ def bishop_cells(n, colour):
     if colour not in COLOURS:
         raise ValueError(f"colour must be one of {COLOURS}, got {colour!r}")
     if colour == "both":
-        keep = lambda r, c: True
-    elif colour == "black":
-        keep = lambda r, c: (r + c) % 2 == 0
-    else:
-        keep = lambda r, c: (r + c) % 2 == 1
-    return [(r, c) for r in range(n) for c in range(n) if keep(r, c)]
+        return [(r, c) for r in range(n) for c in range(n)]
+    # A bishop never changes the parity of row+col, so a colour IS a parity class.
+    parity = 0 if colour == "black" else 1
+    return [(r, c) for r in range(n) for c in range(n) if (r + c) % 2 == parity]
 
 
 def bishop_adjacent(a, b):

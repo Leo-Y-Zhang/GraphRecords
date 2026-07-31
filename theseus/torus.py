@@ -8,8 +8,6 @@ for this family all have offset 3.
 Nothing here is fast. These are the L0 references that the sweep in Phase 2 must
 agree with.
 """
-from itertools import combinations
-
 
 def torus_cells(n):
     return [(r, c) for r in range(n) for c in range(n)]
