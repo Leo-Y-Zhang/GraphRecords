@@ -182,6 +182,27 @@ There is no full-bishop version of that sequence and there cannot be: a connecte
 set lies inside one component, so it can never dominate the other. OEIS has black
 and white variants only, which the test suite asserts.
 
+### Why the colouring sequences are out of reach
+
+A cell is an edge between its x-class and its y-class, and two cells conflict
+exactly when they share an endpoint. So **proper vertex colourings of the rook
+graph are proper EDGE colourings of the bipartite cell graph**, and by Koenig's
+edge colouring theorem the chromatic number is the maximum degree:
+
+    chi(bishop graph) = largest diagonal length
+
+Verified: chi equals the maximum class size for n=1..4, and counting proper
+colourings that use exactly chi colours reproduces published A371202
+(1, 2, 12, 528).
+
+That reformulation also settles the feasibility question, negatively. Counting
+Delta-edge-colourings of a bipartite graph is the same problem as counting Latin
+squares in the regular case, where only eleven terms are known to anyone. A sweep
+would have to carry the full SET of colours used at each y-class, so the state is
+`(2^Delta)^ny` rather than a constant per class. A371202, A371203 and A371204 are
+stuck at five or six terms for a real reason, and this reduction does not change
+it. They are recorded here as understood, not attempted.
+
 ### Composition differs by predicate
 
 The two colour components combine differently depending on the predicate, which
