@@ -33,3 +33,28 @@ def brute_connected_bishop(n, colour):
     if not cells:
         return 0
     return connected_induced_count(adjacency_masks(cells, bishop_adjacent))
+
+
+def dominating_count(nbr):
+    """Number of vertex subsets S such that every vertex is in S or adjacent to it."""
+    m = len(nbr)
+    closed = [nbr[i] | (1 << i) for i in range(m)]
+    full = (1 << m) - 1
+    total = 0
+    for mask in range(1 << m):
+        covered = 0
+        f = mask
+        while f:
+            bit = f & -f
+            covered |= closed[bit.bit_length() - 1]
+            f ^= bit
+        if covered == full:
+            total += 1
+    return total
+
+
+def brute_dominating_bishop(n, colour):
+    cells = bishop_cells(n, colour)
+    if not cells:
+        return 1          # the empty set vacuously dominates the empty graph
+    return dominating_count(adjacency_masks(cells, bishop_adjacent))
