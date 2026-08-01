@@ -15,6 +15,7 @@ import time
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from graphrecords.connected import frontier_connected, peeling_connected
+from graphrecords.memguard import start as memguard_start
 
 
 def main():
@@ -22,7 +23,14 @@ def main():
     ap.add_argument("--from-n", type=int, default=10)
     ap.add_argument("--to-n", type=int, default=11)
     ap.add_argument("--colour", default="black")
+    ap.add_argument("--mem-floor", type=float, default=1.0,
+                    help="abort if free RAM falls below this many GB")
     args = ap.parse_args()
+
+    # An n=11 run holds memory for eight hours unattended. The guard that already
+    # protects every extension runner belongs here too: the black n=11 crosscheck
+    # ran unprotected and a sibling job reached 4.4 GB with 1.5 GB free.
+    memguard_start(args.mem_floor)
 
     ok = True
     for n in range(args.from_n, args.to_n + 1):
