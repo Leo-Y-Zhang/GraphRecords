@@ -85,8 +85,16 @@ def _canonical(labels):
     return tuple(out)
 
 
-def _frontier_run(n, colour):
+def _frontier_run(n, colour, transpose=False):
     """Run the frontier partition DP. Returns (answer, peak_state_count).
+
+    `transpose` sweeps the y-classes instead of the x-classes. That is the SAME
+    bipartite graph seen from the other side, so the answer must be identical --
+    but the sweep order, the intervals and every pruning decision differ, so a
+    direction-dependent bug in the frontier logic shows up as a disagreement.
+    It is far cheaper than the 9^n peeling counter and is checked in the suite.
+    Valid because each y-class also meets a CONTIGUOUS x-interval, which the
+    tests assert; the pruning would be unsound otherwise.
 
     Sweep the x-classes in order carrying a partition of the y-classes into
     connected blocks, label 0 meaning untouched. At each x-class choose a
@@ -98,6 +106,9 @@ def _frontier_run(n, colour):
     stranded block is dropped.
     """
     grid, nx, ny = class_grid(n, colour)
+    if transpose:
+        grid = [[grid[i][j] for i in range(nx)] for j in range(ny)]
+        nx, ny = ny, nx
     if nx == 0 or ny == 0:
         return 0, 0
 
@@ -159,9 +170,9 @@ def _frontier_run(n, colour):
     return answer, peak
 
 
-def frontier_connected(n, colour):
+def frontier_connected(n, colour, transpose=False):
     """Connected non-empty cell subsets, via the frontier partition DP."""
-    return _frontier_run(n, colour)[0]
+    return _frontier_run(n, colour, transpose=transpose)[0]
 
 
 def frontier_state_peak(n, colour):
