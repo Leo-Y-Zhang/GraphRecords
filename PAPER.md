@@ -147,9 +147,9 @@ ten terms are staged across five. Aggregate confidence claims hide exactly this.
 | A290719 a(10) | peeling + frontier(black) + frontier(white), which must agree at even n | **yes, three ways** |
 | A290769 a(10) | same value as A290719 a(10) by the even-n reflection isomorphism | **yes**, inherited |
 | A290719 a(11) | frontier DP **and the peeling counter**, which agree (7.9 h for the peeling half) | **yes** — cross-check completed 2026-08-01 |
-| A290769 a(11) | frontier DP on the white board, plus the same odd-n check. **The cross-check covered BLACK only** | **no** |
-| A291595 a(10) | derived as black + white; the identity is verified against all 9 published terms | inherits — **both parents now confirmed** |
-| A291595 a(11) | as above | inherits — one parent (A290769) still unconfirmed |
+| A290769 a(11) | frontier DP **and the peeling counter**, which agree (670 s vs 2737 s) | **yes** — cross-check completed 2026-08-01 |
+| A291595 a(10) | derived as black + white; the identity is verified against all 9 published terms | inherits — **both parents confirmed** |
+| A291595 a(11) | as above | inherits — **both parents confirmed** |
 | A289145, A289169 a(9) | frontier DP **and the CDS peeling counter**, which agree | **yes** — cross-check completed 2026-08-01 |
 | A289145, A289169 a(10) | as above, and the two boards return the identical value as the even-n isomorphism requires | **yes** — cross-check completed 2026-08-01 |
 
@@ -174,12 +174,18 @@ classes it occupies.
 The two n=10 values are equal, which the even-n reflection isomorphism requires
 and which two independent algorithms now both produce.
 
-**What is still not independently confirmed: A290769 a(11)**, and A291595 a(11),
-which inherits from it. That is one job — the peeling counter on the white board
-at n=11, on the order of eight hours. Until it finishes, those two terms rest on a
-single algorithm that has never disagreed with brute force or with published data.
-That is good evidence. It is not the same thing as independent confirmation, and
-the two should not be blurred into one sentence.
+**Every one of the ten staged terms now carries independent confirmation.** The
+last gap closed 2026-08-01 16:27: the peeling counter on the white board at n=11
+returned `1134335726831043925`, agreeing with the frontier DP (670 s vs 2737 s).
+That confirms A290769 a(11) directly and A291595 a(11) by the addition identity,
+whose two parents are now both confirmed.
+
+Stated precisely, because the distinction is the point of this section: seven
+terms are confirmed by a **second algorithm** sharing no code path beyond the
+class grid, and three by a **structural identity** — the even-n reflection
+isomorphism for A290769 a(10), and `black + white = bishop` for A291595 a(10) and
+a(11) — each verified against every published term of the sequence it governs.
+Neither kind is a re-run of the same code.
 
 ## 5. A second collapse: domination
 
