@@ -1,4 +1,4 @@
-# Theseus
+# GraphRecords
 
 Extending OEIS sequences defined on board graphs, starting with the bishop graph.
 
@@ -34,12 +34,12 @@ output to published data indexes by n, never by list position.
 
 ## Layout
 
-- `theseus/boards.py` - board cell sets and explicit graph construction
-- `theseus/reduction.py` - the bishop-to-rook map, with its proof and self-check
-- `theseus/brute.py` - exhaustive reference counters (verification level L0)
-- `theseus/connected.py` - two independent fast counters: exact-support peeling,
+- `graphrecords/boards.py` - board cell sets and explicit graph construction
+- `graphrecords/reduction.py` - the bishop-to-rook map, with its proof and self-check
+- `graphrecords/brute.py` - exhaustive reference counters (verification level L0)
+- `graphrecords/connected.py` - two independent fast counters: exact-support peeling,
   and the frontier partition DP used in production
-- `theseus/targets.py` - offline snapshot of published OEIS terms
+- `graphrecords/targets.py` - offline snapshot of published OEIS terms
 - `bench/measure_growth.py` - state-growth and timing measurement
 - `verify_all.py` - the gate
 
@@ -56,4 +56,4 @@ staged b-files also come out of a fresh Windows checkout **LF-only**, which is
 what `.gitattributes` is for: git would otherwise rewrite them to CRLF and
 silently violate the OEIS b-file spec.
 
-    git clone --branch phase1-bishop-family <repo> && cd Theseus && python verify_all.py
+    git clone --branch phase1-bishop-family <repo> && cd GraphRecords && python verify_all.py

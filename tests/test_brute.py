@@ -1,5 +1,5 @@
 import pytest
-from theseus.brute import brute_connected_bishop
+from graphrecords.brute import brute_connected_bishop
 
 # published OEIS DATA, snapshotted from oeis.org
 A290719 = [1, 3, 22, 168, 5251, 194751]          # black bishop, n = 1..6

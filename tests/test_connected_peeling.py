@@ -1,7 +1,7 @@
 import pytest
-from theseus.brute import brute_connected_bishop
-from theseus.connected import peeling_connected
-from theseus.targets import published_terms
+from graphrecords.brute import brute_connected_bishop
+from graphrecords.connected import peeling_connected
+from graphrecords.targets import published_terms
 
 
 @pytest.mark.parametrize("n", range(1, 7))

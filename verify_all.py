@@ -12,15 +12,15 @@ here or anywhere else.
 import subprocess
 import sys
 
-from theseus.brute import (
+from graphrecords.brute import (
     brute_connected_bishop,
     brute_dominating_bishop,
     brute_total_dominating_bishop,
 )
-from theseus.connected import frontier_connected, peeling_connected
-from theseus.domination import dominating_sets, total_dominating_sets
-from theseus.reduction import class_grid, verify_isomorphism
-from theseus.targets import terms_by_n
+from graphrecords.connected import frontier_connected, peeling_connected
+from graphrecords.domination import dominating_sets, total_dominating_sets
+from graphrecords.reduction import class_grid, verify_isomorphism
+from graphrecords.targets import terms_by_n
 
 # total domination is far more expensive than plain domination and cannot reach
 # its own published ceiling; the gate checks it only as far as it stays cheap

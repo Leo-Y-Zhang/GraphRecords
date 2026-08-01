@@ -1,4 +1,4 @@
-"""Build paste-ready OEIS submission material for the staged Theseus terms.
+"""Build paste-ready OEIS submission material for the staged GraphRecords terms.
 
 Produces, per sequence: whether a b-file already exists upstream, the DATA line
 truncated to what OEIS actually accepts, the EXTENSIONS line, and a comment in

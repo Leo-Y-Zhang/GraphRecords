@@ -1,8 +1,8 @@
-# Theseus — an enumeration engine for OEIS board-graph sequences
+# GraphRecords — an enumeration engine for OEIS board-graph sequences
 
 **Date:** 2026-07-31
 **Status:** design approved (scope: Phase 1 then Phase 2)
-**Repo:** `C:\dev\Theseus` (private; visibility is the operator's decision, never mine)
+**Repo:** `C:\dev\GraphRecords` (private; visibility is the operator's decision, never mine)
 
 ## 1. Problem
 
@@ -148,7 +148,7 @@ sequence, and, where affordable, from two independent algorithms.
 
 ## 7. Deliverables
 
-1. `theseus/` — the engine: board constructors, the bishop reduction, reference and
+1. `graphrecords/` — the engine: board constructors, the bishop reduction, reference and
    production counters, predicate modules.
 2. `verify_all.py` — the gate described above.
 3. `bench/` — brute force vs reduction timing curves, demonstrating the complexity change.

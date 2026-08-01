@@ -1,5 +1,5 @@
 import pytest
-from theseus.reduction import rook_coords, verify_isomorphism, class_grid
+from graphrecords.reduction import rook_coords, verify_isomorphism, class_grid
 
 
 @pytest.mark.parametrize("n", range(1, 13))

@@ -8,8 +8,8 @@ import time
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[1]))
 
-from theseus.connected import _frontier_run          # noqa: E402
-from theseus.targets import terms_by_n               # noqa: E402
+from graphrecords.connected import _frontier_run          # noqa: E402
+from graphrecords.targets import terms_by_n               # noqa: E402
 
 PUBLISHED = {"black": terms_by_n("A290719"), "white": terms_by_n("A290769")}
 

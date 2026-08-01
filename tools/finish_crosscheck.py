@@ -225,7 +225,7 @@ def main():
     paper.write_text(t, encoding="utf-8")
 
     (HOME / "THESEUS CROSSCHECK PASSED - READ ME.txt").write_text(
-        f"Theseus: a({TARGET_N}) of A290719 independently confirmed by two independent\n"
+        f"GraphRecords: a({TARGET_N}) of A290719 independently confirmed by two independent\n"
         "algorithms (frontier partition DP vs exact-support peeling).\n\n"
         "Verified in this run:\n" + listed + "\n\n"
         "This says nothing about the other staged terms - it did not cover them.\n\n"

@@ -4,8 +4,8 @@ L0-L3 could all share a modelling error. These are facts about the problem
 rather than about our code, so they catch what the other levels cannot.
 """
 import pytest
-from theseus.connected import frontier_connected
-from theseus.targets import terms_by_n
+from graphrecords.connected import frontier_connected
+from graphrecords.targets import terms_by_n
 
 BISHOP = terms_by_n("A291595")
 

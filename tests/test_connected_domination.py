@@ -1,7 +1,7 @@
 import pytest
-from theseus.brute import brute_connected_dominating_bishop
-from theseus.connected_domination import connected_dominating_sets
-from theseus.targets import terms_by_n
+from graphrecords.brute import brute_connected_dominating_bishop
+from graphrecords.connected_domination import connected_dominating_sets
+from graphrecords.targets import terms_by_n
 
 BLACK = terms_by_n("A289145")   # connected dominating sets, black bishop
 WHITE = terms_by_n("A289169")   # connected dominating sets, white bishop
@@ -29,7 +29,7 @@ def test_no_full_bishop_version_can_exist():
     """The bishop graph has two components, so a connected set lives in one of
     them and cannot dominate the other. OEIS has black and white variants but no
     full-graph one, which is consistent with that."""
-    from theseus.targets import load_targets
+    from graphrecords.targets import load_targets
 
     names = [r["name"] for r in load_targets().values()]
     full = [

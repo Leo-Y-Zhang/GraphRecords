@@ -1,4 +1,4 @@
-# Theseus Phase 1 — Bishop Family Implementation Plan
+# GraphRecords Phase 1 — Bishop Family Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -23,8 +23,8 @@
 ### Task 1: Board construction
 
 **Files:**
-- Create: `theseus/__init__.py` (empty)
-- Create: `theseus/boards.py`
+- Create: `graphrecords/__init__.py` (empty)
+- Create: `graphrecords/boards.py`
 - Test: `tests/test_boards.py`
 
 **Interfaces:**
@@ -38,7 +38,7 @@
 
 ```python
 # tests/test_boards.py
-from theseus.boards import bishop_cells, bishop_adjacent, adjacency_masks
+from graphrecords.boards import bishop_cells, bishop_adjacent, adjacency_masks
 
 
 def test_black_cells_are_even_parity():
@@ -68,13 +68,13 @@ def test_white_3x3_is_a_four_cycle():
 
 - [x] **Step 2: Run test to verify it fails**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_boards.py -v`
-Expected: FAIL, `ModuleNotFoundError: No module named 'theseus'`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_boards.py -v`
+Expected: FAIL, `ModuleNotFoundError: No module named 'graphrecords'`
 
 - [x] **Step 3: Write minimal implementation**
 
 ```python
-# theseus/boards.py
+# graphrecords/boards.py
 """Board cell sets and explicit graph construction.
 
 Cells are (row, col) with 0 <= row, col < n. Bishop adjacency is "shares a
@@ -117,14 +117,14 @@ def adjacency_masks(cells, adjacent):
 
 - [x] **Step 4: Run test to verify it passes**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_boards.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_boards.py -v`
 Expected: PASS, 5 passed
 
 - [x] **Step 5: Commit**
 
 ```bash
-cd /c/dev/Theseus
-git add theseus/__init__.py theseus/boards.py tests/test_boards.py
+cd /c/dev/GraphRecords
+git add graphrecords/__init__.py graphrecords/boards.py tests/test_boards.py
 git commit -m "Add board construction for bishop graphs"
 ```
 
@@ -133,7 +133,7 @@ git commit -m "Add board construction for bishop graphs"
 ### Task 2: The rook reduction, with an exhaustive self-check
 
 **Files:**
-- Create: `theseus/reduction.py`
+- Create: `graphrecords/reduction.py`
 - Test: `tests/test_reduction.py`
 
 **Interfaces:**
@@ -148,7 +148,7 @@ git commit -m "Add board construction for bishop graphs"
 ```python
 # tests/test_reduction.py
 import pytest
-from theseus.reduction import rook_coords, verify_isomorphism, class_grid
+from graphrecords.reduction import rook_coords, verify_isomorphism, class_grid
 
 
 @pytest.mark.parametrize("n", range(1, 13))
@@ -181,13 +181,13 @@ def test_each_x_class_meets_a_contiguous_y_interval():
 
 - [x] **Step 2: Run test to verify it fails**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_reduction.py -v`
-Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.reduction'`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_reduction.py -v`
+Expected: FAIL, `ModuleNotFoundError: No module named 'graphrecords.reduction'`
 
 - [x] **Step 3: Write minimal implementation**
 
 ```python
-# theseus/reduction.py
+# graphrecords/reduction.py
 """The bishop-to-rook reduction.
 
 Theorem. For cells of one colour on the n X n board, the map
@@ -207,7 +207,7 @@ iff sharing an x-class or a y-class.
 """
 from itertools import combinations
 
-from theseus.boards import bishop_adjacent, bishop_cells
+from graphrecords.boards import bishop_adjacent, bishop_cells
 
 
 def rook_coords(n, colour):
@@ -249,14 +249,14 @@ def class_grid(n, colour):
 
 - [x] **Step 4: Run test to verify it passes**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_reduction.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_reduction.py -v`
 Expected: PASS, 28 passed
 
 - [x] **Step 5: Commit**
 
 ```bash
-cd /c/dev/Theseus
-git add theseus/reduction.py tests/test_reduction.py
+cd /c/dev/GraphRecords
+git add graphrecords/reduction.py tests/test_reduction.py
 git commit -m "Add bishop to rook reduction with exhaustive isomorphism check"
 ```
 
@@ -265,7 +265,7 @@ git commit -m "Add bishop to rook reduction with exhaustive isomorphism check"
 ### Task 3: Brute-force reference counter (verification level L0)
 
 **Files:**
-- Create: `theseus/brute.py`
+- Create: `graphrecords/brute.py`
 - Test: `tests/test_brute.py`
 
 **Interfaces:**
@@ -279,7 +279,7 @@ git commit -m "Add bishop to rook reduction with exhaustive isomorphism check"
 ```python
 # tests/test_brute.py
 import pytest
-from theseus.brute import brute_connected_bishop
+from graphrecords.brute import brute_connected_bishop
 
 # published OEIS DATA, snapshotted from oeis.org
 A290719 = [1, 3, 22, 168, 5251, 194751]          # black bishop, n = 1..6
@@ -305,20 +305,20 @@ def test_single_cell_board():
 
 - [x] **Step 2: Run test to verify it fails**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_brute.py -v`
-Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.brute'`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_brute.py -v`
+Expected: FAIL, `ModuleNotFoundError: No module named 'graphrecords.brute'`
 
 - [x] **Step 3: Write minimal implementation**
 
 ```python
-# theseus/brute.py
+# graphrecords/brute.py
 """Exhaustive reference counters (verification level L0).
 
 Deliberately naive: builds the graph straight from the definition and walks every
 subset. Too slow to be useful beyond about 22 cells, which is the point -- it is
 the independent check that the fast algorithms are counting the right thing.
 """
-from theseus.boards import adjacency_masks, bishop_adjacent, bishop_cells
+from graphrecords.boards import adjacency_masks, bishop_adjacent, bishop_cells
 
 
 def connected_induced_count(nbr):
@@ -351,14 +351,14 @@ def brute_connected_bishop(n, colour):
 
 - [x] **Step 4: Run test to verify it passes**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_brute.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_brute.py -v`
 Expected: PASS, 9 passed
 
 - [x] **Step 5: Commit**
 
 ```bash
-cd /c/dev/Theseus
-git add theseus/brute.py tests/test_brute.py
+cd /c/dev/GraphRecords
+git add graphrecords/brute.py tests/test_brute.py
 git commit -m "Add exhaustive reference counter for connected induced subgraphs"
 ```
 
@@ -367,7 +367,7 @@ git commit -m "Add exhaustive reference counter for connected induced subgraphs"
 ### Task 4: Target list and published-term snapshot
 
 **Files:**
-- Create: `theseus/targets.py`
+- Create: `graphrecords/targets.py`
 - Create: `tools/fetch_targets.py`
 - Create: `data/targets.json` (generated, then committed)
 - Test: `tests/test_targets.py`
@@ -382,7 +382,7 @@ git commit -m "Add exhaustive reference counter for connected induced subgraphs"
 
 ```python
 # tests/test_targets.py
-from theseus.targets import load_targets, published_terms
+from graphrecords.targets import load_targets, published_terms
 
 
 def test_snapshot_contains_the_anchor_sequences():
@@ -407,8 +407,8 @@ def test_offset_recorded_for_every_target():
 
 - [x] **Step 2: Run test to verify it fails**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_targets.py -v`
-Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.targets'`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_targets.py -v`
+Expected: FAIL, `ModuleNotFoundError: No module named 'graphrecords.targets'`
 
 - [x] **Step 3: Write the fetcher and the loader**
 
@@ -472,7 +472,7 @@ if __name__ == "__main__":
 ```
 
 ```python
-# theseus/targets.py
+# graphrecords/targets.py
 """Access to the committed snapshot of published OEIS terms."""
 import functools
 import json
@@ -492,19 +492,19 @@ def published_terms(aid):
 
 - [x] **Step 4: Generate the snapshot**
 
-Run: `cd /c/dev/Theseus && python tools/fetch_targets.py`
+Run: `cd /c/dev/GraphRecords && python tools/fetch_targets.py`
 Expected: `wrote ...data/targets.json with 110 sequences` (a slightly larger count is fine if OEIS has grown; a much smaller one means the search failed, so stop and investigate)
 
 - [x] **Step 5: Run tests to verify they pass**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_targets.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_targets.py -v`
 Expected: PASS, 4 passed
 
 - [x] **Step 6: Commit**
 
 ```bash
-cd /c/dev/Theseus
-git add theseus/targets.py tools/fetch_targets.py data/targets.json tests/test_targets.py
+cd /c/dev/GraphRecords
+git add graphrecords/targets.py tools/fetch_targets.py data/targets.json tests/test_targets.py
 git commit -m "Snapshot the bishop graph family and add offline target loader"
 ```
 
@@ -513,7 +513,7 @@ git commit -m "Snapshot the bishop graph family and add offline target loader"
 ### Task 5: Exact-support peeling counter (first fast algorithm)
 
 **Files:**
-- Create: `theseus/connected.py`
+- Create: `graphrecords/connected.py`
 - Test: `tests/test_connected_peeling.py`
 
 **Interfaces:**
@@ -527,9 +527,9 @@ git commit -m "Snapshot the bishop graph family and add offline target loader"
 ```python
 # tests/test_connected_peeling.py
 import pytest
-from theseus.brute import brute_connected_bishop
-from theseus.connected import peeling_connected
-from theseus.targets import published_terms
+from graphrecords.brute import brute_connected_bishop
+from graphrecords.connected import peeling_connected
+from graphrecords.targets import published_terms
 
 
 @pytest.mark.parametrize("n", range(1, 7))
@@ -545,13 +545,13 @@ def test_reproduces_published_black_bishop(n):
 
 - [x] **Step 2: Run test to verify it fails**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_peeling.py -v`
-Expected: FAIL, `ModuleNotFoundError: No module named 'theseus.connected'`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_connected_peeling.py -v`
+Expected: FAIL, `ModuleNotFoundError: No module named 'graphrecords.connected'`
 
 - [x] **Step 3: Write minimal implementation**
 
 ```python
-# theseus/connected.py
+# graphrecords/connected.py
 """Counting connected cell subsets of a rook graph.
 
 A cell subset is connected in the rook graph exactly when the bipartite graph it
@@ -560,7 +560,7 @@ class are mutually adjacent. Both counters below work on that bipartite view.
 """
 from functools import lru_cache
 
-from theseus.reduction import class_grid
+from graphrecords.reduction import class_grid
 
 
 def _submasks(m):
@@ -627,14 +627,14 @@ def peeling_connected(n, colour):
 
 - [x] **Step 4: Run test to verify it passes**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_peeling.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_connected_peeling.py -v`
 Expected: PASS, 20 passed. The n=8 case takes roughly 4 seconds.
 
 - [x] **Step 5: Commit**
 
 ```bash
-cd /c/dev/Theseus
-git add theseus/connected.py tests/test_connected_peeling.py
+cd /c/dev/GraphRecords
+git add graphrecords/connected.py tests/test_connected_peeling.py
 git commit -m "Add exact support peeling counter validated to eight published terms"
 ```
 
@@ -643,7 +643,7 @@ git commit -m "Add exact support peeling counter validated to eight published te
 ### Task 6: Frontier partition DP (the production algorithm)
 
 **Files:**
-- Modify: `theseus/connected.py` (append; do not disturb `peeling_connected`)
+- Modify: `graphrecords/connected.py` (append; do not disturb `peeling_connected`)
 - Test: `tests/test_connected_frontier.py`
 
 **Interfaces:**
@@ -659,8 +659,8 @@ git commit -m "Add exact support peeling counter validated to eight published te
 ```python
 # tests/test_connected_frontier.py
 import pytest
-from theseus.connected import frontier_connected, peeling_connected
-from theseus.targets import published_terms
+from graphrecords.connected import frontier_connected, peeling_connected
+from graphrecords.targets import published_terms
 
 
 @pytest.mark.parametrize("n", range(1, 9))
@@ -681,13 +681,13 @@ def test_reproduces_every_published_white_bishop_term(n):
 
 - [x] **Step 2: Run test to verify it fails**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_frontier.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_connected_frontier.py -v`
 Expected: FAIL, `ImportError: cannot import name 'frontier_connected'`
 
 - [x] **Step 3: Append the implementation**
 
 ```python
-# appended to theseus/connected.py
+# appended to graphrecords/connected.py
 
 
 def _canonical(labels):
@@ -774,7 +774,7 @@ def frontier_state_peak(n, colour):
 
 - [x] **Step 4: Run test to verify it passes**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_connected_frontier.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_connected_frontier.py -v`
 Expected: PASS, 34 passed
 
 If any case fails, do NOT adjust the expected values — they are published data. Debug the DP against `peeling_connected` at the smallest failing n, where both are cheap.
@@ -783,8 +783,8 @@ If any case fails, do NOT adjust the expected values — they are published data
 
 Run:
 ```bash
-cd /c/dev/Theseus && python -c "
-from theseus.connected import frontier_state_peak, frontier_connected
+cd /c/dev/GraphRecords && python -c "
+from graphrecords.connected import frontier_state_peak, frontier_connected
 import time
 for n in range(1, 15):
     t = time.time(); v = frontier_connected(n, 'black'); dt = time.time() - t
@@ -796,8 +796,8 @@ Expected: peak state counts and timings printed per n. Stop at whatever n exceed
 - [x] **Step 6: Commit**
 
 ```bash
-cd /c/dev/Theseus
-git add theseus/connected.py tests/test_connected_frontier.py
+cd /c/dev/GraphRecords
+git add graphrecords/connected.py tests/test_connected_frontier.py
 git commit -m "Add frontier partition DP validated against peeling and published data"
 ```
 
@@ -818,8 +818,8 @@ git commit -m "Add frontier partition DP validated against peeling and published
 ```python
 # tests/test_identities.py
 import pytest
-from theseus.connected import frontier_connected
-from theseus.targets import published_terms
+from graphrecords.connected import frontier_connected
+from graphrecords.targets import published_terms
 
 
 @pytest.mark.parametrize("n", range(1, 10))
@@ -836,13 +836,13 @@ def test_white_board_is_empty_at_n_equals_one():
 
 - [x] **Step 2: Run the test**
 
-Run: `cd /c/dev/Theseus && python -m pytest tests/test_identities.py -v`
+Run: `cd /c/dev/GraphRecords && python -m pytest tests/test_identities.py -v`
 Expected: PASS, 10 passed
 
 - [x] **Step 3: Commit**
 
 ```bash
-cd /c/dev/Theseus
+cd /c/dev/GraphRecords
 git add tests/test_identities.py
 git commit -m "Add cross sequence identity gate for the two bishop components"
 ```
@@ -870,10 +870,10 @@ Exits 0 only if every verification level passes. Believe this over any prose.
 import subprocess
 import sys
 
-from theseus.brute import brute_connected_bishop
-from theseus.connected import frontier_connected, peeling_connected
-from theseus.reduction import verify_isomorphism
-from theseus.targets import load_targets, published_terms
+from graphrecords.brute import brute_connected_bishop
+from graphrecords.connected import frontier_connected, peeling_connected
+from graphrecords.reduction import verify_isomorphism
+from graphrecords.targets import load_targets, published_terms
 
 CHECKS = []
 
@@ -941,7 +941,7 @@ if __name__ == "__main__":
 - [x] **Step 2: Write the README**
 
 ```markdown
-# Theseus
+# GraphRecords
 
 Extending OEIS sequences defined on board graphs, starting with the bishop graph.
 
@@ -962,23 +962,23 @@ claim written in prose here or anywhere else.
 
 ## Layout
 
-- `theseus/boards.py` - board cell sets and explicit graph construction
-- `theseus/reduction.py` - the bishop-to-rook map, with its proof and self-check
-- `theseus/brute.py` - exhaustive reference counters
-- `theseus/connected.py` - the two fast counters
-- `theseus/targets.py` - offline snapshot of published OEIS terms
+- `graphrecords/boards.py` - board cell sets and explicit graph construction
+- `graphrecords/reduction.py` - the bishop-to-rook map, with its proof and self-check
+- `graphrecords/brute.py` - exhaustive reference counters
+- `graphrecords/connected.py` - the two fast counters
+- `graphrecords/targets.py` - offline snapshot of published OEIS terms
 - `verify_all.py` - the gate
 ```
 
 - [x] **Step 3: Run the gate**
 
-Run: `cd /c/dev/Theseus && python verify_all.py`
+Run: `cd /c/dev/GraphRecords && python verify_all.py`
 Expected: final line `verify_all: ALL <N> CHECKS PASSED`, exit code 0
 
 - [x] **Step 4: Commit**
 
 ```bash
-cd /c/dev/Theseus
+cd /c/dev/GraphRecords
 git add verify_all.py README.md
 git commit -m "Add the verification gate and repository README"
 ```
@@ -1009,8 +1009,8 @@ import argparse
 import pathlib
 import time
 
-from theseus.connected import frontier_connected
-from theseus.targets import published_terms
+from graphrecords.connected import frontier_connected
+from graphrecords.targets import published_terms
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 STAGE = ROOT / "OEIS-upload"
@@ -1062,14 +1062,14 @@ if __name__ == "__main__":
 
 - [x] **Step 2: Run the extension**
 
-Run: `cd /c/dev/Theseus && python tools/extend.py --limit 20 --budget 1800`
+Run: `cd /c/dev/GraphRecords && python tools/extend.py --limit 20 --budget 1800`
 Expected: every published term reproduced, then `NEW` lines for each term beyond the published data, then staged b-file paths. If it aborts on a published term, stop and debug — do not stage.
 
 - [x] **Step 3: Verify the staged b-files are LF-only**
 
 Run:
 ```bash
-cd /c/dev/Theseus && python -c "
+cd /c/dev/GraphRecords && python -c "
 import pathlib
 for p in sorted(pathlib.Path('OEIS-upload').glob('b*.txt')):
     raw = p.read_bytes()
@@ -1084,7 +1084,7 @@ Expected: every file reports `LF-ok no-BOM trailing-LF`
 - [x] **Step 4: Write PAPER.md**
 
 Record, with the actual numbers produced in Task 6 Step 5 and Task 9 Step 2:
-the reduction theorem and its proof (copy from `theseus/reduction.py`); the two
+the reduction theorem and its proof (copy from `graphrecords/reduction.py`); the two
 algorithms and their costs; the measured peak-state table; a results table of old
 term count versus new term count per sequence; the verification levels and what
 each rules out; and an explicit statement of the ceiling — which n became
@@ -1111,11 +1111,11 @@ never alter existing lines; wrap multi-paragraph comments with (Start) / (End).
 
 - [x] **Step 6: Re-run the gate and commit**
 
-Run: `cd /c/dev/Theseus && python verify_all.py`
+Run: `cd /c/dev/GraphRecords && python verify_all.py`
 Expected: `verify_all: ALL <N> CHECKS PASSED`, exit code 0
 
 ```bash
-cd /c/dev/Theseus
+cd /c/dev/GraphRecords
 git add tools/extend.py OEIS-upload PAPER.md
 git commit -m "Extend the bishop connected subgraph sequences and stage b-files"
 ```

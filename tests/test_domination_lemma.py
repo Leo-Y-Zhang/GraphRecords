@@ -12,10 +12,10 @@ Both statements are tested against brute force here before anything is built on
 them.
 """
 import pytest
-from theseus.boards import bishop_cells
-from theseus.brute import brute_dominating_bishop
-from theseus.reduction import class_grid, rook_coords
-from theseus.targets import terms_by_n
+from graphrecords.boards import bishop_cells
+from graphrecords.brute import brute_dominating_bishop
+from graphrecords.reduction import class_grid, rook_coords
+from graphrecords.targets import terms_by_n
 
 BLACK = terms_by_n("A289164")   # dominating sets, black bishop graph, 15 terms
 WHITE = terms_by_n("A289170")   # dominating sets, white bishop graph, 14 terms
@@ -52,7 +52,7 @@ def _supports_and_domination(n, colour):
     yi = {y: j for j, y in enumerate(ys)}
     classes = [(xi[coords[c][0]], yi[coords[c][1]]) for c in cells]
 
-    from theseus.boards import adjacency_masks, bishop_adjacent
+    from graphrecords.boards import adjacency_masks, bishop_adjacent
     nbr = adjacency_masks(cells, bishop_adjacent)
     closed = [nbr[i] | (1 << i) for i in range(len(cells))]
     full = (1 << len(cells)) - 1

@@ -1,4 +1,4 @@
-from theseus.boards import bishop_cells, bishop_adjacent, adjacency_masks
+from graphrecords.boards import bishop_cells, bishop_adjacent, adjacency_masks
 
 
 def test_black_cells_are_even_parity():

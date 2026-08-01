@@ -18,7 +18,7 @@ y-class it is finalised: `req` there must already imply `hit`, or the state is
 dead. Finalised bits are then cleared, which merges states and is what keeps the
 count small.
 """
-from theseus.reduction import class_grid
+from graphrecords.reduction import class_grid
 
 
 def _dominating_run(n, colour):

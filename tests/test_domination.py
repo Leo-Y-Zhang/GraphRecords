@@ -1,7 +1,7 @@
 import pytest
-from theseus.brute import brute_dominating_bishop, brute_total_dominating_bishop
-from theseus.domination import dominating_sets, total_dominating_sets
-from theseus.targets import terms_by_n
+from graphrecords.brute import brute_dominating_bishop, brute_total_dominating_bishop
+from graphrecords.domination import dominating_sets, total_dominating_sets
+from graphrecords.targets import terms_by_n
 
 BLACK = terms_by_n("A289164")   # 15 published terms
 WHITE = terms_by_n("A289170")   # 14 published terms

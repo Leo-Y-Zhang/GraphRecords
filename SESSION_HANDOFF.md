@@ -1,7 +1,7 @@
-# Theseus - session handoff
+# GraphRecords - session handoff
 
 **Last updated:** 2026-07-31, session b0ad5ff3
-**Branch:** `phase1-bishop-family`, pushed to private `GreenPandaTech/Theseus`
+**Branch:** `phase1-bishop-family`, pushed to private `GreenPandaTech/GraphRecords`
 **Gate:** `python verify_all.py` -> exit 0 (count printed by the run itself)
 
 ## What this is
@@ -17,7 +17,7 @@ Both blow-ups were memory, not runtime: domination n=21 held 5.6 GB, connected
 dominating n=11 held 4.6 GB. State counts grow only ~2.2x per step, so the fix is
 a cheaper state, not a faster loop.
 
-**Done for `theseus/domination.py`:** the DP state is packed into ONE integer
+**Done for `graphrecords/domination.py`:** the DP state is packed into ONE integer
 (hit mask | requirement mask << ny | placed bit << 2ny). A two-element tuple key
 carries ~60 bytes of object overhead on top of the ints it holds, and with
 millions of live states that overhead was the entire problem. Identical state
@@ -28,7 +28,7 @@ version was killed at 5.6 GB. It also ran ~1.6x faster throughout. It bought
 exactly ONE term, as predicted - growth is 2.2x per step, so a 2-3x memory saving
 moves the wall one step and no further.
 
-**Still to do:** `theseus/connected_domination.py` carries tuple keys AND a labels
+**Still to do:** `graphrecords/connected_domination.py` carries tuple keys AND a labels
 tuple per state, so it has more overhead to reclaim than domination did. Expect
 one more term (n=10 -> n=11) on A289145/A289169, not more.
 
@@ -52,7 +52,7 @@ free RAM low AND the target itself large (`-MinTargetGB`).
 
 ## Third predicate: connected dominating sets
 
-`theseus/connected_domination.py`. Composes both collapses. Connectivity gives
+`graphrecords/connected_domination.py`. Composes both collapses. Connectivity gives
 the frontier partition; domination costs only a requirement bit, because a
 y-class carries a non-zero block label exactly when it holds a chosen cell, which
 is what domination already asks. Reproduces all 8 published terms of A289145 and
@@ -64,7 +64,7 @@ test suite asserts.
 
 ## Second predicate: domination (2026-07-31, later)
 
-`theseus/domination.py`. Support-collapse lemma: a set dominates iff its support
+`graphrecords/domination.py`. Support-collapse lemma: a set dominates iff its support
 is a vertex cover of the cell bipartite graph, so domination depends only on
 which classes are occupied. Reaches **n=18** where connected subgraphs reach 11.
 
@@ -129,8 +129,8 @@ Phase 1 is COMPLETE and written up. Nothing is half-done. If you pick this up:
    Reading the DATA line as the term count already cost a day once.
 3. The ten staged terms wait on A217058 being accepted, then one submission at a
    time, each explicitly authorised by the operator. Submitting is never mine.
-4. If extending further: pack `theseus/connected_domination.py` the way
-   `theseus/domination.py` was packed (one integer per state). It still uses tuple
+4. If extending further: pack `graphrecords/connected_domination.py` the way
+   `graphrecords/domination.py` was packed (one integer per state). It still uses tuple
    keys plus a labels tuple and died at 4.6 GB on n=11. Packing bought exactly one
    term for domination (n=20 -> n=21), so expect one here too, not more.
 5. Phase 2 is designed in `docs/superpowers/specs/2026-07-31-phase2-*.md` but is a
@@ -152,7 +152,7 @@ i.e. +3 to +4 terms per sequence. Do not promise more than that.
 - The repo is private on GitHub. Making it PUBLIC is the operator's decision,
   never mine.
 - Offsets are NOT uniform across this family (A290719 starts at n=1, A290769 at
-  n=2). Always index by true n via `theseus.targets.terms_by_n`.
+  n=2). Always index by true n via `graphrecords.targets.terms_by_n`.
 - Counts exceed 64 bits. Python ints only; never a fixed-width accumulator.
 
 ## Traps already hit, do not repeat

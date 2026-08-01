@@ -1,4 +1,4 @@
-from theseus.targets import load_targets, published_terms
+from graphrecords.targets import load_targets, published_terms
 
 
 def test_snapshot_contains_the_anchor_sequences():

@@ -6,7 +6,7 @@ class are mutually adjacent. Both counters below work on that bipartite view.
 """
 from functools import lru_cache
 
-from theseus.reduction import class_grid
+from graphrecords.reduction import class_grid
 
 
 def _submasks(m):

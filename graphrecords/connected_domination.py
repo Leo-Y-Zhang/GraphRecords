@@ -14,7 +14,7 @@ forces every y-class it meets to be occupied.
 Since phi is injective the class grid is 0/1, so "place at least one cell in this
 (x-class, y-class)" is a single choice and every transition weight is 1.
 """
-from theseus.reduction import class_grid
+from graphrecords.reduction import class_grid
 
 # The DP state is a single `bytes` key:
 #

@@ -17,7 +17,7 @@ iff sharing an x-class or a y-class.
 """
 from itertools import combinations
 
-from theseus.boards import bishop_adjacent, bishop_cells
+from graphrecords.boards import bishop_adjacent, bishop_cells
 
 
 def rook_coords(n, colour):

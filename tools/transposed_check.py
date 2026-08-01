@@ -21,9 +21,9 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from theseus.connected import frontier_connected        # noqa: E402
-from theseus.memguard import start as memguard_start    # noqa: E402
-from theseus.targets import terms_by_n                  # noqa: E402
+from graphrecords.connected import frontier_connected        # noqa: E402
+from graphrecords.memguard import start as memguard_start    # noqa: E402
+from graphrecords.targets import terms_by_n                  # noqa: E402
 
 
 def main() -> int:

@@ -10,7 +10,7 @@ import pathlib
 import re
 
 import pytest
-from theseus.targets import offset_start, terms_by_n
+from graphrecords.targets import offset_start, terms_by_n
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 STAGE = ROOT / "OEIS-upload"

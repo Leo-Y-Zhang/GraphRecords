@@ -1,4 +1,4 @@
-# Theseus Phase 2 — local board graphs
+# GraphRecords Phase 2 — local board graphs
 
 **Date:** 2026-07-31
 **Status:** design, not yet approved for execution

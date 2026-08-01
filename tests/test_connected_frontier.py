@@ -1,6 +1,6 @@
 import pytest
-from theseus.connected import frontier_connected, peeling_connected
-from theseus.targets import terms_by_n
+from graphrecords.connected import frontier_connected, peeling_connected
+from graphrecords.targets import terms_by_n
 
 BLACK = terms_by_n("A290719")   # offset 1
 WHITE = terms_by_n("A290769")   # offset 2 -- a 1 X 1 board has no white cells
@@ -39,7 +39,7 @@ def test_transposed_sweep_agrees(n, colour):
 def test_contiguity_holds_in_both_directions(n):
     """The transposed sweep's pruning is only sound if y-classes also meet a
     contiguous x-interval. Asserted, not assumed."""
-    from theseus.reduction import class_grid
+    from graphrecords.reduction import class_grid
     grid, nx, ny = class_grid(n, "black")
     for row in grid:
         used = [j for j, v in enumerate(row) if v]
