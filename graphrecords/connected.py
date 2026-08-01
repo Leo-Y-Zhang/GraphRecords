@@ -19,16 +19,23 @@ def _submasks(m):
         s = (s - 1) & m
 
 
-def peeling_connected(n, colour):
-    """Connected non-empty cell subsets, by exact-support inclusion-exclusion.
+def peeling_machinery(n, colour):
+    """The exact-support peeling counters, shared by every predicate built on it.
 
-    B(X, Y) counts subsets whose x-support is exactly X and y-support exactly Y.
-    C(X, Y) counts those that are also connected, found by peeling off the
-    component holding the lowest x-class of X. Cost is about 9^n.
+    Returns `(nx, ny, ncells, C)`. B(X, Y) counts subsets whose x-support is
+    exactly X and y-support exactly Y; C(X, Y) counts those that are also
+    connected, found by peeling off the component holding the lowest x-class of
+    X. Cost is about 9^n.
+
+    Exposed rather than kept private because connected *dominating* sets are the
+    same C summed over a restricted set of supports -- domination is decided by
+    the support alone. Sharing this means the second algorithm for that sequence
+    is the peeling path already cross-checked against the frontier DP, instead of
+    a second transcription of it that could drift.
     """
     grid, nx, ny = class_grid(n, colour)
     if nx == 0 or ny == 0:
-        return 0
+        return 0, 0, None, None
 
     @cache
     def ncells(X, Y):
@@ -68,6 +75,14 @@ def peeling_connected(n, colour):
                 total -= C(X1, Y1) * B(X ^ X1, Y ^ Y1)
         return total
 
+    return nx, ny, ncells, C
+
+
+def peeling_connected(n, colour):
+    """Connected non-empty cell subsets, by exact-support inclusion-exclusion."""
+    nx, ny, _ncells, C = peeling_machinery(n, colour)
+    if C is None:
+        return 0
     return sum(C(X, Y) for X in range(1, 1 << nx) for Y in range(1, 1 << ny))
 
 

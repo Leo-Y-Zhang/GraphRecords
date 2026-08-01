@@ -128,7 +128,8 @@ Five levels, all re-run from cold by `verify_all.py`, plus the pytest suite.
   indexed by each sequence's true offset. Offsets are **not** uniform here:
   A290719 begins at n=1, A290769 at n=2, since a 1 X 1 board has no white cells.
 - **L3** The frontier DP and the peeling counter, which share no code path beyond
-  the class grid, agree for n=1..8 in both colours.
+  the class grid, agree for n=1..8 in both colours — for connected subgraphs, and
+  since 2026-08-01 for connected dominating sets as well.
 - **L4** Structural identities that follow from the problem rather than the code:
   the two components give `black(n) + white(n) = bishop(n)` against all 9 published
   terms of A291595; reflection makes the colour classes congruent for even n, so
@@ -147,11 +148,38 @@ ten terms are staged across five. Aggregate confidence claims hide exactly this.
 | A290769 a(10) | same value as A290719 a(10) by the even-n reflection isomorphism | **yes**, inherited |
 | A290719 a(11) | frontier DP **and the peeling counter**, which agree (7.9 h for the peeling half) | **yes** — cross-check completed 2026-08-01 |
 | A290769 a(11) | frontier DP on the white board, plus the same odd-n check. **The cross-check covered BLACK only** | **no** |
-| A291595 a(10), a(11) | derived as black + white; the identity is verified against all 9 published terms | inherits the rows above |
-| A289145, A289169 a(9) | the composed connectivity+domination DP; brute force to n=6, all published terms to n=8; the two boards differ as odd n requires | **no** |
-| A289145, A289169 a(10) | as above, and **the two boards return the identical value**, as the even-n isomorphism requires | partial — same algorithm, independent input |
+| A291595 a(10) | derived as black + white; the identity is verified against all 9 published terms | inherits — **both parents now confirmed** |
+| A291595 a(11) | as above | inherits — one parent (A290769) still unconfirmed |
+| A289145, A289169 a(9) | frontier DP **and the CDS peeling counter**, which agree | **yes** — cross-check completed 2026-08-01 |
+| A289145, A289169 a(10) | as above, and the two boards return the identical value as the even-n isomorphism requires | **yes** — cross-check completed 2026-08-01 |
 
-So: **three terms now carry genuine independent confirmation** — A290719 a(10) (three ways), A290769 a(10) (inherited by the even-n reflection isomorphism) and A290719 a(11) (peeling cross-check, completed 2026-08-01 after 7.9 hours). The remaining seven rest on a single algorithm that has never disagreed with brute force or with published data. That is good evidence. It is not the same thing as independent confirmation, and the two should not be blurred into one sentence.
+**Seven of the ten staged terms now carry genuine independent confirmation.** The
+four connected-dominating-set terms were the largest block resting on a single
+algorithm, and they no longer do. `cds_peeling.py` counts the same sets by
+exact-support inclusion-exclusion, sharing no code path with the frontier DP
+beyond the class grid — and in particular nothing with that DP's requirement-mask
+bookkeeping, which is its subtlest part and the likeliest place for an error to
+survive the tests. Domination enters it as a predicate on the support, which is
+sound because a cell's closed neighbourhood in a rook graph is its whole x-class
+together with its whole y-class, so whether a set dominates depends only on which
+classes it occupies.
+
+| cross-check | frontier DP | peeling | agreed value |
+|---|---:|---:|---|
+| A289145 a(9), black | 8.0 s | 147.0 s | 2014079802496 |
+| A289169 a(9), white | 2.6 s | 10.6 s | 1011850062768 |
+| A289169 a(10), white | 67.8 s | 559.0 s | 1073633875253120 |
+| A289145 a(10), black | 28.1 s | 528.7 s | 1073633875253120 |
+
+The two n=10 values are equal, which the even-n reflection isomorphism requires
+and which two independent algorithms now both produce.
+
+**What is still not independently confirmed: A290769 a(11)**, and A291595 a(11),
+which inherits from it. That is one job — the peeling counter on the white board
+at n=11, on the order of eight hours. Until it finishes, those two terms rest on a
+single algorithm that has never disagreed with brute force or with published data.
+That is good evidence. It is not the same thing as independent confirmation, and
+the two should not be blurred into one sentence.
 
 ## 5. A second collapse: domination
 
