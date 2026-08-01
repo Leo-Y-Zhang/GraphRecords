@@ -163,3 +163,30 @@ i.e. +3 to +4 terms per sequence. Do not promise more than that.
   body on the next page rather than a short page. Treat that as end-of-results.
 - The fixed-width-strip seam (`6 X n` etc.) is already harvested by Alois Heinz
   and Seiichi Manyama, with b-files of 200-500 terms. Do not compete there.
+
+## Cross-check verdict (recorded automatically)
+
+a(11) of A290719 is **independently confirmed**: the frontier partition
+DP and the exact-support peeling counter, which share no code path beyond
+the class grid, agree.
+
+This run compared the two algorithms at:
+
+  - n=10 (black)
+  - n=11 (black)
+
+It establishes nothing about the other staged terms, which it did not
+cover; each of those rests on whatever verification is recorded for it
+separately.
+
+```
+n=10 black
+  frontier DP : 1090550900687379   [60.6s]
+  peeling     : 1090550900687379   [742.6s]
+  -> AGREE - independently confirmed
+n=11 black
+  frontier DP : 2265142469367980614   [1527.2s]
+  peeling     : 2265142469367980614   [28482.6s]
+  -> AGREE - independently confirmed
+CROSSCHECK PASSED
+```

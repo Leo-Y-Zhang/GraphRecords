@@ -254,3 +254,30 @@ Both are enforced by the gate against every published term.
 - The fixed-width strip sequences, where a transfer matrix yields a linear
   recurrence and thousands of terms, are already well covered by Alois P. Heinz
   and Seiichi Manyama; this work deliberately does not compete there.
+
+## Cross-check verdict (recorded automatically)
+
+a(11) of A290719 is **independently confirmed**: the frontier partition
+DP and the exact-support peeling counter, which share no code path beyond
+the class grid, agree.
+
+This run compared the two algorithms at:
+
+  - n=10 (black)
+  - n=11 (black)
+
+It establishes nothing about the other staged terms, which it did not
+cover; each of those rests on whatever verification is recorded for it
+separately.
+
+```
+n=10 black
+  frontier DP : 1090550900687379   [60.6s]
+  peeling     : 1090550900687379   [742.6s]
+  -> AGREE - independently confirmed
+n=11 black
+  frontier DP : 2265142469367980614   [1527.2s]
+  peeling     : 2265142469367980614   [28482.6s]
+  -> AGREE - independently confirmed
+CROSSCHECK PASSED
+```
