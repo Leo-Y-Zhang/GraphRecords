@@ -1,4 +1,5 @@
 import pytest
+
 from graphrecords.connected import frontier_connected, peeling_connected
 from graphrecords.targets import terms_by_n
 

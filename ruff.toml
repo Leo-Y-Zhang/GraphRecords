@@ -1,0 +1,36 @@
+# The lint contract lives here, in the repo, on purpose.
+#
+# Before this file existed there was no ruff configuration at all, so `ruff
+# check .` graded the code against whatever default rule set the installed ruff
+# happened to ship, and CI installed ruff unpinned. The result: commit 48d1bf1
+# linted clean on 0.15.16 locally and failed with 55 errors on 0.16.1 in CI, and
+# nothing in the repo had changed. A gate whose verdict depends on the day you
+# run it is not a gate.
+#
+# So the rule set is stated explicitly and the CI job pins the ruff version to
+# the one this file was validated against (.github/workflows/ci.yml).
+
+target-version = "py313"
+line-length = 100
+
+[lint]
+# E/F  pycodestyle + pyflakes -- the baseline.
+# I    import sorting, deterministic order.
+# UP   pyupgrade; this repo is py313-only, so legacy spellings are just noise.
+# B    bugbear, catches real defects rather than style.
+# RUF  ruff's own rules, including RUF100 (noqa directives that do nothing).
+select = ["E", "F", "I", "UP", "B", "RUF"]
+
+# A note on E402, because the obvious guess is wrong. The scripts in tools/ and
+# bench/ insert the repo root on sys.path before importing graphrecords, and each
+# such import used to carry a `# noqa: E402`. Those directives were dead: ruff's
+# E402 deliberately allows imports that follow a sys.path modification, so the
+# rule never fired and RUF100 was right to call all fifteen of them unused. They
+# were removed rather than preserved by bending this config around them. Verified
+# on ruff 0.16.1 with an isolated minimal case, not assumed.
+
+[lint.per-file-ignores]
+# The b-file and OEIS staging tests assert on exact literal text, and the
+# published sequence data is transcribed verbatim; neither should be reflowed.
+"tests/test_staged_bfiles.py" = ["E501"]
+"graphrecords/targets.py" = ["E501"]

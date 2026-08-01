@@ -1,4 +1,5 @@
 import pytest
+
 from graphrecords.brute import brute_connected_bishop
 
 # published OEIS DATA, snapshotted from oeis.org

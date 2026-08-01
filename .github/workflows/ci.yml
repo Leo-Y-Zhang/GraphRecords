@@ -35,7 +35,12 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
-      - run: pip install ruff
+      # Pinned deliberately. Unpinned, this step installed whatever ruff was
+      # newest that morning: 48d1bf1 linted clean on 0.15.16 and failed with 55
+      # errors on 0.16.1 without a line of the repo changing. The rule set now
+      # lives in ruff.toml and the version that grades it is fixed here, so a red
+      # lint means the code changed. Bump both together, never just this line.
+      - run: pip install ruff==0.16.1
       - run: ruff check .
 
   gitleaks:

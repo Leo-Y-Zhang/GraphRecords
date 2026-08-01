@@ -10,6 +10,7 @@ import pathlib
 import re
 
 import pytest
+
 from graphrecords.targets import offset_start, terms_by_n
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]

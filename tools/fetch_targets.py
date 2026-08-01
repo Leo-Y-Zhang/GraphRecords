@@ -64,7 +64,7 @@ def main():
     records = {}
     for q in ('"bishop graph"', '"bishop graphs"'):
         for res in search_all(q):
-            aid = "A%06d" % res["number"]
+            aid = f"A{res['number']:06d}"
             records[aid] = {
                 "name": res.get("name", ""),
                 "offset": res.get("offset", ""),

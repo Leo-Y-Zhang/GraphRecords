@@ -4,7 +4,7 @@ A cell subset is connected in the rook graph exactly when the bipartite graph it
 induces between x-classes and y-classes is connected, because all cells sharing a
 class are mutually adjacent. Both counters below work on that bipartite view.
 """
-from functools import lru_cache
+from functools import cache
 
 from graphrecords.reduction import class_grid
 
@@ -30,7 +30,7 @@ def peeling_connected(n, colour):
     if nx == 0 or ny == 0:
         return 0
 
-    @lru_cache(maxsize=None)
+    @cache
     def ncells(X, Y):
         total = 0
         for i in range(nx):
@@ -41,7 +41,7 @@ def peeling_connected(n, colour):
                         total += row[j]
         return total
 
-    @lru_cache(maxsize=None)
+    @cache
     def B(X, Y):
         if X == 0 or Y == 0:
             return 1 if (X == 0 and Y == 0) else 0
@@ -53,7 +53,7 @@ def peeling_connected(n, colour):
                 total += sign * (1 << ncells(X1, Y1))
         return total
 
-    @lru_cache(maxsize=None)
+    @cache
     def C(X, Y):
         if X == 0 or Y == 0:
             return 1 if (X == 0 and Y == 0) else 0

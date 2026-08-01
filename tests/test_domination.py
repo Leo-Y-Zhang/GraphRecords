@@ -1,4 +1,5 @@
 import pytest
+
 from graphrecords.brute import brute_dominating_bishop, brute_total_dominating_bishop
 from graphrecords.domination import dominating_sets, total_dominating_sets
 from graphrecords.targets import terms_by_n

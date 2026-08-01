@@ -1,5 +1,6 @@
 import pytest
-from graphrecords.reduction import rook_coords, verify_isomorphism, class_grid
+
+from graphrecords.reduction import class_grid, rook_coords, verify_isomorphism
 
 
 @pytest.mark.parametrize("n", range(1, 13))
@@ -24,7 +25,7 @@ def test_class_grid_totals_match_cell_count():
 
 def test_each_x_class_meets_a_contiguous_y_interval():
     # locality is what makes the frontier DP affordable
-    grid, nx, ny = class_grid(9, "black")
+    grid, _, _ = class_grid(9, "black")
     for row in grid:
         used = [j for j, v in enumerate(row) if v]
         assert used == list(range(used[0], used[-1] + 1))
@@ -44,5 +45,5 @@ def test_class_grid_is_zero_one(n, colour):
     as a subset of the occupied grid positions, so per-class counts are just
     populations rather than multiplicities.
     """
-    grid, nx, ny = class_grid(n, colour)
+    grid, _, _ = class_grid(n, colour)
     assert all(v in (0, 1) for row in grid for v in row)

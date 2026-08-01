@@ -1,4 +1,5 @@
 import pytest
+
 from graphrecords.brute import brute_connected_bishop
 from graphrecords.connected import peeling_connected
 from graphrecords.targets import published_terms

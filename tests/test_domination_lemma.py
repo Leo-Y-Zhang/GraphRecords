@@ -12,6 +12,7 @@ Both statements are tested against brute force here before anything is built on
 them.
 """
 import pytest
+
 from graphrecords.boards import bishop_cells
 from graphrecords.brute import brute_dominating_bishop
 from graphrecords.reduction import class_grid, rook_coords
@@ -45,7 +46,6 @@ def _supports_and_domination(n, colour):
     """Yield (x-support, y-support, dominates?) for every cell subset."""
     coords = rook_coords(n, colour)
     cells = bishop_cells(n, colour)
-    grid, nx, ny = class_grid(n, colour)
     xs = sorted({x for x, _ in coords.values()})
     ys = sorted({y for _, y in coords.values()})
     xi = {x: i for i, x in enumerate(xs)}

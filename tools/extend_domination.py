@@ -14,9 +14,9 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from graphrecords.domination import dominating_sets                 # noqa: E402
-from graphrecords.memguard import start as memguard_start        # noqa: E402
-from graphrecords.targets import offset_start, terms_by_n           # noqa: E402
+from graphrecords.domination import dominating_sets
+from graphrecords.memguard import start as memguard_start
+from graphrecords.targets import offset_start, terms_by_n
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 STAGE = ROOT / "OEIS-upload"
@@ -96,7 +96,7 @@ def main():
     print(f"{DERIVED}: agrees with all {checked} published terms in range")
 
     results = []
-    for aid, vals in list(computed.items()) + [(DERIVED, derived)]:
+    for aid, vals in [*computed.items(), (DERIVED, derived)]:
         pub = len(terms_by_n(aid))
         path = stage(aid, vals)
         results.append((aid, pub, len(vals), len(vals) - pub))

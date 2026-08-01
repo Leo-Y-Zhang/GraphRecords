@@ -5,6 +5,7 @@ quietly miscounts would have produced a confident wrong verdict, so it is pinned
 against the independent exhaustive counter wherever both are affordable.
 """
 import pytest
+
 from graphrecords.torus import brute_dominating
 from graphrecords.torus_profile import _row_neighbourhood, dominating_sets_torus
 

@@ -78,7 +78,7 @@ def main():
         print(f"searching {fam!r} keyword:more ...")
         sys.stdout.flush()
         for res in search_all(f'"{fam}" keyword:more'):
-            aid = "A%06d" % res["number"]
+            aid = f"A{res['number']:06d}"
             rec = records.setdefault(aid, {
                 "name": res.get("name", ""),
                 "offset": res.get("offset", ""),
@@ -102,7 +102,12 @@ def main():
 
     print(f"\n{len(records)} sequences with keyword:more across the local families\n")
     print(f"{'predicate':44s} {'seqs':>4s} {'fewest terms':>12s}")
-    for key, v in sorted(groups.items(), key=lambda kv: (-len(kv[1]), min(x[1] for x in kv[1])))[:24]:
+    # biggest predicate groups first, and within a size the ones whose shortest
+    # entry is shortest -- those are the most extendable targets.
+    def _rank(kv):
+        return -len(kv[1]), min(x[1] for x in kv[1])
+
+    for key, v in sorted(groups.items(), key=_rank)[:24]:
         print(f"{key[:44]:44s} {len(v):>4d} {min(x[1] for x in v):>12d}")
     print(f"\nwrote {OUT}")
 

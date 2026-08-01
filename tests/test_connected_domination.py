@@ -1,4 +1,5 @@
 import pytest
+
 from graphrecords.brute import brute_connected_dominating_bishop
 from graphrecords.connected_domination import connected_dominating_sets
 from graphrecords.targets import terms_by_n
