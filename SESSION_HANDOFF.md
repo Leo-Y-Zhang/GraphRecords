@@ -1,8 +1,34 @@
 # GraphRecords - session handoff
 
-**Last updated:** 2026-07-31, session b0ad5ff3
+**Last updated:** 2026-08-01
 **Branch:** `phase1-bishop-family`, pushed to private `GreenPandaTech/GraphRecords`
-**Gate:** `python verify_all.py` -> exit 0 (count printed by the run itself)
+**Gate:** `python verify_all.py` -> exit 0 (**189 checks + 372 tests** as of 2026-08-01)
+
+## INDEPENDENT CONFIRMATION - 7 of the 10 staged terms, and what is left
+
+**2026-08-01: the four connected-dominating-set terms are now cross-checked.**
+`graphrecords/cds_peeling.py` is a second algorithm for A289145/A289169 - exact
+support inclusion-exclusion, with domination as a predicate on the support. It
+shares no code path with the frontier DP beyond the class grid, and nothing at
+all with that DP's requirement-mask bookkeeping. Run it with
+`python tools/crosscheck_cds.py --from-n 9 --to-n 10 --colour black|white`.
+All four agree; timings and values are in `PAPER.md` section 4.
+
+**ONE JOB IS RUNNING (started 2026-08-01 15:31, on the order of 8 hours):** the
+peeling counter on the **white board at n=11**, which closes the last gap -
+`A290769 a(11)` and, by inheritance, `A291595 a(11)`. Detached OS process,
+memory-guarded, logging to `bench/out/crosscheck_white_n11.log`.
+**Read that log before starting anything heavy, and do not run a second big job
+beside it.** When it finishes:
+
+* if it AGREES, update the per-term table in `PAPER.md` section 4 - all ten terms
+  then carry independent confirmation, and the "what is still not independently
+  confirmed" paragraph must be DELETED rather than left contradicting the table;
+* if it DISAGREES, that is a real defect in a staged term. Submit nothing, and
+  find out which counter is wrong before touching any b-file.
+
+**Do not re-run the cross-checks that already passed** (A290719 a(10) and a(11),
+and the four CDS terms) - they are recorded in `PAPER.md` and cost hours.
 
 ## What this is
 
