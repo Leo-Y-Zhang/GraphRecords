@@ -135,7 +135,7 @@ def stop(kind, headline, detail, code):
     """Write the marker files for a non-confirming outcome, commit, push."""
     msg = f"{headline}\n\n{detail}\n"
     (ROOT / "CROSSCHECK-FAILED-READ-ME.txt").write_text(msg, encoding="utf-8")
-    (HOME / f"THESEUS CROSSCHECK {kind} - READ ME.txt").write_text(msg, encoding="utf-8")
+    (HOME / f"GRAPHRECORDS CROSSCHECK {kind} - READ ME.txt").write_text(msg, encoding="utf-8")
     commit_and_push(f"Cross check {kind.lower()} - a({TARGET_N}) is NOT confirmed")
     print(f"CROSS-CHECK {kind} - markers written")
     return code
@@ -224,7 +224,7 @@ def main():
     )
     paper.write_text(t, encoding="utf-8")
 
-    (HOME / "THESEUS CROSSCHECK PASSED - READ ME.txt").write_text(
+    (HOME / "GRAPHRECORDS CROSSCHECK PASSED - READ ME.txt").write_text(
         f"GraphRecords: a({TARGET_N}) of A290719 independently confirmed by two independent\n"
         "algorithms (frontier partition DP vs exact-support peeling).\n\n"
         "Verified in this run:\n" + listed + "\n\n"
