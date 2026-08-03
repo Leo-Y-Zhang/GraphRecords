@@ -142,8 +142,8 @@ Two contracts worth stating because they are load-bearing:
   `ncells(complement X, complement Y) == 0`.
 
 The tools in `tools/` are non-interactive batch scripts (argparse, no prompts,
-no stdin). They print a running log and exit with a status; nothing about them is
-a user interface, which is why this repo has no App Flow and no Design Brief.
+no stdin). They print a running log and exit with a status; nothing about them
+is a user interface. See *Why there is no App Flow and no Design Brief* below.
 
 ## Trust boundaries
 
@@ -237,6 +237,34 @@ timeout, on every push and pull request.
   graph. That gift does not recur for grid, king, knight or torus graphs, and
   `research_notes/phase2_torus_prototype_result.md` is the measurement showing
   what happens when it is absent.
+
+## Why there is no App Flow and no Design Brief
+
+The estate standard asks for four documents. This repository ships the PRD and
+this TDD only. That is a decision, and it belongs in writing next to the design
+rather than being left as a gap someone later mistakes for carelessness.
+
+An **App Flow** enumerates screens and the transitions between them. There are
+no screens. Everything here is either a pure function taking `(n, colour)` and
+returning an exact integer — no I/O, no globals, no configuration, as *Approach*
+and *Interfaces* both say — or a batch script under `tools/` that takes argparse
+flags, prints a log, and exits with a status. There is no state a user moves
+through, no empty state, and no error state beyond an exception and a non-zero
+exit. The nearest thing to a flow in this project is the staging pipeline
+(`probe_upstream_bfiles.py` -> `verify_all.py` -> submission pack), and that is
+a sequence of commands with a gate, documented where it is run rather than as a
+screen flow.
+
+A **Design Brief** sets visual and interaction intent and an accessibility
+floor. The output of this repository is integers and b-files, whose form is
+fixed by OEIS submission format and not open to intent; nothing is rendered and
+nothing is looked at while it runs. The one presentation decision that does
+matter is the honesty of the claims in `PAPER.md` and the README — that verified
+computation is never written up as proof — and that is a constraint on
+*content*, enforced by `verify_all.py`, not a design brief.
+
+If a viewer, a plot, or anything a person interacts with is ever added, both
+documents get written before that code.
 
 ## Build order, as it actually went
 
