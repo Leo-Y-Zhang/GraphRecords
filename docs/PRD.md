@@ -62,21 +62,17 @@ and "could not tell" is never treated as "nothing is published".
 - Record negative results — predicates and graph families where the method
   provably does not pay — rather than quietly dropping them.
 
-**Won't, this time**
-
-- No automated submission, no OEIS account credentials in the repo, not ever.
-- No attempt on n=12 for connected subgraphs. States grow 2.5x to 15x per step
-  and n=12 needs several GB; the honest claim is "+3 to +4 terms per sequence",
-  not an order of magnitude.
-- No support for board graphs other than the bishop — no grid, king, knight or
-  torus.
-
 ## Where it stops
 
 **Submitting to OEIS.** The repository stages files into `OEIS-upload/` and stops.
-Submission is the operator's act from the operator's own account, one sequence at
-a time, each explicitly authorised. Eight b-files arriving at once from a new
-contributor is exactly the editor friction to avoid.
+Nothing is submitted automatically and no OEIS account credential is in the
+repository, not ever. Submission is the operator's act from the operator's own
+account, one sequence at a time, each explicitly authorised. Eight b-files
+arriving at once from a new contributor is exactly the editor friction to avoid.
+
+**n=12 for connected subgraphs.** Not attempted. States grow 2.5x to 15x per
+step and n=12 needs several GB; the honest claim is "+3 to +4 terms per
+sequence", not an order of magnitude.
 
 **The fixed-width strip sequences** — `6 X n` bishop strips and similar. A
 transfer matrix gives a linear recurrence and thousands of terms there, and those
@@ -95,7 +91,8 @@ A303145, so it cannot extend its own sequences. Kept in the gate as a correctnes
 check, never as a contribution.
 
 **Phase 2, the torus and other local board graphs.** Opened as a measured
-prototype and closed on the measurement; see the rejected table.
+prototype and closed on the measurement; see the table below. Nothing outside
+the bishop is supported — no grid, no king, no knight, no torus.
 
 ## Marks of done
 
@@ -157,9 +154,9 @@ another author already published — the near-miss described above, now mechanic
 An overnight job pages the machine into a freeze — mitigated by an in-process
 memory guard that terminates its own process on a free-RAM breach.
 
-## Rejected
+## Closed on the measurement, not the argument
 
-| Considered | Why it was dropped |
+| What was tried | What the measurement said |
 |---|---|
 | **Brute force over cell subsets** | `2^50` at n=10. Kept as the L0/L1 reference for n<=6, where it is the only thing that can independently establish correctness at all. |
 | **Exact-support peeling as the production counter** | Correct and genuinely independent, but ~`9^n`: 510.7 s at n=10 where the frontier DP takes 53.5 s, and 28,482 s at n=11 against 1,527 s. Kept precisely *because* it is slow and independent — it is the cross-check, not the engine. |

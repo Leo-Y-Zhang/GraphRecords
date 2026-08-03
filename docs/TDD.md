@@ -173,7 +173,7 @@ There is no schema and nothing to migrate. The nearest equivalent is refreshing
 applied migration": **run the probe before staging, never after**, and never
 treat a stale snapshot as current.
 
-## Failure modes
+## What breaks, and how a wrong term is stopped
 
 | What breaks | Who notices | How it is detected | How it is undone |
 |---|---|---|---|
@@ -191,7 +191,7 @@ the computation's own error handling, and once memory is that tight there is no
 safe work left to do. A poll that cannot read memory is treated as "keep going",
 because killing a healthy job on a transient read error is the worse failure.
 
-## Rollback
+## Reverting, and why staged files are inert
 
 Code and data revert with `git revert`. There is no deployed surface, no
 consumer, and no state outside the repository, so rollback is seconds. Staged
@@ -205,7 +205,7 @@ authorised, with `verify_all.py` and the upstream probe re-run immediately
 before. Accepting that irreversibility is the reason for every fail-closed
 decision above.
 
-## Test plan
+## The gate, level by level
 
 `python verify_all.py` is the gate and runs pytest as its last check: 189 gate
 checks plus 372 tests, exit 0, measured locally 2026-08-03 with the 372 tests
@@ -266,7 +266,7 @@ never written up as proof — and that is a constraint on *content*, enforced by
 If a viewer, a plot, or anything a person interacts with is ever added, both
 documents get written before that code.
 
-## Build order, as it actually went
+## The order, reference implementations first
 
 1. `boards.py` and `brute.py` — definitions and a reference nothing else may
    contradict.
