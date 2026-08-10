@@ -14,7 +14,7 @@
 - No result is reported unless it passes every applicable verification level (L0-L4 in the spec).
 - Published OEIS terms are fetched once into `data/targets.json` and committed. Tests read the committed snapshot, never the network.
 - Submitting to OEIS is out of scope for this plan. Staged output only.
-- Commit identity is the repo default (`GreenPandaTech` noreply). Hooks live at `C:\dev\Tools\githooks`; if a commit reports no gitleaks output, stop and restore the gate.
+- Commit identity is the repo default (a noreply address). Hooks live at `C:\dev\Tools\githooks`; if a commit reports no gitleaks output, stop and restore the gate.
 - Commit messages: plain ASCII, no backticks, no `$(...)`, no apostrophes.
 - Board colour naming is exactly `"black"`, `"white"`, `"both"` throughout. Never `"full"` or `"all"`.
 
