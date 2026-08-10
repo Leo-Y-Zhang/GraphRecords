@@ -1,34 +1,27 @@
 # GraphRecords - session handoff
 
-**Last updated:** 2026-08-01
-**Branch:** `phase1-bishop-family`, pushed to private `GreenPandaTech/GraphRecords`
-**Gate:** `python verify_all.py` -> exit 0 (**189 checks + 372 tests** as of 2026-08-01)
+**Last updated:** 2026-08-10
+**Branch:** `phase1-bishop-family`, pushed to the private repo
+**Gate:** `python verify_all.py` -> exit 0 (**189 checks + 372 tests**, re-verified
+2026-08-10 from a fresh clone)
 
-## INDEPENDENT CONFIRMATION - 7 of the 10 staged terms, and what is left
+## INDEPENDENT CONFIRMATION - ALL TEN staged terms (closed 2026-08-01)
 
-**2026-08-01: the four connected-dominating-set terms are now cross-checked.**
-`graphrecords/cds_peeling.py` is a second algorithm for A289145/A289169 - exact
-support inclusion-exclusion, with domination as a predicate on the support. It
-shares no code path with the frontier DP beyond the class grid, and nothing at
-all with that DP's requirement-mask bookkeeping. Run it with
-`python tools/crosscheck_cds.py --from-n 9 --to-n 10 --colour black|white`.
-All four agree; timings and values are in `PAPER.md` section 4.
+**No cross-check is running and none is owed.** The white-board n=11 peeling job
+finished 2026-08-01 16:27 and AGREED: `A290769 a(11) = 1134335726831043925`
+(peeling vs frontier DP, 670 s vs 2737 s), which confirms `A291595 a(11)` through
+the addition identity. `PAPER.md` section 4 holds the authoritative per-term
+table: seven terms rest on a second algorithm sharing no code path beyond the
+class grid, three on a structural identity verified against every published term
+of the sequence it governs.
 
-**ONE JOB IS RUNNING (started 2026-08-01 15:31, on the order of 8 hours):** the
-peeling counter on the **white board at n=11**, which closes the last gap -
-`A290769 a(11)` and, by inheritance, `A291595 a(11)`. Detached OS process,
-memory-guarded, logging to `bench/out/crosscheck_white_n11.log`.
-**Read that log before starting anything heavy, and do not run a second big job
-beside it.** When it finishes:
+`graphrecords/cds_peeling.py` is the second algorithm for A289145/A289169 - exact
+support inclusion-exclusion, with domination as a predicate on the support. Run it
+with `python tools/crosscheck_cds.py --from-n 9 --to-n 10 --colour black|white`.
 
-* if it AGREES, update the per-term table in `PAPER.md` section 4 - all ten terms
-  then carry independent confirmation, and the "what is still not independently
-  confirmed" paragraph must be DELETED rather than left contradicting the table;
-* if it DISAGREES, that is a real defect in a staged term. Submit nothing, and
-  find out which counter is wrong before touching any b-file.
-
-**Do not re-run the cross-checks that already passed** (A290719 a(10) and a(11),
-and the four CDS terms) - they are recorded in `PAPER.md` and cost hours.
+**Do not re-run the cross-checks - all of them already passed** (A290719 a(10)
+and a(11), A290769 a(11), and the four CDS terms). They are recorded in
+`PAPER.md` and cost hours.
 
 ## What this is
 
@@ -54,9 +47,13 @@ version was killed at 5.6 GB. It also ran ~1.6x faster throughout. It bought
 exactly ONE term, as predicted - growth is 2.2x per step, so a 2-3x memory saving
 moves the wall one step and no further.
 
-**Still to do:** `graphrecords/connected_domination.py` carries tuple keys AND a labels
-tuple per state, so it has more overhead to reclaim than domination did. Expect
-one more term (n=10 -> n=11) on A289145/A289169, not more.
+**Done for `graphrecords/connected_domination.py` too - and it was NOT enough.**
+The state is now a packed `bytes` key (556 -> 49 bytes per state, 11x), yet both
+n=11 attempts still died near 4.4 GB, because at that size the memory is dict
+entry overhead and big-integer counts, not key bytes. **CDS n=11 is OUT OF REACH
+on this machine; do not retry it by shrinking keys again.** A289145/A289169 stop
+at a(10). Any future attempt needs a different memory model entirely (flat arrays
+with modular counts, off-heap), not a smaller key.
 
 ## LOAD DISCIPLINE — read before launching anything
 
@@ -149,16 +146,21 @@ and the two-component identity holds for all 9 published terms of A291595.
 Phase 1 is COMPLETE and written up. Nothing is half-done. If you pick this up:
 
 1. **Before anything else**, run `python verify_all.py` and confirm exit 0.
-   (Verified 2026-08-01 from a CLEAN CLONE: 189 checks + 301 tests, exit 0, no
-   local state, and the staged b-files come out of a fresh checkout LF-only.)
+   (Last verified 2026-08-10 from a FRESH CLONE: 189 checks + 372 tests, exit 0,
+   no local state, and the staged b-files come out of a fresh checkout LF-only.)
 2. **Before staging any new sequence**, run `tools/probe_upstream_bfiles.py`.
    Reading the DATA line as the term count already cost a day once.
-3. The ten staged terms wait on A217058 being accepted, then one submission at a
-   time, each explicitly authorised by the operator. Submitting is never mine.
-4. If extending further: pack `graphrecords/connected_domination.py` the way
-   `graphrecords/domination.py` was packed (one integer per state). It still uses tuple
-   keys plus a labels tuple and died at 4.6 GB on n=11. Packing bought exactly one
-   term for domination (n=20 -> n=21), so expect one here too, not more.
+   (Last probed 2026-08-10: published reach unchanged - A289145/A289169 to n=8,
+   A290719/A290769/A291595 to n=9 - so all ten staged terms are still new.)
+3. **The queue gate is satisfied: A217058 was ACCEPTED 2026-08-06.** The
+   remaining van der Waerden submissions go next, per that campaign's own plan;
+   only then these, one at a time, each explicitly authorised by the operator.
+   Submitting is never mine. Lesson from that approval: the reviewing editor
+   deleted the entire comment on acceptance, so keep any submission here to the
+   terms and an EXTENSIONS line unless an editor asks for more.
+4. There is NO further computation left in Phase 1. The last candidate (CDS
+   n=11 via a packed state) was built and measured to death twice at ~4.4 GB -
+   see MEMORY IS THE WALL above. Do not reopen it by shrinking keys.
 5. Phase 2 is designed in `docs/superpowers/specs/2026-07-31-phase2-*.md` but is a
    thinner seam than Phase 1 - read its section 1 before committing to it.
 

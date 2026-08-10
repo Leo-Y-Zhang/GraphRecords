@@ -7,14 +7,17 @@ real name permanently.
 
 ## The gate, in order
 
-1. **A217058 must be ACCEPTED first.** The van der Waerden campaign in
-   MathRecords is ahead of this work in the queue and the standing rule is one
-   submission at a time, optimising for zero editor friction.
+1. ~~A217058 must be ACCEPTED first.~~ **SATISFIED: A217058 was accepted
+   2026-08-06.** The van der Waerden campaign in MathRecords was ahead of this
+   work in the queue and the standing rule is one submission at a time,
+   optimising for zero editor friction.
 2. Then the remaining vdW terms, per that campaign's own plan.
-3. Only then these. Eight b-file extensions arriving at once from a new
-   contributor is exactly the friction the standing directive exists to avoid —
-   land ONE, see how it is received, and ask an editor how they would like the
-   rest.
+3. Only then these. Five extensions arriving at once from a new contributor is
+   exactly the friction the standing directive exists to avoid — land ONE, see
+   how it is received, and ask an editor how they would like the rest.
+   Lesson from the A217058 approval: the reviewing editor deleted the entire
+   comment on acceptance, so offer the terms and an EXTENSIONS line only, and
+   add nothing else unless an editor asks.
 
 ## What is staged, and what is actually new
 
@@ -75,9 +78,12 @@ was verified on 2026-07-31 to still produce LF-only files.
 
 ## Honest note on confidence
 
-These terms are not all equally established. A290719 a(10) is confirmed three
-independent ways; A290769 a(10) inherits that by the even-n reflection
-isomorphism; the rest rest on a single algorithm that has never disagreed with
-brute force or with published data. That is good evidence, and it is not the same
-as independent confirmation. `PAPER.md` states this per term rather than in
-aggregate. If an editor asks, say so plainly.
+**All ten staged terms carry independent confirmation as of 2026-08-01** — but
+not all of the same kind, and the distinction should be stated plainly if an
+editor asks. Seven terms are confirmed by a second algorithm that shares no code
+path with the first beyond the class grid (frontier DP vs exact-support peeling);
+three inherit through a structural identity — the even-n reflection isomorphism
+for A290769 a(10), and black + white = bishop for A291595 a(10) and a(11) — each
+identity verified against every published term of the sequence it governs.
+`PAPER.md` section 4 holds the authoritative per-term table. Never restate this
+as an aggregate claim of one uniform kind of evidence.
