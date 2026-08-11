@@ -1,0 +1,404 @@
+% Ten new terms for five bishop-graph sequences
+% LaTeX source; compiles with pdflatex, xelatex, or tectonic.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\newcommand{\seq}[1]{\texttt{#1}}
+
+\title{Ten new terms for five bishop-graph sequences,\\
+       via a bishop-to-rook coordinate reduction}
+\author{Leo Y. Zhang}
+\date{August 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+The $n \times n$ bishop graph is a rook graph in rotated coordinates. We give the
+reduction explicitly, prove it, and use it to extend five sequences in the
+On-Line Encyclopedia of Integer Sequences by two terms each: \seq{A290719},
+\seq{A290769} and \seq{A291595} (connected induced subgraphs, on the black
+cells, the white cells, and the whole board) from $n=9$ to $n=11$, and
+\seq{A289145} and \seq{A289169} (connected dominating sets) from $n=8$ to
+$n=10$. None of the five entries carried a program, a formula or a comment, so
+this also supplies a first published method for them.
+
+The reduction turns a count over $O(2^{|B|})$ cell subsets into a sweep over
+$O(n)$ classes per side. We separate two regimes sharply: predicates depending
+only on \emph{which} classes a set occupies collapse, and reach $n=21$;
+predicates needing class \emph{populations} do not, and total domination is
+recorded as a negative result. We also show that proper colourings of a bishop
+graph are proper edge colourings of a bipartite graph, which by K\"onig's theorem
+gives the chromatic number at once but also explains why the associated counting
+sequences are, and will remain, short.
+
+Nothing here is a proof of the counts; it is verified computation. Every one of
+the ten new terms carries independent confirmation --- seven from a second
+algorithm sharing no code path beyond the class grid, three from structural
+identities checked against every published term of the sequence they govern.
+\end{abstract}
+
+\section{Results}
+
+Write $B$ for the cells of one colour of the $n \times n$ board. The bishop graph
+on $B$ joins two cells when they share a diagonal. Table~\ref{tab:results} lists
+what was already published and what is added here.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llccc}
+\toprule
+Sequence & Counts & Published to & Now to & New \\
+\midrule
+\seq{A290719} & connected induced subgraphs, black & $n=9$ & $n=11$ & $+2$ \\
+\seq{A290769} & connected induced subgraphs, white & $n=9$ & $n=11$ & $+2$ \\
+\seq{A291595} & connected induced subgraphs, bishop & $n=9$ & $n=11$ & $+2$ \\
+\seq{A289145} & connected dominating sets, black    & $n=8$ & $n=10$ & $+2$ \\
+\seq{A289169} & connected dominating sets, white    & $n=8$ & $n=10$ & $+2$ \\
+\bottomrule
+\end{tabular}
+\caption{Five sequences, ten new terms. ``Published to'' is measured against
+each entry's b-file, not its \textsc{data} line; Section~\ref{sec:correction}
+explains why that distinction is not pedantry.}
+\label{tab:results}
+\end{table}
+
+The new values are
+\begin{align*}
+\seq{A290719}: \quad a(10) &= 1090550900687379, &  a(11) &= 2265142469367980614,\\
+\seq{A290769}: \quad a(10) &= 1090550900687379, &  a(11) &= 1134335726831043925,\\
+\seq{A291595}: \quad a(10) &= 2181101801374758, &  a(11) &= 3399478196199024539,\\
+\seq{A289145}: \quad a(9)  &= 2014079802496,    &  a(10) &= 1073633875253120,\\
+\seq{A289169}: \quad a(9)  &= 1011850062768,    &  a(10) &= 1073633875253120.
+\end{align*}
+
+Two coincidences in that list are forced rather than accidental, and serve as
+checks: at even $n$ a reflection carries the black cells onto the white ones, so
+$\seq{A290719}\,a(10) = \seq{A290769}\,a(10)$ and
+$\seq{A289145}\,a(10) = \seq{A289169}\,a(10)$; and the bishop graph has exactly
+two components, so \seq{A291595} is the sum of the other two throughout.
+
+\section{The reduction}
+
+\begin{theorem}\label{thm:reduction}
+Let $B$ be the cells of one colour on the $n \times n$ board and define
+\[
+  \varphi(r,c) \;=\; \Bigl( \bigl\lfloor (r+c)/2 \bigr\rfloor,\;
+                            \bigl\lfloor (r-c+n)/2 \bigr\rfloor \Bigr).
+\]
+Then $\varphi$ is injective on $B$, and two distinct cells of $B$ share a
+diagonal if and only if their images agree in the first coordinate or in the
+second.
+\end{theorem}
+
+\begin{proof}
+Within one colour $r+c$ has fixed parity, hence so does $r-c$. Restricted to
+values of a single parity, both $t \mapsto \lfloor t/2 \rfloor$ and
+$t \mapsto \lfloor (t+n)/2 \rfloor$ are strictly monotone and therefore
+injective. Two cells share an anti-diagonal exactly when $r+c$ agrees, that is
+when the first coordinates agree; they share a main diagonal exactly when $r-c$
+agrees, that is when the second coordinates agree. Since the pair $(r+c,\,r-c)$
+determines $(r,c)$, the map $\varphi$ is injective.
+\end{proof}
+
+So the single-colour bishop graph \emph{is} a rook graph on the image cells:
+two cells are adjacent exactly when they share an $x$-class or a $y$-class. A
+bishop move preserves the parity of $r+c$, so the full bishop graph is the
+disjoint union of the black and white graphs and has exactly two components.
+
+The consequence that matters for counting is this. All cells sharing a class are
+mutually adjacent, so a set of cells is connected in a rook graph if and only if
+the bipartite graph it induces between $x$-classes and $y$-classes is connected.
+Since $\varphi$ is injective, each $(x\text{-class}, y\text{-class})$ pair holds
+at most one cell, so the class grid is a $0/1$ matrix and a set of cells is
+simply a set of occupied grid positions. Counting therefore moves from
+$O(2^{|B|})$ subsets of cells to work over $O(n)$ classes per side.
+
+\section{Two algorithms}
+
+\paragraph{Exact-support peeling.}
+Let $B(X,Y)$ count the cell subsets whose $x$-support is exactly $X$ and whose
+$y$-support is exactly $Y$, obtained from $2^{\mathrm{cells}(X',Y')}$ by
+M\"obius inversion over sub-masks, and let $C(X,Y)$ count those that are also
+connected. Peeling off the component containing the lowest $x$-class of $X$
+gives
+\[
+  C(X,Y) \;=\; B(X,Y) \;-\!\!\sum_{\substack{X_1 \ni \mathrm{low}(X),\; Y_1 \neq \emptyset \\ (X_1,Y_1) \neq (X,Y)}}\!\! C(X_1,Y_1)\, B(X \setminus X_1,\, Y \setminus Y_1).
+\]
+Its cost is about $9^n$. It is kept as an independent reference implementation
+rather than for production, and that is precisely its value: it shares no code
+path with the sweep below beyond the class grid.
+
+\paragraph{Frontier partition DP.}
+Sweep the $x$-classes carrying a partition of the $y$-classes into connected
+blocks, with label $0$ meaning untouched. At each $x$-class choose a non-empty
+subset $T$ of the $y$-classes it meets, weighted by
+$\prod_{j \in T} (2^{\mathrm{grid}[i][j]} - 1)$, and merge every block meeting
+$T$.
+
+The pruning is what makes this practical. Each $x$-class meets a
+\emph{contiguous} interval of $y$-classes, so a $y$-class lying below every
+remaining interval can never be touched again. A block confined entirely to that
+finalised region can never merge with anything else, so any state carrying such a
+stranded block is dropped immediately. This keeps the live state count far below
+the Bell number of the frontier width.
+
+\section{Measured cost}
+
+Table~\ref{tab:cost} gives peak live states and wall time on the black board.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+$n$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\
+\midrule
+states & 2 & 2 & 10 & 11 & 101 & 151 & 1596 & 3136 & 39955 & 86321 & 1343614 \\
+sec    & 0 & 0 & 0  & 0  & 0   & 0.01 & 0.09 & 0.43 & 9.73 & 53.5  & 1604.7 \\
+\bottomrule
+\end{tabular}
+\caption{Peak live DP states and wall time, black board.}
+\label{tab:cost}
+\end{table}
+
+The white board reaches $n=11$ in $691.9$\,s, with peak states
+$0$, $4$, $4$, $29$, $38$, $380$, $660$, $7529$, $15923$, $225187$, $494815$.
+For scale, the peeling
+counter needs $510.7$\,s at $n=10$ where the frontier DP needs $53.5$\,s, and
+brute force over all $2^{50}$ subsets is not reachable at all.
+
+\begin{remark}[Ceiling]
+States grow by a factor of roughly $2.5$ to $15$ per step, so $n=12$ needs
+several gigabytes and $n=13$ is out of reach on the machine used here. This work
+adds terms; it does not add an order of magnitude. These counts grow doubly
+exponentially in $n$, and no algorithm changes that.
+\end{remark}
+
+\section{Verification}
+
+Five levels are re-run from cold by the repository's gate, alongside the unit
+test suite.
+
+\begin{description}
+\item[L0] The reduction of Theorem~\ref{thm:reduction} is re-derived
+exhaustively for $n = 1,\dots,12$ in both colours: every pair of cells is checked
+for agreement between diagonal-sharing and class-sharing.
+\item[L1] The frontier DP is checked against brute-force enumeration over all
+cell subsets for $n = 1,\dots,6$, both colours.
+\item[L2] Every published term of \seq{A290719} (nine of them) and
+\seq{A290769} (eight) is reproduced exactly, indexed by each sequence's true
+offset. The offsets are not uniform: \seq{A290719} begins at $n=1$ and
+\seq{A290769} at $n=2$, because a $1 \times 1$ board has no white cells.
+\item[L3] The frontier DP and the peeling counter agree for $n = 1,\dots,8$ in
+both colours, for connected subgraphs and for connected dominating sets.
+\item[L4] Structural identities that follow from the problem rather than from the
+code: $\mathrm{black}(n) + \mathrm{white}(n) = \mathrm{bishop}(n)$ against all
+nine published terms of \seq{A291595}; $\mathrm{black}(n) = \mathrm{white}(n)$
+for even $n$ by reflection; and the two differing for odd $n$.
+\end{description}
+
+\subsection{Confidence, stated per term rather than in aggregate}
+
+An aggregate claim that ``every term rests on two independent algorithms'' would
+have been false when it was first drafted, and the reason is worth recording: the
+peeling cross-check then covered two terms of one sequence, while ten terms were
+staged across five. Aggregate confidence claims hide exactly that asymmetry.
+
+Stated per term: seven of the ten are confirmed by a \emph{second algorithm}
+sharing no code path with the sweep beyond the class grid, and three by a
+\emph{structural identity} --- the even-$n$ reflection isomorphism for
+\seq{A290769}\,$a(10)$, and $\mathrm{black}+\mathrm{white}=\mathrm{bishop}$ for
+\seq{A291595}\,$a(10)$ and $a(11)$ --- each verified against every published term
+of the sequence governing it. Neither kind is a re-run of the same code.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llrr}
+\toprule
+Cross-check & Value agreed & Frontier DP & Peeling \\
+\midrule
+\seq{A289145}\,$a(9)$, black  & 2014079802496    & 8.0\,s  & 147.0\,s \\
+\seq{A289169}\,$a(9)$, white  & 1011850062768    & 2.6\,s  & 10.6\,s \\
+\seq{A289145}\,$a(10)$, black & 1073633875253120 & 28.1\,s & 528.7\,s \\
+\seq{A289169}\,$a(10)$, white & 1073633875253120 & 67.8\,s & 559.0\,s \\
+\seq{A290719}\,$a(11)$, black & 2265142469367980614 & 1527.2\,s & 28482.6\,s \\
+\seq{A290769}\,$a(11)$, white & 1134335726831043925 & 670\,s & 2737\,s \\
+\bottomrule
+\end{tabular}
+\caption{Independent confirmations by the peeling counter. The two $n=10$
+dominating-set values are equal, which the even-$n$ reflection isomorphism
+requires and which both algorithms independently produce.}
+\label{tab:crosscheck}
+\end{table}
+
+\section{A second collapse: domination}
+
+In a rook graph the closed neighbourhood of a cell is the whole of its $x$-class
+together with the whole of its $y$-class. A cell is therefore dominated exactly
+when its $x$-class or its $y$-class contains a chosen cell.
+
+\begin{lemma}\label{lem:domination}
+A set $S$ of cells dominates if and only if the pair
+$(\,x\text{-supp}(S),\, y\text{-supp}(S)\,)$ is a vertex cover of the bipartite
+graph whose edges are the cells. In particular domination depends only on which
+classes $S$ touches, never on which cells it uses inside them.
+\end{lemma}
+
+Both this and the neighbourhood description are tested against brute force before
+use. The sweep then needs only one bit per live $y$-class recording whether $S$
+has touched it, plus one requirement bit, because an $x$-class left empty forces
+every $y$-class it meets to be touched.
+
+\subsection{When the reduction pays, and when it does not}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}llrl@{}}
+\toprule
+Predicate & What the state must record & States & Reaches \\
+\midrule
+dominating sets & occupancy, 2 per class & 1125035 & $n=21$ \\
+connected induced subgraphs & a partition of the frontier & 1343614 & $n=11$ \\
+total dominating sets & population capped at 2, 6 per class & 914611 & $n=11$ \\
+\bottomrule
+\end{tabular}
+\caption{The rule is sharp.}
+\label{tab:regimes}
+\end{table}
+
+The rule is sharp: \emph{predicates that depend only on which classes are
+occupied collapse; predicates that need class populations do not.} Total
+domination uses the open neighbourhood, so a chosen cell does not cover itself
+and the sweep must distinguish ``one chosen cell here'' from ``two or more''.
+That single extra level of state costs seven terms of reach.
+
+Recording a \emph{deficit} rather than a raw requirement matters. Once a class
+saturates at two, every requirement on it is already met, so the three states
+(count $2$, requirement $0$, $1$ or $2$) behave identically from then on. Merging
+them cuts the per-class combinations from nine to six, and $n=10$ from
+$36$\,s to $6.6$\,s.
+
+\begin{remark}[Negative result]
+Total domination reaches only $n=11$ against the sixteen published terms of
+\seq{A303145}, so this method cannot extend it. It is recorded rather than
+omitted: the reduction is not a universal win, and knowing which predicates it
+fails on is part of the result.
+\end{remark}
+
+\subsection{Composing both collapses}
+
+Connected dominating sets need connectivity \emph{and} domination, and the two
+compose more cheaply than one might expect. In the connectivity sweep a
+$y$-class carries a non-zero block label exactly when it holds a chosen cell,
+which is precisely what domination asks about. Domination therefore contributes
+one requirement bit per $y$-class rather than a whole extra dimension, and the
+combined counter still reaches $n=10$.
+
+There is no full-bishop analogue of that sequence, and there cannot be: a
+connected set lies inside one component, so it can never dominate the other. The
+OEIS accordingly has black and white variants only.
+
+The two colour components also combine differently depending on the predicate,
+which yields independent checks at no cost: connected subgraphs \emph{add},
+because a connected subgraph lies in one component, giving
+$\seq{A291595} = \seq{A290719} + \seq{A290769}$; dominating sets
+\emph{multiply}, because a set dominates a disjoint union exactly when it
+dominates each part, giving $\seq{A295898} = \seq{A289164} \cdot \seq{A289170}$.
+Both identities are enforced against every published term.
+
+\section{Why the colouring sequences are out of reach}
+
+A cell is an edge between its $x$-class and its $y$-class, and two cells conflict
+exactly when they share an endpoint. So proper vertex colourings of the rook
+graph are proper \emph{edge} colourings of the bipartite cell graph, and by
+K\"onig's edge colouring theorem the chromatic number is the maximum degree:
+\[
+  \chi(\text{bishop graph}) \;=\; \text{largest diagonal length}.
+\]
+This is verified for $n = 1,\dots,4$, and counting the proper colourings that use
+exactly $\chi$ colours reproduces the published \seq{A371202}
+$(1, 2, 12, 528)$.
+
+The same reformulation settles feasibility, negatively. Counting
+$\Delta$-edge-colourings of a bipartite graph is, in the regular case, the
+problem of counting Latin squares, where only eleven terms are known to anyone. A
+sweep would have to carry the full \emph{set} of colours used at each $y$-class,
+making the state $(2^{\Delta})^{n_y}$ rather than a constant per class. That
+\seq{A371202}, \seq{A371203} and \seq{A371204} stand at five or six terms is not
+an accident, and this reduction does not change it. They are recorded here as
+understood, not attempted.
+
+\section{A correction, and the process fix it forced}\label{sec:correction}
+
+The dominating-set sequences \seq{A289164}, \seq{A289170} and \seq{A295898} were
+also computed here, to $n=21$, and are \emph{not} contributions: their published
+b-files already reach $n=50$. The OEIS truncates the \textsc{data} line near 260
+characters, so those entries \emph{display} twelve to fifteen terms while holding
+fifty. The bishop shortlist had been checked for exactly this; the domination
+sequences were picked up later from a grouped listing and were not.
+
+The check is now mechanical rather than remembered: a tool records how far every
+published b-file reaches, and a test refuses to let a staged file count as a
+contribution unless it exceeds that. Reading the \textsc{data} line as the term
+count is the easiest way to lose a day on this kind of work, and it is recorded
+here so that the next person does not.
+
+That computation was not wasted. All twenty overlapping terms agree with the
+published b-file exactly, including $a(20)$ at 61 digits and $a(21)$ at 67. An
+independent author reached $n=50$ by an undisclosed method and the two agree
+throughout, which is considerably stronger evidence for the engine than the
+fifteen displayed terms it had originally been checked against.
+
+\section{Honest limits}
+
+\begin{itemize}
+\item Nothing here is a proof of the counts. It is verified computation, and the
+strongest claim available is that two algorithms and five levels of checks
+agree.
+\item The method is specific to bishop graphs. Local board graphs --- grid, king,
+knight --- have a different neighbourhood structure and need a different engine.
+\item The fixed-width strip sequences, where a transfer matrix yields a linear
+recurrence and thousands of terms, are already well covered in the OEIS by other
+contributors; this work deliberately does not compete there.
+\item The census of regimes in Table~\ref{tab:regimes} is exhaustive only over
+the predicates actually implemented.
+\end{itemize}
+
+\section*{Data availability}
+
+The code, the staged b-files, the cross-check logs and the gate that reproduces
+every claim above are available at
+\url{https://github.com/Leo-Y-Zhang/GraphRecords}.
+
+\begin{thebibliography}{9}
+
+\bibitem{oeis}
+OEIS Foundation Inc., \emph{The On-Line Encyclopedia of Integer Sequences},
+\url{https://oeis.org}.
+
+\bibitem{konig}
+D.~K\H{o}nig,
+\emph{\"Uber Graphen und ihre Anwendung auf Determinantentheorie und
+Mengenlehre},
+Mathematische Annalen \textbf{77} (1916), 453--465.
+
+\bibitem{stanley}
+R.~P. Stanley,
+\emph{Enumerative Combinatorics, Volume 1}, 2nd ed.,
+Cambridge University Press, 2011.
+(M\"obius inversion over the subset lattice.)
+
+\end{thebibliography}
+
+\end{document}
