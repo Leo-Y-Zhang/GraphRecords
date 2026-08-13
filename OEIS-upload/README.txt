@@ -1,9 +1,11 @@
-# OEIS-upload — STAGED, NOT SUBMITTED
+# OEIS-upload — SUBMITTED 2026-08-13 (see SESSION_HANDOFF.md for live status)
 
-Nothing in this folder has been sent to OEIS, and nothing goes without explicit
-per-submission authorisation from the operator. Submitting is the operator's act,
-from the operator's own account. That is not a formality: these entries carry a
-real name permanently.
+All five submissions went in on 2026-08-13, each pasted by the operator from this
+staging (DATA + EXTENSIONS + one-line note, nothing else). A290719 and A290769 were
+APPROVED the same day; A291595, A289145 and A289169 proposed and in review. The
+files below are retained as the record of exactly what was staged. The original
+rule stands for anything future: nothing goes without explicit per-submission
+authorisation from the operator, from the operator's own account.
 
 ## The gate, in order
 

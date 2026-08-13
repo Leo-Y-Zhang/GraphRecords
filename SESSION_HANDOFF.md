@@ -1,9 +1,26 @@
 # GraphRecords - session handoff
 
-**Last updated:** 2026-08-10
+**Last updated:** 2026-08-13
 **Branch:** `phase1-bishop-family`, pushed to the private repo
 **Gate:** `python verify_all.py` -> exit 0 (**189 checks + 372 tests**, re-verified
-2026-08-10 from a fresh clone)
+2026-08-13 before the submissions below)
+
+## SUBMISSION STATUS (2026-08-13, all by the operator, verified off oeis.org)
+
+| Sequence | Terms | Status |
+|---|---|---|
+| A290719 | a(10)-a(11) | **APPROVED** Aug 13 12:18 EDT (8 min after proposal) |
+| A290769 | a(10)-a(11) | **APPROVED** Aug 13 12:30 EDT |
+| A291595 | a(10)-a(11) | proposed 12:25, reviewed by Michel Marcus 12:27 |
+| A289145 | a(9)-a(10)  | proposed 12:29 |
+| A289169 | a(9)-a(10)  | proposed 12:34 |
+
+Every submission: DATA + one EXTENSIONS line (`from _Leo Y. Zhang_, Aug 13 2026`),
+one-line discussion note, no comment, no b-file (none of the five has an uploaded
+b-file upstream; OEIS regenerates from DATA — A290719's confirmed regenerated to
+n=11 after approval). Pre-paste gate + `tools/probe_upstream_bfiles.py` were run
+fresh the same day. When all five resolve, Phase 1 is fully landed and nothing
+remains in `OEIS-upload/` to send.
 
 ## INDEPENDENT CONFIRMATION - ALL TEN staged terms (closed 2026-08-01)
 
