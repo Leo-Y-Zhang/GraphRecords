@@ -171,12 +171,14 @@ Phase 1 is COMPLETE and written up. Nothing is half-done. If you pick this up:
    no local state, and the staged b-files come out of a fresh checkout LF-only.)
 2. **Before staging any new sequence**, run `tools/probe_upstream_bfiles.py`.
    Reading the DATA line as the term count already cost a day once.
-   (Last probed 2026-08-10: published reach unchanged - A289145/A289169 to n=8,
-   A290719/A290769/A291595 to n=9 - so all ten staged terms are still new.)
+   (Last probed 2026-08-13 after the approvals: A289145/A289169 now published to
+   n=10, A290719/A290769/A291595 to n=11 - i.e. upstream carries all ten of our
+   terms, and `tests/test_staged_bfiles.py` now holds the staged files to
+   matching what it serves.)
 3. **The queue gate is satisfied: A217058 was ACCEPTED 2026-08-06.** The
-   remaining van der Waerden submissions go next, per that campaign's own plan;
-   only then these, one at a time, each explicitly authorised by the operator.
-   Submitting is never mine. Lesson from that approval: the reviewing editor
+   remaining van der Waerden submissions went next, per that campaign's own
+   plan; these five followed on 2026-08-13, one at a time, each explicitly
+   authorised by the operator. Submitting is never mine. Lesson from that approval: the reviewing editor
    deleted the entire comment on acceptance, so keep any submission here to the
    terms and an EXTENSIONS line unless an editor asks for more.
 4. There is NO further computation left in Phase 1. The last candidate (CDS
@@ -196,8 +198,9 @@ i.e. +3 to +4 terms per sequence. Do not promise more than that.
 
 ## Standing constraints
 
-- **Nothing is submitted to OEIS.** Staged only, in `OEIS-upload/`. A217058 must
-  be accepted first, then one submission at a time, each explicitly authorised.
+- **Phase 1's ten terms were submitted and APPROVED 2026-08-13** (table at the
+  top). Nothing else here goes to OEIS: any future submission is one at a time,
+  each explicitly authorised by the operator, and submitting is never mine.
 - The repo is private on GitHub. Making it PUBLIC is the operator's decision,
   never mine.
 - Offsets are NOT uniform across this family (A290719 starts at n=1, A290769 at

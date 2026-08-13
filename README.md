@@ -45,7 +45,13 @@ output to published data indexes by n, never by list position.
 
 ## Status
 
-Nothing here has been submitted to OEIS, and nothing will be without explicit
+The ten Phase 1 terms — A290719, A290769 and A291595 a(10)-a(11), A289145 and
+A289169 a(9)-a(10) — were submitted to OEIS by the operator and **approved on
+2026-08-13**, all five sequences the same day. `data/upstream_bfiles.json` is the
+probe that measured each published b-file afterwards, and the staged files in
+`OEIS-upload/` are now an archive of exactly what was sent.
+
+Nothing else here has been submitted, and nothing will be without explicit
 per-submission authorisation.
 
 ## Verified from a clean clone

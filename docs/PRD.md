@@ -1,6 +1,7 @@
 # GraphRecords — extending five OEIS bishop-graph sequences
 
-Phase 1 complete; nothing submitted. Written retrospectively, from the code.
+Phase 1 complete; all ten terms submitted and approved by OEIS on 2026-08-13.
+Written retrospectively, from the code.
 Where this document and the code disagree, the code wins and this document is
 wrong. Technical design: [TDD](TDD.md).
 

@@ -28,6 +28,11 @@ method.
     A289145  a(9)  = 2014079802496         a(10) = 1073633875253120
     A289169  a(9)  = 1011850062768         a(10) = 1073633875253120
 
+All ten were submitted to OEIS and **approved on 2026-08-13**, every sequence the
+same day. The "published to" column above is therefore the reach each entry had
+*before* this work; all five now publish through the "now to" column, and
+`data/upstream_bfiles.json` holds the probe that measured it afterwards.
+
 ### A correction, and the process fix it forced
 
 The dominating-set sequences A289164, A289170 and A295898 were also computed here,
@@ -37,9 +42,11 @@ n=50. OEIS truncates the DATA line near 260 characters, so those entries *displa
 the domination sequences were picked up later from a grouped listing and were not.
 
 The check is now mechanical rather than remembered: `tools/probe_upstream_bfiles.py`
-records how far every published b-file goes, and a test refuses to let a staged
-file count as a contribution unless it exceeds that. Reading the DATA line as the
-term count is the single easiest way to waste a day on this kind of work.
+records how far every published b-file goes and what it holds, and a test refuses
+to let a staged file count as a contribution unless it exceeds that — and, once a
+submission is approved, holds the same file to matching what OEIS serves, term for
+term. Reading the DATA line as the term count is the single easiest way to waste a
+day on this kind of work.
 
 **What that computation did buy:** every one of the twenty overlapping terms
 agrees with the published b-file exactly, including a(20) at 61 digits and a(21)
@@ -140,7 +147,7 @@ Five levels, all re-run from cold by `verify_all.py`, plus the pytest suite.
 An earlier draft of the automation was going to record "every staged term now
 rests on two independent algorithms". **That would have been false**, and it is
 worth saying why: the peeling cross-check covers two terms of ONE sequence, while
-ten terms are staged across five. Aggregate confidence claims hide exactly this.
+the ten terms span five. Aggregate confidence claims hide exactly this.
 
 | term(s) | rests on | independent second algorithm? |
 |---|---|---|
@@ -153,7 +160,7 @@ ten terms are staged across five. Aggregate confidence claims hide exactly this.
 | A289145, A289169 a(9) | frontier DP **and the CDS peeling counter**, which agree | **yes** — cross-check completed 2026-08-01 |
 | A289145, A289169 a(10) | as above, and the two boards return the identical value as the even-n isomorphism requires | **yes** — cross-check completed 2026-08-01 |
 
-**Seven of the ten staged terms now carry genuine independent confirmation.** The
+**Seven of the ten new terms now carry genuine independent confirmation.** The
 four connected-dominating-set terms were the largest block resting on a single
 algorithm, and they no longer do. `cds_peeling.py` counts the same sets by
 exact-support inclusion-exclusion, sharing no code path with the frontier DP
@@ -174,7 +181,7 @@ classes it occupies.
 The two n=10 values are equal, which the even-n reflection isomorphism requires
 and which two independent algorithms now both produce.
 
-**Every one of the ten staged terms now carries independent confirmation.** The
+**Every one of the ten new terms now carries independent confirmation.** The
 last gap closed 2026-08-01 16:27: the peeling counter on the white board at n=11
 returned `1134335726831043925`, agreeing with the frontier DP (670 s vs 2737 s).
 That confirms A290769 a(11) directly and A291595 a(11) by the addition identity,

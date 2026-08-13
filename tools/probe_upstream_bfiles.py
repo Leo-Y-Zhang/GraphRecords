@@ -10,6 +10,11 @@ than new terms.
 The snapshot this writes is consumed by tests/test_staged_bfiles.py, which
 refuses to let a staged file count as a contribution unless it actually goes
 beyond what is already published. Run this before staging anything, ever.
+
+It records the b-file's VALUES as well as its extent, because once a submission
+is approved the interesting question flips: not "does our file go further than
+upstream" but "does upstream now serve exactly what we staged". Both questions
+are answered from this one snapshot.
 """
 import json
 import pathlib
@@ -24,7 +29,13 @@ UA = {"User-Agent": "Mozilla/5.0 (upstream b-file probe; low volume)"}
 
 
 def probe(aid):
-    """Returns (rows, last_n) for the published b-file, or (0, None) if none."""
+    """Returns (rows, last_n, values) for the published b-file.
+
+    values maps index -> term, so a later run can be compared against a staged
+    file term by term rather than only by how far it reaches. Anything this
+    probe cannot read is (None, None, None) - UNKNOWN, never absence, including
+    a 404: absence is a claim, and this probe deliberately never makes it.
+    """
     try:
         with urllib.request.urlopen(
             urllib.request.Request(f"https://oeis.org/{aid}/b{aid[1:]}.txt", headers=UA),
@@ -33,7 +44,7 @@ def probe(aid):
             body = r.read().decode("utf-8", "replace")
     except Exception as exc:
         print(f"  {aid}: probe failed ({exc}) - treating as UNKNOWN, not as absent")
-        return None, None
+        return None, None, None
     if "<html" in body[:200].lower():
         # An HTML body is the server answering with a page instead of a b-file:
         # an error, a rate limit or an interstitial. It is not the sequence
@@ -42,14 +53,24 @@ def probe(aid):
         # credit for terms someone else published, so it is UNKNOWN.
         print(f"  {aid}: server returned HTML, not a b-file - treating as UNKNOWN, "
               f"not as absent")
-        return None, None
-    idx = [int(ln.split()[0]) for ln in body.splitlines()
-           if ln.strip() and not ln.startswith("#")]
-    if not idx:
+        return None, None, None
+    rows, values = 0, {}
+    for ln in body.splitlines():
+        if not ln.strip() or ln.startswith("#"):
+            continue
+        parts = ln.split()
+        if len(parts) < 2:
+            # A row we cannot read is a b-file we cannot vouch for, and half a
+            # b-file compared against a staged file would silently skip terms.
+            print(f"  {aid}: unreadable b-file row {ln!r} - UNKNOWN")
+            return None, None, None
+        rows += 1
+        values[int(parts[0])] = int(parts[1])
+    if not values:
         # A 200 with a parseable but empty body is still not evidence of absence.
         print(f"  {aid}: b-file fetched but contained no index rows - UNKNOWN")
-        return None, None
-    return len(idx), max(idx)
+        return None, None, None
+    return rows, max(values), values
 
 
 def main():
@@ -60,18 +81,25 @@ def main():
 
     record = {}
     for aid in targets:
-        rows, last_n = probe(aid)
+        rows, last_n, values = probe(aid)
         time.sleep(0.4)
         if rows is None:
             print(f"{aid}: UNKNOWN - rerun before trusting any staging decision")
             return 1
-        record[aid] = {"rows": rows, "last_n": last_n}
+        record[aid] = {
+            "rows": rows,
+            "last_n": last_n,
+            "values": {str(n): v for n, v in sorted(values.items())},
+        }
         print(f"{aid}: published b-file has {rows} rows"
               + (f", up to n={last_n}" if last_n else " (no b-file)"))
         sys.stdout.flush()
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(record, indent=1, sort_keys=True), encoding="utf-8")
+    # No sort_keys: it would order the per-index values as strings, putting
+    # "10" before "2". Both levels are already written in the order we want -
+    # targets are sorted above, indices are sorted per sequence.
+    OUT.write_text(json.dumps(record, indent=1), encoding="utf-8")
     print(f"\nwrote {OUT}")
     return 0
 
