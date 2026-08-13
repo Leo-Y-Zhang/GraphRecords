@@ -1,8 +1,8 @@
 # OEIS-upload — SUBMITTED 2026-08-13 (see SESSION_HANDOFF.md for live status)
 
 All five submissions went in on 2026-08-13, each pasted by the operator from this
-staging (DATA + EXTENSIONS + one-line note, nothing else). A290719 and A290769 were
-APPROVED the same day; A291595, A289145 and A289169 proposed and in review. The
+staging (DATA + EXTENSIONS + one-line note, nothing else), and ALL FIVE WERE APPROVED
+THE SAME DAY — all ten terms are live, verified off the published entries. The
 files below are retained as the record of exactly what was staged. The original
 rule stands for anything future: nothing goes without explicit per-submission
 authorisation from the operator, from the operator's own account.

@@ -11,16 +11,20 @@
 |---|---|---|
 | A290719 | a(10)-a(11) | **APPROVED** Aug 13 12:18 EDT (8 min after proposal) |
 | A290769 | a(10)-a(11) | **APPROVED** Aug 13 12:30 EDT |
-| A291595 | a(10)-a(11) | proposed 12:25, reviewed by Michel Marcus 12:27 |
-| A289145 | a(9)-a(10)  | proposed 12:29 |
-| A289169 | a(9)-a(10)  | proposed 12:34 |
+| A291595 | a(10)-a(11) | **APPROVED** Aug 13 12:39 EDT |
+| A289145 | a(9)-a(10)  | **APPROVED** Aug 13 12:41 EDT |
+| A289169 | a(9)-a(10)  | **APPROVED** Aug 13 12:41 EDT |
 
 Every submission: DATA + one EXTENSIONS line (`from _Leo Y. Zhang_, Aug 13 2026`),
 one-line discussion note, no comment, no b-file (none of the five has an uploaded
 b-file upstream; OEIS regenerates from DATA — A290719's confirmed regenerated to
 n=11 after approval). Pre-paste gate + `tools/probe_upstream_bfiles.py` were run
-fresh the same day. When all five resolve, Phase 1 is fully landed and nothing
-remains in `OEIS-upload/` to send.
+fresh the same day. **ALL FIVE RESOLVED SAME-DAY: Phase 1 is fully landed — all ten
+terms APPROVED and live on 2026-08-13, verified off `fmt=text` (every %T line carries
+the new terms, every %E line credits _Leo Y. Zhang_). Nothing remains in `OEIS-upload/`
+to send. The only unmeasured seam left in this repo is the bishop Hamiltonian-path
+predicate (A307934/A234632/A308146/A234637) — measure state growth BEFORE building
+anything, per the standing discipline.**
 
 ## INDEPENDENT CONFIRMATION - ALL TEN staged terms (closed 2026-08-01)
 
