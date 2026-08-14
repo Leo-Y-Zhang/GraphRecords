@@ -353,7 +353,11 @@ bought entirely by choosing which end to sweep from.
 
 Measured against each entry's **published b-file**, refreshed by
 `tools/probe_upstream_bfiles.py` on the day of the run: A290783 reaches n=9 and
-A381795 reaches n=7. Neither has been submitted.
+A381795 reaches n=7.
+
+A290783 a(10) was submitted on 2026-08-14 and is awaiting review. A381795
+a(8)-a(10) is prepared but not yet submitted: the account holds three open
+drafts, which is its limit, so it goes in when one of them clears.
 
 | n | A290783 states | secs | peak MB | A381795 states | secs | peak MB |
 |---|---:|---:|---:|---:|---:|---:|
@@ -415,11 +419,18 @@ sequence reproduced — checked again on 2026-08-14, all sixteen of them, a(1)-a
 of A381795 and a(1)-a(9) of A290783 — the n=20 anchor underneath the shared grid,
 and the containment inequalities `cds(n) <= connected(n)` and
 `cds(n) <= dominating(n)`, which relate three engines with no shared counting
-logic and which both n=10 values satisfy against a b-file published by someone
-else in 2017:
+logic and which every new term satisfies against a b-file published by someone
+else in 2017. Re-checked against the live A290941 b-file on 2026-08-14, and it
+holds at all three new cds terms, not only at n=10:
 
-    cds(10) <= cis(10)   margin  459088120328958
+    cds(8)  <= dom(8)    margin       5196553785
+    cds(9)  <= dom(9)    margin    1506408453657
     cds(10) <= dom(10)   margin  848986984659861
+    cds(10) <= cis(10)   margin  459088120328958
+
+`cis(n) <= dom(n)` is **not** among these and has not been checked; the two
+containments above are both anchored on cds, and chaining them would assert
+something this work has never verified.
 
 ## 7. Honest limits
 
