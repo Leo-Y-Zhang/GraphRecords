@@ -1,11 +1,11 @@
 # OEIS-upload — SUBMITTED 2026-08-13 (see SESSION_HANDOFF.md for live status)
 
-All five submissions went in on 2026-08-13, each pasted by the operator from this
+All five submissions went in on 2026-08-13, each pasted by the author from this
 staging (DATA + EXTENSIONS + one-line note, nothing else), and ALL FIVE WERE APPROVED
 THE SAME DAY — all ten terms are live, verified off the published entries. The
 files below are retained as the record of exactly what was staged. The original
 rule stands for anything future: nothing goes without explicit per-submission
-authorisation from the operator, from the operator's own account.
+authorisation from the author, from the author's own account.
 
 ## The gate, in order
 
@@ -67,8 +67,7 @@ exactly one past the published b-file. Date them on the day of submission:
 * NEVER alter an existing line — underscores in names are OEIS link markup and
   have been destroyed by careless box edits before.
 * Multi-paragraph comments use the `(Start)` / `(End)` wrapper, signed.
-* No GitHub link. The operator does not want their legal name coupled to the
-  handle in a permanent entry.
+* No GitHub link in an entry.
 * Once an editor edits the draft, their version stands — never re-paste over it.
 
 ## b-file format

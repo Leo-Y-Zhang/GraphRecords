@@ -25,7 +25,7 @@ STAGE = ROOT / "OEIS-upload"
 STAGED = sorted(STAGE.glob("b*.txt")) if STAGE.is_dir() else []
 UPSTREAM = ROOT / "data" / "upstream_bfiles.json"
 
-# Submitted by the operator and approved by OEIS on 2026-08-13, all ten terms
+# Submitted by the author and approved by OEIS on 2026-08-13, all ten terms
 # the same day: the n each sequence is published through as a result.
 APPROVED_THROUGH = {
     "A289145": 10,

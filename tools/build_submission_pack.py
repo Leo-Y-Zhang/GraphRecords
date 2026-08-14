@@ -11,11 +11,10 @@ House style, paid for once and applied here from the start:
   * full first names in LINKS, never initials
   * never alter an existing line
   * multi-paragraph comments use the (Start) / (End) wrapper
-  * no GitHub link -- the operator does not want their legal name coupled to the
-    handle in a permanent entry
+  * no GitHub link in an entry
 
-This script PREPARES. It never submits: submitting is the operator's act, from
-the operator's own OEIS account.
+This script PREPARES. It never submits: submitting is the author's act, from
+the author's own OEIS account.
 """
 import argparse
 import json
@@ -165,8 +164,8 @@ def main():
         json.dumps(out, indent=1), encoding="utf-8"
     )
     print(f"\nwrote data/submission_pack.json ({len(out)} sequences)")
-    print("\nNOTE: this prepares only. Submitting is the operator's act, from the")
-    print("operator's own OEIS account, and queues behind A217058 acceptance.")
+    print("\nNOTE: this prepares only. Submitting is the author's act, from the")
+    print("author's own OEIS account, and queues behind A217058 acceptance.")
 
 
 if __name__ == "__main__":

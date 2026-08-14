@@ -2,7 +2,10 @@
 
 **Date:** 2026-07-31
 **Status:** design, not yet approved for execution
-**Prerequisite:** Phase 1 complete — 28 new terms staged across 8 bishop sequences
+**Prerequisite:** Phase 1 complete — ten new terms across five bishop sequences,
+all approved by OEIS on 2026-08-13. *This line said "28 new terms staged across 8
+sequences" while the design was being drafted; the campaign finished smaller and
+the figure was never corrected until the repository was reviewed for publication.*
 
 ## 1. Why Phase 2 is a different problem
 

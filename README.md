@@ -62,7 +62,7 @@ the point of it.
 ## Status
 
 The ten Phase 1 terms — A290719, A290769 and A291595 a(10)-a(11), A289145 and
-A289169 a(9)-a(10) — were submitted to OEIS by the operator and **approved on
+A289169 a(9)-a(10) — were submitted to OEIS by the author and **approved on
 2026-08-13**, all five sequences the same day. `data/upstream_bfiles.json` is the
 probe that measured each published b-file afterwards, and the staged files in
 `OEIS-upload/` are now an archive of exactly what was sent.

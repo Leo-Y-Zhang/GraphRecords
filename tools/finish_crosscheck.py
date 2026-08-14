@@ -1,6 +1,6 @@
 """Wait for the peeling cross-check, then record its verdict and commit it.
 
-The operator should not have to sit and watch a 2-hour verification. This waits,
+The author should not have to sit and watch a 2-hour verification. This waits,
 reads the result, writes it into SESSION_HANDOFF.md and PAPER.md, and commits and
 pushes. It costs no Claude usage.
 
@@ -28,6 +28,7 @@ a claim the log does not support, and it commits and pushes unattended:
      text is now generated from the blocks actually found, and says explicitly
      what the run does NOT cover.
 """
+import os
 import pathlib
 import re
 import subprocess
@@ -37,7 +38,14 @@ import time
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 LOG = ROOT / "bench" / "out" / "crosscheck.log"
 HOME = pathlib.Path.home()
-HOOKS = "C:/dev/Tools/githooks"
+
+# Where the git hooks live, from the environment or from git's own configuration.
+# One machine's directory layout is no use to a reader, and this repository's own
+# rule is that no build location is written into a tracked file.
+HOOKS = os.environ.get("GIT_HOOKS_PATH") or subprocess.run(
+    ["git", "config", "--get", "core.hooksPath"],
+    capture_output=True, text=True, check=False,
+).stdout.strip()
 BRANCH = "phase1-bishop-family"
 
 # The n whose independent confirmation this run exists to establish.
@@ -125,8 +133,25 @@ def git(*args):
     )
 
 
+# Named paths, never `add -A`.
+#
+# This function commits unattended and then pushes. With `add -A` it would stage
+# whatever happened to be in the working tree — anything untracked and not
+# covered by .gitignore — and publish it without anyone looking. The list below
+# is every file this script is allowed to write.
+TRACKED_OUTPUTS = [
+    "bench/crosscheck_result.txt",
+    "CROSSCHECK-FAILED-READ-ME.txt",
+    "data",
+    "README.md",
+    "SESSION_HANDOFF.md",
+]
+
+
 def commit_and_push(message):
-    git("add", "-A")
+    for path in TRACKED_OUTPUTS:
+        if (ROOT / path).exists():
+            git("add", "--", path)
     git("commit", "-m", message)
     return git("push", "-q", "origin", BRANCH)
 

@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-31
 **Status:** design approved (scope: Phase 1 then Phase 2)
-**Repo:** `C:\dev\GraphRecords` (private; visibility is the operator's decision, never mine)
+**Repo:** `GraphRecords`
 
 ## 1. Problem
 
@@ -158,11 +158,11 @@ sequence, and, where affordable, from two independent algorithms.
 
 ## 8. Submission policy
 
-Computation and submission are decoupled. The operator's standing OEIS directives govern:
+Computation and submission are decoupled. The author's standing OEIS directives govern:
 one submission at a time, zero editor friction, and **A217058 must be accepted first**.
 Even a large batch of verified extensions will be staged and held. When A217058 clears, we
 land one, confirm it is received well, and ask an editor how they would prefer the rest.
-Submitting is the operator's act, never mine.
+Submitting is the author's act, never mine.
 
 House style already learned from the A217058 review, to be applied here from the start:
 US spelling; comments short and written for a general reader; define terms the entry does

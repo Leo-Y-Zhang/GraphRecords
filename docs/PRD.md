@@ -67,7 +67,7 @@ and "could not tell" is never treated as "nothing is published".
 
 **Submitting to OEIS.** The repository stages files into `OEIS-upload/` and stops.
 Nothing is submitted automatically and no OEIS account credential is in the
-repository, not ever. Submission is the operator's act from the operator's own
+repository, not ever. Submission is the author's act from the author's own
 account, one sequence at a time, each explicitly authorised. Eight b-files
 arriving at once from a new contributor is exactly the editor friction to avoid.
 
@@ -110,12 +110,13 @@ the bishop is supported — no grid, no king, no knight, no torus.
       beyond the **published b-file**, enforced by a test rather than by memory.
 - [x] An EXTENSIONS line cannot claim a term somebody else already published,
       enforced by a test on the generated submission pack.
-- [ ] Terms accepted into OEIS. **Deliberately not achieved yet** — this queues
-      behind an unrelated submission, and each paste needs its own authorisation.
+- [x] Terms accepted into OEIS. **Achieved 2026-08-13**: all ten staged terms
+      were submitted one at a time, each with its own authorisation, and all ten
+      were approved the same day.
 
 ## Three readers
 
-**The operator**, who wants to make a genuine, checkable contribution to a public
+**The author**, who wants to make a genuine, checkable contribution to a public
 mathematical reference under their own OEIS account, without ever submitting a
 term they cannot defend to an editor.
 
@@ -136,11 +137,10 @@ No third-party personal data at all: no user accounts, no network service, no
 database, no input from anyone. The only network traffic is an outbound read of
 public `oeis.org` b-files, rate-limited to one request per 0.4 s.
 
-The one personal datum is the operator's own name. An accepted OEIS entry carries
-the contributor's real name permanently and publicly. That is why the repository
-is private, why no GitHub link goes into any entry — it would couple the legal
-name to the anonymous handle — and why submission is manual: it is the one
-irreversible, identity-attaching step in the whole workflow.
+The one personal datum is the author's own name. An accepted OEIS entry carries
+the contributor's real name permanently and publicly, which is why submission is
+manual and never automated: it is the one irreversible, identity-attaching step
+in the whole workflow, and it is taken deliberately or not at all.
 
 Revocation has no analogue here, and that is precisely the risk. There is no
 access to revoke, and there is also no undo. An accepted OEIS entry cannot be

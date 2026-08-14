@@ -48,7 +48,7 @@ Four new terms, none submitted, none authorised: A290783 a(10), A381795 a(8),
 a(9), a(10). `PAPER.md` section 6 holds the per-term confidence table. n=11 was
 deliberately not attempted.
 
-## SUBMISSION STATUS (2026-08-13, all by the operator, verified off oeis.org)
+## SUBMISSION STATUS (2026-08-13, all by the author, verified off oeis.org)
 
 | Sequence | Terms | Status |
 |---|---|---|
@@ -224,7 +224,7 @@ Phase 1 is COMPLETE and written up. Nothing is half-done. If you pick this up:
 3. **The queue gate is satisfied: A217058 was ACCEPTED 2026-08-06.** The
    remaining van der Waerden submissions went next, per that campaign's own
    plan; these five followed on 2026-08-13, one at a time, each explicitly
-   authorised by the operator. Submitting is never mine. Lesson from that approval: the reviewing editor
+   authorised by the author. Submitting is never mine. Lesson from that approval: the reviewing editor
    deleted the entire comment on acceptance, so keep any submission here to the
    terms and an EXTENSIONS line unless an editor asks for more.
 4. There is NO further computation left in Phase 1. The last candidate (CDS
@@ -246,9 +246,9 @@ i.e. +3 to +4 terms per sequence. Do not promise more than that.
 
 - **Phase 1's ten terms were submitted and APPROVED 2026-08-13** (table at the
   top). Nothing else here goes to OEIS: any future submission is one at a time,
-  each explicitly authorised by the operator, and submitting is never mine.
-- The repo is private on GitHub. Making it PUBLIC is the operator's decision,
-  never mine.
+  each explicitly authorised by the author, and submitting is never mine.
+- The repository is public. The rule that nothing is submitted to OEIS without
+  explicit per-submission authorisation is unchanged by that.
 - Offsets are NOT uniform across this family (A290719 starts at n=1, A290769 at
   n=2). Always index by true n via `graphrecords.targets.terms_by_n`.
 - Counts exceed 64 bits. Python ints only; never a fixed-width accumulator.

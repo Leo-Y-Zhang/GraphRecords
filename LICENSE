@@ -3,6 +3,20 @@ Read it, run it, check it — no reuse rights granted
 
 Copyright (c) 2026 Leo Y. Zhang. All rights reserved.
 
+THIRD-PARTY CONTENT, AND WHAT THIS LICENCE DOES NOT COVER
+
+This repository redistributes material from the On-Line Encyclopedia of Integer
+Sequences: sequence names, keywords, author credits and published terms, in
+`data/targets.json`, `data/targets_phase2.json`, `data/upstream_bfiles.json` and
+the staged files under `OEIS-upload/`. That material is (c) The OEIS Foundation
+Inc. and its contributors, licensed CC BY-SA 4.0
+<https://creativecommons.org/licenses/by-sa/4.0/>, and it is used and
+redistributed here under those terms.
+
+Nothing below applies to it. The terms of this licence cover only the author's
+own contribution — the code, the documents, the paper, and the terms computed
+here — and they could not lawfully cover anything else.
+
 ================================================================================
 1. AUTHORSHIP AND OWNERSHIP
 ================================================================================
@@ -56,8 +70,8 @@ following, and nothing beyond it:
     negative finding would be worthless.
 
 For this repository specifically, that means anyone -- an OEIS editor, a referee,
-or any reader -- may run `vdw/verify_certificate.py`, `ec/verify_rank.py` and
-`verify_all.py` against any result published here, and may reproduce and republish
+or any reader -- may run `verify_all.py`, `tools/probe_upstream_bfiles.py` and
+`tools/crosscheck_peeling.py` against any result published here, and may reproduce and republish
 the certificates and verdicts they obtain, including a refutation. The central
 claim of this work is that its mathematics can be confirmed without trusting any
 of its code; a licence that did not permit exactly that would make the claim
