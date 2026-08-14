@@ -283,7 +283,116 @@ gives independent checks that cost nothing:
 
 Both are enforced by the gate against every published term.
 
-## 6. Honest limits
+## 6. A second board: the triangular honeycomb
+
+The same reduction reaches a different board, and this time no new counter was
+written at all.
+
+A cell of the n-triangular honeycomb board is barycentric `(x, y, z)` with
+`x + y + z = n - 1` and all three non-negative, so there are `n(n+1)/2` of them.
+The triangular grid offers three line families, one per coordinate; a bishop
+uses the two at +/-60 degrees, which are the constant-`x` and constant-`y`
+families. The horizontal family (constant `z`) is a rook move here, not a
+bishop's.
+
+**No phi is needed.** Since `z` is determined by `x` and `y`, the cell *is* its
+`(x, y)` pair, and "agrees in x or agrees in y" is already rook adjacency. The
+honeycomb bishop graph is therefore the rook graph on the **staircase**
+`S_n = {(x, y) : x, y >= 0, x + y <= n - 1}` — where the square board gave a
+diamond, this board gives a triangle. Which two of the three families the bishop
+uses does not matter: the cell set is symmetric under permuting the coordinates,
+so all three choices give the same graph relabelled, and the suite measures that
+rather than assuming it.
+
+Unlike the square board this graph is **connected** — one component, no colour
+split — so `black + white = bishop` has no analogue here and something else has
+to take its place. Two things do: the containment inequalities in the gate, and
+the anchor below.
+
+### The y-class order is worth 16x
+
+Every counter here sweeps the x-classes and prunes on the fact that each meets a
+*contiguous* y-interval: once no later x-class can reach a y-class it is
+finalised, states merge, and a block confined to the finalised region is dropped.
+
+In the natural y-order, x-class `i` of the staircase meets y-classes `0..n-1-i`.
+**Every interval starts at 0.** Nothing is ever finalised, and not one of those
+prunings can fire. Reversing the y-order makes x-class `i` meet exactly
+`i..n-1`, so each step finalises one more y-class. Measured at n=9:
+
+| sweep | natural y-order | reversed y-order |
+|---|---:|---:|
+| connected induced subgraphs | 115,974 states, 14.5 s | 33,817 states, 6.8 s |
+| connected dominating sets | 839,563 states, 26.3 s | 51,405 states, 2.8 s |
+
+Reversal only renames y-classes, so it is a graph isomorphism and cannot change
+a count — both orders return the identical value at every n measured, which is
+asserted in the suite alongside the interval shape. It is recorded here because
+it is the whole difference between reaching n=10 and not: a 16x state saving
+bought entirely by choosing which end to sweep from.
+
+### Four new terms
+
+| sequence | counts | published to | now to | new |
+|---|---|---|---|---|
+| A290783 | connected induced subgraphs, honeycomb | n=9 | n=10 | +1 |
+| A381795 | connected dominating sets, honeycomb | n=7 | n=10 | +3 |
+
+    A290783  a(10) = 35157891412269342
+    A381795  a(8)  = 60874901280
+    A381795  a(9)  = 32870948178528
+    A381795  a(10) = 34698803291940384
+
+Measured against each entry's **published b-file**, refreshed by
+`tools/probe_upstream_bfiles.py` on the day of the run: A290783 reaches n=9 and
+A381795 reaches n=7. Neither has been submitted.
+
+| n | A290783 states | secs | peak MB | A381795 states | secs | peak MB |
+|---|---:|---:|---:|---:|---:|---:|
+| 8 | 6,846 | 0.6 | 30 | 8,856 | 0.3 | 34 |
+| 9 | 33,817 | 6.3 | 38 | 51,405 | 2.5 | 73 |
+| 10 | 202,505 | 66.9 | 88 | 286,463 | 21.7 | 231 |
+
+### The anchor, which is worth more than the DATA lines
+
+`A290941` counts **dominating sets of this same honeycomb graph**, and an
+independent author published a b-file for it to **n=50**. The domination engine,
+fed the same staircase the new terms come from, reproduces it for **n=1..20** —
+a 61-digit agreement at n=20, reached by two authors, two methods, and no shared
+code.
+
+Brute force over all subsets dies at n=6. So this single check validates the
+class grid roughly fourteen steps past anything exhaustive enumeration can see,
+and far past the nine and seven published terms of the target sequences. It is
+the strongest evidence in this repo that the staircase is the right graph, and
+it is the reason the honeycomb work needed no new counter to be believed.
+
+`A290941` and `A304553` are **anchors only, never contributions** — both are
+already published to n=50. This is the A289164/A295898 mistake from the square
+board, and it is now prevented mechanically rather than remembered: the probe
+records upstream extent for the targets on every run, and the gate fails if a
+claimed term is not strictly beyond it.
+
+### Confidence, stated per term
+
+| term | rests on | independent second algorithm? |
+|---|---|---|
+| A381795 a(8) | frontier CDS sweep **and** the exact-support peeling counter, 11.7 s, re-run by the gate on every run | **yes** |
+| A381795 a(9) | the same two, 145.6 s for the peeling half | **yes** — measured, too slow to re-run every time |
+| A381795 a(10) | the frontier CDS sweep **only** | **no** — the peeling half is roughly a 30 min run and has not been done |
+| A290783 a(10) | the frontier connectivity sweep **only** | **no** — same reason |
+
+The two n=10 terms are the honest gap, and they are not being rounded up. What
+they do carry: every published term of their own sequence reproduced, the n=20
+anchor underneath the grid they share, and the containment inequalities
+`cds(n) <= connected(n)` and `cds(n) <= dominating(n)`, which relate three
+engines that share no counting logic and which both n=10 values satisfy. That is
+real evidence and it is not a second algorithm. To close the gap:
+
+    python bench/measure_honeycomb.py cds-peel 10 --start 10
+    python bench/measure_honeycomb.py cis-peel 10 --start 10
+
+## 7. Honest limits
 
 - Nothing here is a proof of the counts; it is verified computation. The strongest
   claim is that two algorithms and five checks agree.

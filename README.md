@@ -17,6 +17,13 @@ A bishop never changes the parity of row+col, so the bishop graph has exactly tw
 components (the black cells and the white cells) and the reduction is applied to
 each separately.
 
+The n-triangular honeycomb board reduces further still. Its cells are barycentric
+`(x, y, z)` with `x + y + z = n - 1`, and a bishop moves along constant `x` and
+constant `y`, so the cell already *is* its class pair: that graph is the rook
+graph on the staircase `{(x, y) : x + y <= n - 1}` with no map needed. It is
+connected, so unlike the square board there is no black-plus-white identity to
+check against — an independent author's b-file does that job instead.
+
 ## Verifying
 
     python verify_all.py
@@ -32,15 +39,23 @@ Offsets are not uniform across this family: A290719 starts at n=1 but A290769
 starts at n=2, because a 1 X 1 board has no white cells. Anything comparing
 output to published data indexes by n, never by list position.
 
+As of 2026-08-14 the gate is **292 checks + 607 tests, exit 0**, and takes about
+seven minutes: most of that is re-deriving the claimed terms from cold, which is
+the point of it.
+
 ## Layout
 
-- `graphrecords/boards.py` - board cell sets and explicit graph construction
-- `graphrecords/reduction.py` - the bishop-to-rook map, with its proof and self-check
+- `graphrecords/boards.py` - board cell sets and explicit graph construction,
+  square, rectangular and triangular-honeycomb
+- `graphrecords/reduction.py` - the bishop-to-rook map, with its proof and
+  self-check, and the honeycomb staircase
 - `graphrecords/brute.py` - exhaustive reference counters (verification level L0)
 - `graphrecords/connected.py` - two independent fast counters: exact-support peeling,
   and the frontier partition DP used in production
 - `graphrecords/targets.py` - offline snapshot of published OEIS terms
 - `bench/measure_growth.py` - state-growth and timing measurement
+- `bench/measure_honeycomb.py` - the same, for the honeycomb board, reporting
+  peak RSS because memory rather than time is what ends these runs
 - `verify_all.py` - the gate
 
 ## Status
@@ -50,6 +65,11 @@ A289169 a(9)-a(10) — were submitted to OEIS by the operator and **approved on
 2026-08-13**, all five sequences the same day. `data/upstream_bfiles.json` is the
 probe that measured each published b-file afterwards, and the staged files in
 `OEIS-upload/` are now an archive of exactly what was sent.
+
+Four honeycomb terms have since been computed and gated — A290783 a(10) and
+A381795 a(8)-a(10), recorded in `data/honeycomb_new_terms.json`. Two of them rest
+on a second independent algorithm and two do not; `PAPER.md` section 6 says which
+and why, per term rather than in aggregate.
 
 Nothing else here has been submitted, and nothing will be without explicit
 per-submission authorisation.

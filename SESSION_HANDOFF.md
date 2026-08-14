@@ -1,9 +1,49 @@
 # GraphRecords - session handoff
 
-**Last updated:** 2026-08-13
+**Last updated:** 2026-08-14
 **Branch:** `phase1-bishop-family`, pushed to the private repo
-**Gate:** `python verify_all.py` -> exit 0 (**189 checks + 372 tests**, re-verified
-2026-08-13 before the submissions below)
+**Gate:** `python verify_all.py` -> exit 0 (**292 checks + 607 tests**, run
+2026-08-14 after the honeycomb work; it was 189 + 372 immediately before it)
+
+## NEXT STEP, EXACTLY
+
+Two of the four new honeycomb terms have no independent second algorithm yet.
+Close that before anything else is considered, and before anything is submitted:
+
+    python bench/measure_honeycomb.py cds-peel 10 --start 10    # ~30 min
+    python bench/measure_honeycomb.py cis-peel 10 --start 10    # ~30 min
+
+Each must print the value already recorded in `data/honeycomb_new_terms.json`
+(`A381795 a(10) = 34698803291940384`, `A290783 a(10) = 35157891412269342`). On
+agreement, add the entry to that file's `second_algorithm` map and update the
+per-term table in `PAPER.md` section 6. On disagreement, **stop** - that is a
+defect in one of two engines and neither term may be believed until it is found.
+
+These are single ~30 minute jobs and cannot be split; they were not run on
+2026-08-14 because that session was capped at 10 minute foreground calls with a
+SAT gate already holding memory on the machine.
+
+## HONEYCOMB BOARD (2026-08-14)
+
+The n-triangular honeycomb bishop graph is the rook graph on the staircase
+`{(x,y) : x+y <= n-1}` - barycentric `(x,y,z)` with `x+y+z = n-1`, adjacency in
+constant `x` or constant `y`. No new counter was written: `boards.py` and
+`reduction.py` gained the board and the grid, and every existing engine reaches
+it through `class_grid(n, "honeycomb")`. `connected.py`, `connected_domination.py`,
+`cds_peeling.py` and `brute.py` are untouched.
+
+**The y-class order is REVERSED and that is worth 16x.** In the natural order
+every x-interval starts at 0, so the stranded-block pruning can never fire.
+Measured at n=9: connected induced 115,974 -> 33,817 states, connected dominating
+839,563 -> 51,405. Do not "tidy" it back to the natural order.
+
+**A290941 is the anchor and NOT a target** - dominating sets of this same graph,
+published to n=50 by an independent author, reproduced here for n=1..20. Same for
+A304553. Staging either would repeat the A289164/A295898 mistake exactly.
+
+Four new terms, none submitted, none authorised: A290783 a(10), A381795 a(8),
+a(9), a(10). `PAPER.md` section 6 holds the per-term confidence table. n=11 was
+deliberately not attempted.
 
 ## SUBMISSION STATUS (2026-08-13, all by the operator, verified off oeis.org)
 
