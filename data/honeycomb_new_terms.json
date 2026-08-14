@@ -6,7 +6,9 @@
   "terms": {
    "10": 35157891412269342
   },
-  "second_algorithm": {}
+  "second_algorithm": {
+   "10": "graphrecords.connected.peeling_connected"
+  }
  },
  "A381795": {
   "predicate": "connected dominating sets of the n-triangular honeycomb bishop graph",
@@ -19,7 +21,8 @@
   },
   "second_algorithm": {
    "8": "graphrecords.cds_peeling.peeling_connected_dominating",
-   "9": "graphrecords.cds_peeling.peeling_connected_dominating"
+   "9": "graphrecords.cds_peeling.peeling_connected_dominating",
+   "10": "graphrecords.cds_peeling.peeling_connected_dominating"
   }
  }
 }

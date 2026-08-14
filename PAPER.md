@@ -393,18 +393,33 @@ claimed term is not strictly beyond it.
 |---|---|---|
 | A381795 a(8) | frontier CDS sweep **and** the exact-support peeling counter, 11.7 s, re-run by the gate on every run | **yes** |
 | A381795 a(9) | the same two, 145.6 s for the peeling half | **yes** — measured, too slow to re-run every time |
-| A381795 a(10) | the frontier CDS sweep **only** | **no** — the peeling half is roughly a 30 min run and has not been done |
-| A290783 a(10) | the frontier connectivity sweep **only** | **no** — same reason |
+| A381795 a(10) | the frontier CDS sweep **and** the exact-support peeling counter, 2003 s, 394 MB | **yes** — run 2026-08-14 |
+| A290783 a(10) | the frontier connectivity sweep **and** the exact-support peeling counter, 1775 s, 368 MB | **yes** — run 2026-08-14 |
 
-The two n=10 terms are the honest gap, and they are not being rounded up. What
-they do carry: every published term of their own sequence reproduced, the n=20
-anchor underneath the grid they share, and the containment inequalities
-`cds(n) <= connected(n)` and `cds(n) <= dominating(n)`, which relate three
-engines that share no counting logic and which both n=10 values satisfy. That is
-real evidence and it is not a second algorithm. To close the gap:
+**The gap is closed.** It was open because each n=10 term rested on one sweep,
+and the second algorithm was a half-hour run nobody had made. Both runs were
+made on 2026-08-14 and both agreed digit for digit:
 
-    python bench/measure_honeycomb.py cds-peel 10 --start 10
-    python bench/measure_honeycomb.py cis-peel 10 --start 10
+    A381795  a(10) = 34698803291940384    sweep and peeling, identical
+    A290783  a(10) = 35157891412269342    sweep and peeling, identical
+
+    python bench/measure_honeycomb.py cds-peel 10 --start 10   # 2003 s, 394 MB
+    python bench/measure_honeycomb.py cis-peel 10 --start 10   # 1775 s, 368 MB
+
+*The cds run exceeded the default 1800 s budget and stopped after reporting, as
+it should; the value was produced before the budget check.*
+
+All four terms now rest on two algorithms sharing no code beyond the class grid.
+What they carried before, and still carry: every published term of their own
+sequence reproduced — checked again on 2026-08-14, all sixteen of them, a(1)-a(7)
+of A381795 and a(1)-a(9) of A290783 — the n=20 anchor underneath the shared grid,
+and the containment inequalities `cds(n) <= connected(n)` and
+`cds(n) <= dominating(n)`, which relate three engines with no shared counting
+logic and which both n=10 values satisfy against a b-file published by someone
+else in 2017:
+
+    cds(10) <= cis(10)   margin  459088120328958
+    cds(10) <= dom(10)   margin  848986984659861
 
 ## 7. Honest limits
 
