@@ -44,10 +44,12 @@ TOTAL_LIMIT = 9
 # file rather than a result.
 HONEYCOMB_LIMIT = 10
 
-# A290941 counts dominating sets of the honeycomb bishop graph and an
-# independent author published a b-file for it to n=50. Agreeing with that far
-# past where brute force stops (n=6) is the strongest evidence available that
-# the staircase really is this graph, so it is worth more than any DATA line.
+# A290941 counts dominating sets of the honeycomb bishop graph and its b-file,
+# published in 2017, reaches n=50. Agreeing with that far past where brute force
+# stops (n=6) is the strongest evidence available that the staircase really is
+# this graph, so it is worth more than any DATA line. It is independent of this
+# work -- another method, years earlier, no shared code -- but NOT by another
+# author: every sequence used here, target and anchor, is Eric W. Weisstein's.
 # It is NOT a contribution target, and neither is A304553: both are already at
 # n=50, which is exactly the misreading that wasted a day on A289164/A295898.
 ANCHOR_LIMIT = 20
@@ -149,7 +151,7 @@ def main():
     # there through the class grid alone and nothing downstream changed. The
     # graph is CONNECTED -- there is no colour split, so the black-plus-white
     # identity has no analogue here and its place is taken by the containment
-    # inequalities at L4 and by an independent author's b-file at L2.
+    # inequalities at L4 and by A290941's published b-file at L2.
     hive_cis = {}
     hive_cds = {}
     hive_dom = {}
@@ -178,7 +180,7 @@ def main():
     for n, term in sorted(terms_by_n("A381795").items()):
         check(f"L2 A381795 a({n})", hive_cds[n] == term)
 
-    # L2: the anchor -- an independent author's b-file for this same graph
+    # L2: the anchor -- a b-file for this same graph, computed some other way
     anchor = bfile_terms_by_n("A290941")
     for n in range(1, ANCHOR_LIMIT + 1):
         check(f"L2 A290941 anchor a({n})", dominating_sets(n, HONEYCOMB) == anchor[n])

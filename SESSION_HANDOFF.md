@@ -38,8 +38,11 @@ Measured at n=9: connected induced 115,974 -> 33,817 states, connected dominatin
 839,563 -> 51,405. Do not "tidy" it back to the natural order.
 
 **A290941 is the anchor and NOT a target** - dominating sets of this same graph,
-published to n=50 by an independent author, reproduced here for n=1..20. Same for
-A304553. Staging either would repeat the A289164/A295898 mistake exactly.
+published to n=50 back in 2017, reproduced here for n=1..20. Same for A304553.
+Staging either would repeat the A289164/A295898 mistake exactly. The anchor is
+independent of this work but NOT of the author: every bishop and honeycomb
+sequence here, target and anchor alike, is Eric W. Weisstein's. Do not describe
+it as an independent author - an earlier draft did, and it was wrong.
 
 Four new terms, none submitted, none authorised: A290783 a(10), A381795 a(8),
 a(9), a(10). `PAPER.md` section 6 holds the per-term confidence table. n=11 was
@@ -159,7 +162,10 @@ to n=21, was already known.
 
 What that did buy: all twenty overlapping terms agree with the published b-file
 exactly, including a(21) at 67 digits, so the domination engine is validated
-against an independent author who reached n=50 by an undisclosed method.
+against a b-file that reached n=50 in 2017 by an undisclosed method. Independent
+of this work; NOT by a different author (corrected 2026-08-14 - the sequences
+here are all Eric W. Weisstein's, and the earlier wording claimed more than the
+data supports).
 
 **The check is now mechanical.** `tools/probe_upstream_bfiles.py` records how far
 every published b-file goes into `data/upstream_bfiles.json`, and a test refuses

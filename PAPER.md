@@ -50,9 +50,17 @@ day on this kind of work.
 
 **What that computation did buy:** every one of the twenty overlapping terms
 agrees with the published b-file exactly, including a(20) at 61 digits and a(21)
-at 67. An independent author reached n=50 by an undisclosed method and we agree
+at 67. Someone reached n=50 in 2017 by an undisclosed method and we agree
 throughout, which is far stronger evidence for the engine than the fifteen DATA
 terms it was originally checked against.
+
+*Precisely, because an earlier wording here overstated it:* that b-file is
+independent of **this work** — a different method, computed years before this
+repo existed, sharing no code with it — but not by a different **author**. Every
+bishop and honeycomb sequence used here, target and anchor alike, was submitted
+by Eric W. Weisstein. Calling it "an independent author" was wrong and is
+corrected rather than quietly dropped, since the whole value of an anchor is
+knowing exactly what it is independent of.
 
 ## 1. The reduction
 
@@ -355,11 +363,17 @@ A381795 reaches n=7. Neither has been submitted.
 
 ### The anchor, which is worth more than the DATA lines
 
-`A290941` counts **dominating sets of this same honeycomb graph**, and an
-independent author published a b-file for it to **n=50**. The domination engine,
-fed the same staircase the new terms come from, reproduces it for **n=1..20** —
-a 61-digit agreement at n=20, reached by two authors, two methods, and no shared
-code.
+`A290941` counts **dominating sets of this same honeycomb graph**, and a b-file
+for it was published in 2017 reaching **n=50**. The domination engine, fed the
+same staircase the new terms come from, reproduces it for **n=1..20** — a
+61-digit agreement at n=20, reached by two methods with no shared code.
+
+It is independent of *this work*, not of the *author*: A290941, A304553, A290783
+and A381795 were all submitted by Eric W. Weisstein. What the anchor rules out is
+an error in this repo's grid or engines, which is exactly what it is being asked
+to rule out; it cannot rule out a shared misunderstanding of the board, and that
+is left to the definition itself, checked pairwise against barycentric
+coordinates for n=1..7.
 
 Brute force over all subsets dies at n=6. So this single check validates the
 class grid roughly fourteen steps past anything exhaustive enumeration can see,

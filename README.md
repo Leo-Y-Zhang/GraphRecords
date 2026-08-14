@@ -22,7 +22,8 @@ The n-triangular honeycomb board reduces further still. Its cells are barycentri
 constant `y`, so the cell already *is* its class pair: that graph is the rook
 graph on the staircase `{(x, y) : x + y <= n - 1}` with no map needed. It is
 connected, so unlike the square board there is no black-plus-white identity to
-check against — an independent author's b-file does that job instead.
+check against — A290941's published b-file, which reaches n=50 by another method,
+does that job instead.
 
 ## Verifying
 

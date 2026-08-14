@@ -2,8 +2,8 @@
 
 Everything here is checked against the graph built straight from barycentric
 coordinates, never against the class grid, because a grid checked against itself
-proves nothing. The published-term tests are the same idea one level up: an
-independent author's counts, which a wrong grid cannot reproduce.
+proves nothing. The published-term tests are the same idea one level up: counts
+someone else computed some other way, which a wrong grid cannot reproduce.
 """
 import json
 import pathlib
@@ -240,8 +240,9 @@ def test_reproduces_every_published_connected_dominating_term(n):
 @pytest.mark.parametrize("n", sorted(DOM)[:12])
 def test_reproduces_every_published_dominating_term(n):
     """A290941 is NOT a contribution target -- it is published to n=50 already.
-    It is here as an anchor: an independent author's counts for this exact
-    graph, reaching far past anything brute force can see."""
+    It is here as an anchor: counts for this exact graph reached by another
+    method in 2017, far past anything brute force can see. Independent of this
+    work, though not of the author -- see PAPER.md section 6."""
     assert dominating_sets(n, "honeycomb") == DOM[n]
 
 

@@ -31,7 +31,7 @@ UA = {"User-Agent": "Mozilla/5.0 (upstream b-file probe; low volume)"}
 # on them:
 #
 #   A290941  the ANCHOR. Dominating sets of the n-triangular honeycomb bishop
-#            graph, published to n=50 by an independent author. verify_all.py
+#            graph, published to n=50 back in 2017. verify_all.py
 #            checks our class grid against it far past anything brute force can
 #            reach, which is the strongest evidence available that the grid is
 #            the right graph. It is emphatically NOT a contribution target, and
