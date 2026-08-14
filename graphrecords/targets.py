@@ -10,11 +10,28 @@ import json
 import pathlib
 
 SNAPSHOT = pathlib.Path(__file__).resolve().parents[1] / "data" / "targets.json"
+BFILES = pathlib.Path(__file__).resolve().parents[1] / "data" / "upstream_bfiles.json"
 
 
 @functools.lru_cache(maxsize=1)
 def load_targets():
     return json.loads(SNAPSHOT.read_text(encoding="utf-8"))
+
+
+@functools.lru_cache(maxsize=1)
+def load_bfiles():
+    return json.loads(BFILES.read_text(encoding="utf-8"))
+
+
+def bfile_terms_by_n(aid):
+    """Published b-file terms keyed by n, from tools/probe_upstream_bfiles.py.
+
+    The b-file is the authority and the DATA line is not: OEIS truncates DATA
+    near 260 characters, so an entry can display 15 terms while its b-file holds
+    50. A290941 is exactly such an entry, and reading its DATA line as the term
+    count is the mistake this repo has already paid for once.
+    """
+    return {int(n): int(v) for n, v in load_bfiles()[aid]["values"].items()}
 
 
 def published_terms(aid):

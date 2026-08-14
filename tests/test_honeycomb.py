@@ -5,6 +5,9 @@ coordinates, never against the class grid, because a grid checked against itself
 proves nothing. The published-term tests are the same idea one level up: an
 independent author's counts, which a wrong grid cannot reproduce.
 """
+import json
+import pathlib
+
 import pytest
 
 from graphrecords.boards import (
@@ -24,7 +27,7 @@ from graphrecords.reduction import (
     rook_coords,
     verify_isomorphism,
 )
-from graphrecords.targets import terms_by_n
+from graphrecords.targets import bfile_terms_by_n, terms_by_n
 
 CIS = terms_by_n("A290783")     # connected induced subgraphs, honeycomb
 CDS = terms_by_n("A381795")     # connected dominating sets, honeycomb
@@ -248,3 +251,55 @@ def test_reproduces_every_published_total_dominating_term(n):
     domination needs class populations rather than mere occupancy, so it is the
     expensive one and the suite only takes it as far as it stays cheap."""
     assert total_dominating_sets(n, "honeycomb") == TOT[n]
+
+
+# --- the record of what is claimed as new ----------------------------------
+#
+# verify_all.py re-derives each claimed term from cold; these tests check the
+# record itself is honest, which is a different question and the one that went
+# wrong before: three sequences were once staged as contributions while their
+# b-files already reached n=50.
+
+NEW_TERMS = json.loads(
+    (pathlib.Path(__file__).resolve().parents[1] / "data" / "honeycomb_new_terms.json")
+    .read_text(encoding="utf-8")
+)
+
+
+@pytest.mark.parametrize("aid", sorted(NEW_TERMS))
+def test_claimed_terms_lie_beyond_the_probed_upstream_bfile(aid):
+    record = NEW_TERMS[aid]
+    published = bfile_terms_by_n(aid)
+    assert max(published) == record["upstream_last_n"], (
+        f"{aid}: the record says upstream reaches n={record['upstream_last_n']} but "
+        f"the probe measured n={max(published)} - re-run "
+        f"tools/probe_upstream_bfiles.py and re-check what is actually new"
+    )
+    for n_text in record["terms"]:
+        assert int(n_text) > record["upstream_last_n"], (
+            f"{aid}: a({n_text}) is claimed as new but upstream already publishes "
+            f"through a({record['upstream_last_n']})"
+        )
+
+
+@pytest.mark.parametrize("aid", sorted(NEW_TERMS))
+def test_claimed_terms_agree_with_upstream_where_they_overlap(aid):
+    """Nothing claimed may contradict a published term. The overlap is empty by
+    the test above, so this checks the whole published range instead: the engine
+    that produced the new terms must reproduce every term upstream already has."""
+    engines = {
+        "A290783": lambda n: frontier_connected(n, "honeycomb"),
+        "A381795": lambda n: connected_dominating_sets(n, "honeycomb"),
+    }
+    for n, term in sorted(bfile_terms_by_n(aid).items()):
+        assert engines[aid](n) == term, f"{aid}: a({n}) disagrees with the b-file"
+
+
+@pytest.mark.parametrize("aid", sorted(NEW_TERMS))
+def test_second_algorithm_record_only_names_claimed_terms(aid):
+    """Confidence is recorded per term, never in aggregate. A term with no entry
+    here rests on one algorithm, and that has to stay visible rather than being
+    rounded up to 'the new terms are cross-checked'."""
+    record = NEW_TERMS[aid]
+    unknown = set(record["second_algorithm"]) - set(record["terms"])
+    assert not unknown, f"{aid}: second_algorithm names unclaimed terms {unknown}"

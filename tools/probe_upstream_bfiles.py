@@ -27,6 +27,21 @@ STAGE = ROOT / "OEIS-upload"
 OUT = ROOT / "data" / "upstream_bfiles.json"
 UA = {"User-Agent": "Mozilla/5.0 (upstream b-file probe; low volume)"}
 
+# Probed on every run in addition to whatever is staged, because the gate leans
+# on them:
+#
+#   A290941  the ANCHOR. Dominating sets of the n-triangular honeycomb bishop
+#            graph, published to n=50 by an independent author. verify_all.py
+#            checks our class grid against it far past anything brute force can
+#            reach, which is the strongest evidence available that the grid is
+#            the right graph. It is emphatically NOT a contribution target, and
+#            neither is A304553 next to it: both are already at n=50, which is
+#            exactly the misreading that wasted a day on A289164 and A295898.
+#   A290783  the two honeycomb sequences this repo does extend. Their upstream
+#   A381795  extent is recorded here so that "how far is this published" stays a
+#            measurement in the repo rather than something someone remembers.
+ALWAYS_PROBE = ("A290783", "A290941", "A381795")
+
 
 def probe(aid):
     """Returns (rows, last_n, values) for the published b-file.
@@ -74,10 +89,8 @@ def probe(aid):
 
 
 def main():
-    targets = sorted("A" + p.stem[1:] for p in STAGE.glob("b*.txt"))
-    if not targets:
-        print("nothing staged")
-        return 0
+    staged = {"A" + p.stem[1:] for p in STAGE.glob("b*.txt")}
+    targets = sorted(staged | set(ALWAYS_PROBE))
 
     record = {}
     for aid in targets:
