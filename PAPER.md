@@ -355,9 +355,9 @@ Measured against each entry's **published b-file**, refreshed by
 `tools/probe_upstream_bfiles.py` on the day of the run: A290783 reaches n=9 and
 A381795 reaches n=7.
 
-A290783 a(10) was submitted on 2026-08-14 and is awaiting review. A381795
-a(8)-a(10) is prepared but not yet submitted: the account holds three open
-drafts, which is its limit, so it goes in when one of them clears.
+A290783 a(10) was submitted on 2026-08-14 and **approved the same day**; it is
+now the published a(10) of that entry, the first term added to it since 2017.
+A381795 a(8)-a(10) is prepared but not yet submitted.
 
 | n | A290783 states | secs | peak MB | A381795 states | secs | peak MB |
 |---|---:|---:|---:|---:|---:|---:|
