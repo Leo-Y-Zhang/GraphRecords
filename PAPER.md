@@ -357,7 +357,9 @@ A381795 reaches n=7.
 
 A290783 a(10) was submitted on 2026-08-14 and **approved the same day**; it is
 now the published a(10) of that entry, the first term added to it since 2017.
-A381795 a(8)-a(10) is prepared but not yet submitted.
+A381795 a(8)-a(10) was submitted on 2026-08-15 and **approved the same day**,
+taking that entry from seven terms to ten. Both are published; neither is a
+claim of this repository any longer.
 
 | n | A290783 states | secs | peak MB | A381795 states | secs | peak MB |
 |---|---:|---:|---:|---:|---:|---:|
