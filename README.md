@@ -88,4 +88,4 @@ staged b-files also come out of a fresh Windows checkout **LF-only**, which is
 what `.gitattributes` is for: git would otherwise rewrite them to CRLF and
 silently violate the OEIS b-file spec.
 
-    git clone --branch phase1-bishop-family <repo> && cd GraphRecords && python verify_all.py
+    git clone <repo> && cd GraphRecords && python verify_all.py

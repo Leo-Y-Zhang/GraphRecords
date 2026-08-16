@@ -1,7 +1,7 @@
 # GraphRecords - session handoff
 
 **Last updated:** 2026-08-14
-**Branch:** `phase1-bishop-family`, pushed to the private repo
+**Branch:** `main` (the default branch), pushed to the public repo
 **Gate:** `python verify_all.py` -> exit 0 (**292 checks + 607 tests**, run
 2026-08-14 after the honeycomb work; it was 189 + 372 immediately before it)
 
