@@ -46,7 +46,7 @@ HOOKS = os.environ.get("GIT_HOOKS_PATH") or subprocess.run(
     ["git", "config", "--get", "core.hooksPath"],
     capture_output=True, text=True, check=False,
 ).stdout.strip()
-BRANCH = "phase1-bishop-family"
+BRANCH = "main"
 
 # The n whose independent confirmation this run exists to establish.
 TARGET_N = 11
