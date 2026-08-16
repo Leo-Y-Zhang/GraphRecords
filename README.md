@@ -70,7 +70,9 @@ probe that measured each published b-file afterwards, and the staged files in
 Four honeycomb terms have since been computed and gated — A290783 a(10) and
 A381795 a(8)-a(10), recorded in `data/honeycomb_new_terms.json`. Two of them rest
 on a second independent algorithm and two do not; `PAPER.md` section 6 says which
-and why, per term rather than in aggregate.
+and why, per term rather than in aggregate. Both were submitted and **approved**:
+A290783 a(10) on 2026-08-14 and A381795 a(8)-a(10) on 2026-08-15. That brings the
+total to fourteen terms across seven sequences, all live.
 
 Nothing else here has been submitted, and nothing will be without explicit
 per-submission authorisation.
