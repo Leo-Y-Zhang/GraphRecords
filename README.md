@@ -27,7 +27,20 @@ does that job instead.
 
 ## Verifying
 
+Needs **Python 3.13**, which is what CI runs and what `ruff.toml` targets. There
+is nothing to install and nothing to build: this is not a package, and `pytest`
+is the only third-party import anywhere in the tree — the gate shells out to it
+as its last step, so without it the gate stops one check short of finishing.
+
+    pip install pytest
     python verify_all.py
+
+That second line is the whole test command; there is no separate suite to run.
+Budget about seven minutes and a couple of gigabytes of free memory — memory
+rather than time is the wall in this family, and the anchor check re-derives
+A290941 to n=20 (`SESSION_HANDOFF.md` has the measured growth). No solver, no
+network and no dataset: every published term the gate compares against is
+committed under `data/`.
 
 This is the authoritative gate. It re-derives the isomorphism exhaustively,
 checks the fast counters against brute-force enumeration, reproduces every
@@ -40,9 +53,14 @@ Offsets are not uniform across this family: A290719 starts at n=1 but A290769
 starts at n=2, because a 1 X 1 board has no white cells. Anything comparing
 output to published data indexes by n, never by list position.
 
-As of 2026-08-14 the gate is **292 checks + 607 tests, exit 0**, and takes about
+As of 2026-08-27 the gate is **292 checks + 609 tests, exit 0**, and takes about
 seven minutes: most of that is re-deriving the claimed terms from cold, which is
-the point of it.
+the point of it. Two of the 609 skip: a claimed term is held either to lying
+strictly beyond the published b-file or, once OEIS has approved it, to being
+served upstream exactly as claimed, and no term is ever in both states at once.
+
+`.github/workflows/ci.yml` runs exactly this on every push, plus `ruff check .`
+on a pinned `ruff==0.16.1` and a gitleaks scan of the whole history.
 
 ## Layout
 
@@ -88,4 +106,7 @@ staged b-files also come out of a fresh Windows checkout **LF-only**, which is
 what `.gitattributes` is for: git would otherwise rewrite them to CRLF and
 silently violate the OEIS b-file spec.
 
-    git clone <repo> && cd GraphRecords && python verify_all.py
+    git clone https://github.com/Leo-Y-Zhang/GraphRecords.git
+    cd GraphRecords
+    pip install pytest
+    python verify_all.py

@@ -1,27 +1,28 @@
 # GraphRecords - session handoff
 
-**Last updated:** 2026-08-14
+**Last updated:** 2026-08-27
 **Branch:** `main` (the default branch), pushed to the public repo
-**Gate:** `python verify_all.py` -> exit 0 (**292 checks + 607 tests**, run
-2026-08-14 after the honeycomb work; it was 189 + 372 immediately before it)
+**Gate:** `python verify_all.py` -> exit 0 (**292 checks + 609 tests**; the 292
+was measured 2026-08-14 and the 2026-08-27 edit is check-count neutral, the suite
+was run 2026-08-27 and reports 607 passed / 2 skipped. It was 189 + 372 before
+the honeycomb work.)
+
+**Status lives in `README.md` "## Status", which is canonical.** What is written
+here is context for the next session, not a second scoreboard; when the two
+disagree the README wins, and this file gets fixed.
 
 ## NEXT STEP, EXACTLY
 
-Two of the four new honeycomb terms have no independent second algorithm yet.
-Close that before anything else is considered, and before anything is submitted:
+Nothing is owed on the honeycomb terms. Both cross-checks were run to completion
+on 2026-08-14 and agreed digit for digit, all four terms were submitted, and OEIS
+approved them (see "## SUBMISSION STATUS" below); `data/honeycomb_new_terms.json`
+now names a second algorithm for every claimed term.
 
-    python bench/measure_honeycomb.py cds-peel 10 --start 10    # ~30 min
-    python bench/measure_honeycomb.py cis-peel 10 --start 10    # ~30 min
-
-Each must print the value already recorded in `data/honeycomb_new_terms.json`
-(`A381795 a(10) = 34698803291940384`, `A290783 a(10) = 35157891412269342`). On
-agreement, add the entry to that file's `second_algorithm` map and update the
-per-term table in `PAPER.md` section 6. On disagreement, **stop** - that is a
-defect in one of two engines and neither term may be believed until it is found.
-
-These are single ~30 minute jobs and cannot be split; they were not run on
-2026-08-14 because that session was capped at 10 minute foreground calls with a
-SAT gate already holding memory on the machine.
+The one seam left unmeasured in this repository is the bishop Hamiltonian-path
+predicate (A307934/A234632/A308146/A234637), named at the end of "## SUBMISSION
+STATUS" below. **Measure state growth before building anything**: memory is the
+wall here, not time, and the LOAD DISCIPLINE section exists because that lesson
+cost two dead runs.
 
 ## HONEYCOMB BOARD (2026-08-14)
 
@@ -44,9 +45,11 @@ independent of this work but NOT of the author: every bishop and honeycomb
 sequence here, target and anchor alike, is Eric W. Weisstein's. Do not describe
 it as an independent author - an earlier draft did, and it was wrong.
 
-Four new terms, none submitted, none authorised: A290783 a(10), A381795 a(8),
-a(9), a(10). `PAPER.md` section 6 holds the per-term confidence table. n=11 was
-deliberately not attempted.
+Four new terms, all four now submitted and **APPROVED**: A290783 a(10) on
+2026-08-14 and A381795 a(8), a(9), a(10) on 2026-08-15, each the same day it was
+proposed. They are published terms of those entries and are no longer claims of
+this repository. `PAPER.md` section 6 holds the per-term confidence table. n=11
+was deliberately not attempted.
 
 ## SUBMISSION STATUS (2026-08-13, all by the author, verified off oeis.org)
 
@@ -217,10 +220,10 @@ Phase 1 is COMPLETE and written up. Nothing is half-done. If you pick this up:
    no local state, and the staged b-files come out of a fresh checkout LF-only.)
 2. **Before staging any new sequence**, run `tools/probe_upstream_bfiles.py`.
    Reading the DATA line as the term count already cost a day once.
-   (Last probed 2026-08-13 after the approvals: A289145/A289169 now published to
-   n=10, A290719/A290769/A291595 to n=11 - i.e. upstream carries all ten of our
-   terms, and `tests/test_staged_bfiles.py` now holds the staged files to
-   matching what it serves.)
+   (Last probed 2026-08-27: A289145/A289169 published to n=10,
+   A290719/A290769/A291595 to n=11, and A290783/A381795 to n=10 - i.e. upstream
+   carries all fourteen of our terms, and `tests/test_staged_bfiles.py` now
+   holds the staged files to matching what it serves.)
 3. **The queue gate is satisfied: A217058 was ACCEPTED 2026-08-06.** The
    remaining van der Waerden submissions went next, per that campaign's own
    plan; these five followed on 2026-08-13, one at a time, each explicitly
