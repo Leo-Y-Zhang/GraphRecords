@@ -29,18 +29,16 @@ does that job instead.
 
 Needs **Python 3.13**, which is what CI runs and what `ruff.toml` targets. There
 is nothing to install and nothing to build: this is not a package, and `pytest`
-is the only third-party import anywhere in the tree — the gate shells out to it
-as its last step, so without it the gate stops one check short of finishing.
+is the only third-party import anywhere in the tree — the gate's last check runs
+the suite through it, so without it that check fails and the gate exits 1.
 
     pip install pytest
     python verify_all.py
 
 That second line is the whole test command; there is no separate suite to run.
-Budget about seven minutes and a couple of gigabytes of free memory — memory
-rather than time is the wall in this family, and the anchor check re-derives
-A290941 to n=20 (`SESSION_HANDOFF.md` has the measured growth). No solver, no
-network and no dataset: every published term the gate compares against is
-committed under `data/`.
+No solver, no network and no dataset: every published term the gate compares
+against is committed under `data/`, so a bare clone is enough. Budget about seven
+minutes.
 
 This is the authoritative gate. It re-derives the isomorphism exhaustively,
 checks the fast counters against brute-force enumeration, reproduces every
