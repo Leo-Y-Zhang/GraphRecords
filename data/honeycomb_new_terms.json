@@ -3,6 +3,8 @@
   "predicate": "(non-null) connected induced subgraphs of the n-triangular honeycomb bishop graph",
   "engine": "graphrecords.connected.frontier_connected",
   "upstream_last_n": 9,
+  "approved_through": 10,
+  "approved_on": "2026-08-14",
   "terms": {
    "10": 35157891412269342
   },
@@ -14,6 +16,8 @@
   "predicate": "connected dominating sets of the n-triangular honeycomb bishop graph",
   "engine": "graphrecords.connected_domination.connected_dominating_sets",
   "upstream_last_n": 7,
+  "approved_through": 10,
+  "approved_on": "2026-08-15",
   "terms": {
    "8": 60874901280,
    "9": 32870948178528,

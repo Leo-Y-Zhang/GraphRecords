@@ -352,8 +352,12 @@ bought entirely by choosing which end to sweep from.
     A381795  a(10) = 34698803291940384
 
 Measured against each entry's **published b-file**, refreshed by
-`tools/probe_upstream_bfiles.py` on the day of the run: A290783 reaches n=9 and
-A381795 reaches n=7.
+`tools/probe_upstream_bfiles.py` on the day of the run: A290783 reached n=9 and
+A381795 reached n=7. That is the pre-submission reach and it is what made these
+terms contributions. `data/upstream_bfiles.json` has since been re-probed and
+records both entries at n=10 — these terms are what took them there, so the gate
+now checks that upstream serves each of them with exactly the value claimed here
+rather than that upstream still stops short.
 
 A290783 a(10) was submitted on 2026-08-14 and **approved the same day**; it is
 now the published a(10) of that entry, the first term added to it since 2017.

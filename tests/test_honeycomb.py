@@ -269,7 +269,12 @@ NEW_TERMS = json.loads(
 
 @pytest.mark.parametrize("aid", sorted(NEW_TERMS))
 def test_claimed_terms_lie_beyond_the_probed_upstream_bfile(aid):
+    """Before submission the record has to prove the terms are not already
+    published. `upstream_last_n` is the reach the probe measured at that point
+    and stays in the record as the archival fact that made them contributions."""
     record = NEW_TERMS[aid]
+    if record.get("approved_through") is not None:
+        pytest.skip("approved - checked by the round trip below instead")
     published = bfile_terms_by_n(aid)
     assert max(published) == record["upstream_last_n"], (
         f"{aid}: the record says upstream reaches n={record['upstream_last_n']} but "
@@ -284,15 +289,46 @@ def test_claimed_terms_lie_beyond_the_probed_upstream_bfile(aid):
 
 
 @pytest.mark.parametrize("aid", sorted(NEW_TERMS))
+def test_approved_terms_are_served_upstream_exactly_as_claimed(aid):
+    """Once OEIS approves a submission the b-file becomes the public record of
+    it, so the honest question flips: not "does upstream stop short of us" but
+    "does upstream serve what we said". A silent divergence - an edit upstream,
+    a mistyped digit in the submission - is what this catches, and it is a
+    comparison of two records rather than a recomputation, so it costs nothing."""
+    record = NEW_TERMS[aid]
+    approved_through = record.get("approved_through")
+    if approved_through is None:
+        pytest.skip("not submitted - checked by the strictly-beyond test above")
+    published = bfile_terms_by_n(aid)
+    assert max(published) >= approved_through, (
+        f"{aid}: approved through a({approved_through}) on "
+        f"{record['approved_on']}, but the published b-file now reaches only "
+        f"n={max(published)} - re-run tools/probe_upstream_bfiles.py"
+    )
+    for n_text, term in record["terms"].items():
+        n = int(n_text)
+        assert published.get(n) == term, (
+            f"{aid}: this repository claims a({n}) = {term} but the published "
+            f"b-file serves {published.get(n)}"
+        )
+
+
+@pytest.mark.parametrize("aid", sorted(NEW_TERMS))
 def test_claimed_terms_agree_with_upstream_where_they_overlap(aid):
-    """Nothing claimed may contradict a published term. The overlap is empty by
-    the test above, so this checks the whole published range instead: the engine
-    that produced the new terms must reproduce every term upstream already has."""
+    """Nothing claimed may contradict a published term. This re-derives every
+    term upstream held BEFORE the submission: the engine that produced the new
+    terms has to reproduce the whole run-up to them, not just the tip. The
+    claimed terms themselves are re-derived from cold by verify_all.py, which is
+    where the expensive n=10 sweeps belong - running them here as well would
+    double the gate's cost to prove the same thing twice."""
     engines = {
         "A290783": lambda n: frontier_connected(n, "honeycomb"),
         "A381795": lambda n: connected_dominating_sets(n, "honeycomb"),
     }
+    before = NEW_TERMS[aid]["upstream_last_n"]
     for n, term in sorted(bfile_terms_by_n(aid).items()):
+        if n > before:
+            continue
         assert engines[aid](n) == term, f"{aid}: a({n}) disagrees with the b-file"
 
 

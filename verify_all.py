@@ -211,21 +211,44 @@ def main():
         check(f"L4 honeycomb cds <= dominating n={n}", hive_cds[n] <= hive_dom[n])
 
     # L5: the terms claimed as new. Each is re-derived from cold here, and each
-    # is required to lie strictly beyond what the probe measured upstream --
+    # is measured against the probed b-file rather than against a memory --
     # claiming a term someone else already published is the failure this repo
     # has already made once, and it is now a gate rather than a memory.
+    #
+    # A term has two lives, so the question the gate asks has to change when the
+    # term does. Before submission, "is this new" means the b-file must stop
+    # short of it. After approval the term IS the b-file, and asking whether
+    # upstream still stops short would assert something that approval made
+    # false: the check would have to be broken to keep passing. So an approved
+    # record is checked the other way round -- upstream must now reach at least
+    # as far as the approval, and must serve every claimed term with exactly the
+    # value claimed here. `upstream_last_n` stays in the record as the archival
+    # pre-submission reach, which is what made each term a contribution.
     claimed = json.loads(NEW_TERMS.read_text(encoding="utf-8"))
     computed = {"A290783": hive_cis, "A381795": hive_cds}
     for aid, record in sorted(claimed.items()):
         published_to = bfile_terms_by_n(aid)
-        check(
-            f"L5 {aid} upstream reach still n={record['upstream_last_n']}",
-            max(published_to) == record["upstream_last_n"],
-        )
+        approved_through = record.get("approved_through")
+        if approved_through is not None:
+            check(
+                f"L5 {aid} upstream now reaches the approved a({approved_through})",
+                max(published_to) >= approved_through,
+            )
+        else:
+            check(
+                f"L5 {aid} upstream reach still n={record['upstream_last_n']}",
+                max(published_to) == record["upstream_last_n"],
+            )
         for n_text, term in sorted(record["terms"].items(), key=lambda kv: int(kv[0])):
             n = int(n_text)
             check(f"L5 {aid} a({n}) re-derives", computed[aid][n] == term)
-            check(f"L5 {aid} a({n}) is genuinely new", n > record["upstream_last_n"])
+            if approved_through is not None:
+                check(
+                    f"L5 {aid} upstream serves a({n}) as claimed",
+                    published_to.get(n) == term,
+                )
+            else:
+                check(f"L5 {aid} a({n}) is genuinely new", n > record["upstream_last_n"])
 
     # the test suite is part of the gate
     rc = subprocess.call([sys.executable, "-m", "pytest", "-q"])
