@@ -47,9 +47,18 @@ def rook_coords(rows, colour, cols=None):
     }
 
 
-def verify_isomorphism(rows, colour, cols=None):
-    """Check the theorem exhaustively for this board. Raises on violation."""
-    coords = rook_coords(rows, colour, cols=cols)
+def verify_isomorphism(rows, colour, cols=None, coords=None):
+    """Check the theorem exhaustively for this board. Raises on violation.
+
+    `coords` lets a caller substitute a hand-corrupted mapping for the one
+    this function would otherwise compute itself. No real caller passes it:
+    it exists so verify_all.py's L0 tamper check can prove this exhaustive
+    comparison actually rejects a wrong reduction, rather than only ever
+    being run against a mapping already known to be right -- nothing else in
+    the gate re-derives this theorem a second, independent way.
+    """
+    if coords is None:
+        coords = rook_coords(rows, colour, cols=cols)
     shape = f"{rows}X{cols if cols is not None else rows}"
     if len(set(coords.values())) != len(coords):
         raise AssertionError(f"phi not injective for {shape} colour={colour}")
