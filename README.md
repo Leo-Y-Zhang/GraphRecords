@@ -51,11 +51,15 @@ Offsets are not uniform across this family: A290719 starts at n=1 but A290769
 starts at n=2, because a 1 X 1 board has no white cells. Anything comparing
 output to published data indexes by n, never by list position.
 
-As of 2026-08-27 the gate is **292 checks + 609 tests, exit 0**, and takes about
+As of 2026-09-13 the gate is **293 checks + 609 tests, exit 0**, and takes about
 seven minutes: most of that is re-deriving the claimed terms from cold, which is
 the point of it. Two of the 609 skip: a claimed term is held either to lying
 strictly beyond the published b-file or, once OEIS has approved it, to being
 served upstream exactly as claimed, and no term is ever in both states at once.
+One of the 293 checks is a tamper check: it corrupts a rook-coordinate mapping
+in memory and confirms `verify_isomorphism` still rejects it, so a gutted
+reduction check fails inside the gate's first second rather than nowhere at
+all.
 
 `.github/workflows/ci.yml` runs exactly this on every push, plus `ruff check .`
 on a pinned `ruff==0.16.1` and a gitleaks scan of the whole history.

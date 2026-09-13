@@ -31,7 +31,7 @@ from graphrecords.cds_peeling import peeling_connected_dominating
 from graphrecords.connected import frontier_connected, peeling_connected
 from graphrecords.connected_domination import connected_dominating_sets
 from graphrecords.domination import dominating_sets, total_dominating_sets
-from graphrecords.reduction import HONEYCOMB, class_grid, verify_isomorphism
+from graphrecords.reduction import HONEYCOMB, class_grid, rook_coords, verify_isomorphism
 from graphrecords.targets import bfile_terms_by_n, terms_by_n
 
 # total domination is far more expensive than plain domination and cannot reach
@@ -74,6 +74,41 @@ def main():
                 check(f"L0 isomorphism n={n} {colour}", True)
             except AssertionError as exc:
                 check(f"L0 isomorphism n={n} {colour}: {exc}", False)
+
+    # L0 self-test: a corrupted certificate must be rejected. Mutation testing
+    # (audit/mutants/SAT_checkers.md, GraphRecords M2) found that dropping
+    # verify_isomorphism's adjacency-equivalence check -- keeping only
+    # injectivity -- survives the entire gate, pytest suite included: nothing
+    # else re-derives the bishop-to-rook reduction a second, independent way,
+    # so a broken reduction check goes unnoticed as long as the real board
+    # data stays right, which it does. Corrupt one committed rook-coordinate
+    # certificate in memory -- never on disk -- and confirm verify_isomorphism
+    # still catches it. This runs inside the first second of the gate, so a
+    # gutted checker fails long before the seven-minute run would finish.
+    #
+    # The corruption has to defeat the adjacency check specifically, not just
+    # injectivity (which a truncated checker still keeps): swapping two cells'
+    # images is still injective -- it permutes the same set of values -- but
+    # generally breaks which pairs share an x- or y-class, which is exactly
+    # what only the adjacency-equivalence half of the theorem notices.
+    tamper_n, tamper_colour = 4, "black"
+    tamper_coords = rook_coords(tamper_n, tamper_colour)
+    cell_a, cell_b = sorted(tamper_coords)[:2]
+    tampered_coords = dict(tamper_coords)
+    tampered_coords[cell_a], tampered_coords[cell_b] = (
+        tamper_coords[cell_b],
+        tamper_coords[cell_a],
+    )
+    try:
+        verify_isomorphism(tamper_n, tamper_colour, coords=tampered_coords)
+        rejected = False
+    except AssertionError:
+        rejected = True
+    check(
+        f"L0 corrupted certificate is rejected (rook-coord tampered, "
+        f"n={tamper_n} {tamper_colour})",
+        rejected,
+    )
 
     # L1: fast vs exhaustive
     for n in range(1, 7):
