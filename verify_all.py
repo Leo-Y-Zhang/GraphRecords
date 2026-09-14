@@ -3,7 +3,7 @@
 Exits 0 only if every verification level passes. Believe this over any prose,
 here or anywhere else.
 
-  L0  the reduction theorem, checked exhaustively
+  L0  the reduction theorem, checked exhaustively, then again independently
   L1  fast counter against exhaustive enumeration
   L2  fast counter against every published OEIS term, indexed by true n
   L3  two independent fast algorithms against each other
@@ -31,6 +31,12 @@ from graphrecords.cds_peeling import peeling_connected_dominating
 from graphrecords.connected import frontier_connected, peeling_connected
 from graphrecords.connected_domination import connected_dominating_sets
 from graphrecords.domination import dominating_sets, total_dominating_sets
+from graphrecords.independent_check import (
+    check_bishop_certificate,
+    check_honeycomb_certificate,
+    moved_certificate,
+    swapped_certificate,
+)
 from graphrecords.reduction import HONEYCOMB, class_grid, rook_coords, verify_isomorphism
 from graphrecords.targets import bfile_terms_by_n, terms_by_n
 
@@ -109,6 +115,70 @@ def main():
         f"n={tamper_n} {tamper_colour})",
         rejected,
     )
+
+    # L0, a second time, through code that shares nothing with
+    # verify_isomorphism: the same certificates -- rook_coords for every board
+    # the L0 loop and the tests cover, and the honeycomb identification -- are
+    # held to being a bijection onto the occupied class grid with adjacency
+    # preserved pair by pair, with both graphs rebuilt from their definitions.
+    # verify_isomorphism was the only check of the reduction anywhere in the
+    # gate (M2 above); a wrong certificate now fails here whatever state that
+    # function is in. The whole sweep costs well under a second.
+    for n in range(1, 13):
+        for colour in ("black", "white"):
+            try:
+                check_bishop_certificate(n, colour)
+                check(f"L0 independent isomorphism n={n} {colour}", True)
+            except AssertionError as exc:
+                check(f"L0 independent isomorphism n={n} {colour}: {exc}", False)
+    for rows in range(1, 7):
+        for cols in range(1, 7):
+            if rows == cols:
+                continue
+            for colour in ("black", "white"):
+                try:
+                    check_bishop_certificate(rows, colour, cols=cols)
+                    check(f"L0 independent isomorphism {rows}X{cols} {colour}", True)
+                except AssertionError as exc:
+                    check(f"L0 independent isomorphism {rows}X{cols} {colour}: {exc}", False)
+    for n in range(1, 13):
+        try:
+            check_honeycomb_certificate(n)
+            check(f"L0 independent honeycomb staircase n={n}", True)
+        except AssertionError as exc:
+            check(f"L0 independent honeycomb staircase n={n}: {exc}", False)
+
+    # ...and the independent check has to be able to fail, half by half: one
+    # entry moved to a row and column nothing else uses is still injective and
+    # is caught only by the onto-the-target half; two entries swapped is still
+    # a bijection onto the same image and is caught only by the adjacency
+    # half. On each, the two checkers must agree -- verify_isomorphism has no
+    # target and sees both only through adjacency, so this is where a
+    # verify_isomorphism reduced to injectivity alone shows up.
+    for label, bad in (
+        ("one entry moved", moved_certificate(tamper_coords)),
+        ("two entries swapped", swapped_certificate(tamper_coords)),
+    ):
+        try:
+            check_bishop_certificate(tamper_n, tamper_colour, coords=bad)
+            rejected = False
+        except AssertionError:
+            rejected = True
+        check(
+            f"L0 independent check rejects a tampered certificate "
+            f"({label}, n={tamper_n} {tamper_colour})",
+            rejected,
+        )
+        try:
+            verify_isomorphism(tamper_n, tamper_colour, coords=bad)
+            agrees = False
+        except AssertionError:
+            agrees = True
+        check(
+            f"L0 verify_isomorphism agrees with the independent check "
+            f"({label}, n={tamper_n} {tamper_colour})",
+            agrees,
+        )
 
     # L1: fast vs exhaustive
     for n in range(1, 7):

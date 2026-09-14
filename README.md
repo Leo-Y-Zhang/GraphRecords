@@ -51,15 +51,25 @@ Offsets are not uniform across this family: A290719 starts at n=1 but A290769
 starts at n=2, because a 1 X 1 board has no white cells. Anything comparing
 output to published data indexes by n, never by list position.
 
-As of 2026-09-13 the gate is **293 checks + 609 tests, exit 0**, and takes about
+As of 2026-09-14 the gate is **393 checks + 725 tests, exit 0**, and takes about
 seven minutes: most of that is re-deriving the claimed terms from cold, which is
-the point of it. Two of the 609 skip: a claimed term is held either to lying
+the point of it. Two of the 725 skip: a claimed term is held either to lying
 strictly beyond the published b-file or, once OEIS has approved it, to being
 served upstream exactly as claimed, and no term is ever in both states at once.
-One of the 293 checks is a tamper check: it corrupts a rook-coordinate mapping
+One of the 393 checks is a tamper check: it corrupts a rook-coordinate mapping
 in memory and confirms `verify_isomorphism` still rejects it, so a gutted
 reduction check fails inside the gate's first second rather than nowhere at
-all.
+all. A further hundred re-check the reduction a second time through
+`graphrecords/independent_check.py`, which shares no code with
+`verify_isomorphism`: every certificate the gate and the tests rely on -- the
+square boards to n=12, the rectangular boards to 6 X 6, the honeycomb staircase
+to n=12 -- is rebuilt from the board definitions and held to being a bijection
+onto the occupied class grid that preserves adjacency pair by pair, and both
+checkers are held to rejecting the same tampered certificates. A
+re-derivation checks certificates, not checkers: on its own it cannot see a
+broken `verify_isomorphism` whose certificate is right, which is what the
+agreement checks are for; what it removes is `verify_isomorphism` as the single
+point of failure for the reduction.
 
 `.github/workflows/ci.yml` runs exactly this on every push, plus `ruff check .`
 on a pinned `ruff==0.16.1` and a gitleaks scan of the whole history.
@@ -70,6 +80,8 @@ on a pinned `ruff==0.16.1` and a gitleaks scan of the whole history.
   square, rectangular and triangular-honeycomb
 - `graphrecords/reduction.py` - the bishop-to-rook map, with its proof and
   self-check, and the honeycomb staircase
+- `graphrecords/independent_check.py` - the same reduction re-checked from the
+  board definitions, sharing no code with that self-check
 - `graphrecords/brute.py` - exhaustive reference counters (verification level L0)
 - `graphrecords/connected.py` - two independent fast counters: exact-support peeling,
   and the frontier partition DP used in production
