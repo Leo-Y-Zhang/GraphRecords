@@ -51,12 +51,12 @@ Offsets are not uniform across this family: A290719 starts at n=1 but A290769
 starts at n=2, because a 1 X 1 board has no white cells. Anything comparing
 output to published data indexes by n, never by list position.
 
-As of 2026-09-14 the gate is **393 checks + 725 tests, exit 0**, and takes about
+As of 2026-09-14 the gate is **394 checks + 726 tests, exit 0**, and takes about
 seven minutes: most of that is re-deriving the claimed terms from cold, which is
-the point of it. Two of the 725 skip: a claimed term is held either to lying
+the point of it. Two of the 726 skip: a claimed term is held either to lying
 strictly beyond the published b-file or, once OEIS has approved it, to being
 served upstream exactly as claimed, and no term is ever in both states at once.
-One of the 393 checks is a tamper check: it corrupts a rook-coordinate mapping
+One of the 394 checks is a tamper check: it corrupts a rook-coordinate mapping
 in memory and confirms `verify_isomorphism` still rejects it, so a gutted
 reduction check fails inside the gate's first second rather than nowhere at
 all. A further hundred re-check the reduction a second time through
@@ -69,7 +69,11 @@ checkers are held to rejecting the same tampered certificates. A
 re-derivation checks certificates, not checkers: on its own it cannot see a
 broken `verify_isomorphism` whose certificate is right, which is what the
 agreement checks are for; what it removes is `verify_isomorphism` as the single
-point of failure for the reduction.
+point of failure for the reduction. One more check, right after L2's
+published-term loop for the bishop board, feeds that same comparison a
+deliberately wrong term and confirms it is rejected, so that check too fails
+in the first second if it is ever gutted rather than passing silently for as
+long as the real data underneath it stays right.
 
 `.github/workflows/ci.yml` runs exactly this on every push, plus `ruff check .`
 on a pinned `ruff==0.16.1` and a gitleaks scan of the whole history.

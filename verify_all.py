@@ -71,6 +71,17 @@ def check(name, ok):
     sys.stdout.flush()
 
 
+def l2_term_matches(n, colour, term):
+    """Whether the frontier count for (n, colour) equals `term`.
+
+    Factored out of the L2 loop below so the self-test right after it can
+    hand this the same comparison a deliberately wrong term, through the
+    same code real callers use, rather than duplicating the `==` in a
+    second place a mutation of the first would never touch.
+    """
+    return frontier_connected(n, colour) == term
+
+
 def main():
     # L0: the reduction itself
     for n in range(1, 13):
@@ -191,7 +202,24 @@ def main():
     # L2: published terms, indexed by true n (offsets are not uniform)
     for aid, colour in (("A290719", "black"), ("A290769", "white")):
         for n, term in sorted(terms_by_n(aid).items()):
-            check(f"L2 {aid} a({n})", frontier_connected(n, colour) == term)
+            check(f"L2 {aid} a({n})", l2_term_matches(n, colour, term))
+
+    # L2 self-test (audit/mutants/SAT_checkers.md, GraphRecords M6): forcing
+    # the loop above's check to True regardless of the comparison survives
+    # the entire gate, pytest suite included -- L3's frontier == peeling
+    # cross-check compares the two fast counters to EACH OTHER, never back
+    # to the published term this bypasses, so nothing downstream re-examines
+    # that specific comparison. Feed a deliberately wrong term through the
+    # same l2_term_matches the loop above uses and confirm it is rejected,
+    # so a gutted comparison fails inside the first second of the gate.
+    l2_tamper_aid, l2_tamper_colour, l2_tamper_n = "A290719", "black", 4
+    l2_real_term = terms_by_n(l2_tamper_aid)[l2_tamper_n]
+    l2_wrong_term = l2_real_term + 1
+    check(
+        f"L2 self-test: {l2_tamper_aid} a({l2_tamper_n}) rejects a deliberately "
+        f"wrong published term ({l2_wrong_term} != {l2_real_term})",
+        not l2_term_matches(l2_tamper_n, l2_tamper_colour, l2_wrong_term),
+    )
 
     # L3: two independent fast algorithms
     for n in range(1, 9):

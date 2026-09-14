@@ -48,3 +48,15 @@ def test_contiguity_holds_in_both_directions(n):
     for j in range(ny):
         used = [i for i in range(nx) if grid[i][j]]
         assert used == list(range(used[0], used[-1] + 1))
+
+
+def test_l2_term_matches_rejects_a_deliberately_wrong_term():
+    """Mirrors verify_all.py's L2 self-test (audit/mutants/SAT_checkers.md,
+    GraphRecords M6): the comparison the gate's published-term loop runs
+    must actually discriminate a wrong term from the real one, not just
+    happen to agree because the real term is right."""
+    from verify_all import l2_term_matches
+
+    real_term = BLACK[4]
+    assert l2_term_matches(4, "black", real_term)
+    assert not l2_term_matches(4, "black", real_term + 1)
