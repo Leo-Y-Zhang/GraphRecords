@@ -51,11 +51,17 @@ Offsets are not uniform across this family: A290719 starts at n=1 but A290769
 starts at n=2, because a 1 X 1 board has no white cells. Anything comparing
 output to published data indexes by n, never by list position.
 
-As of 2026-09-14 the gate is **394 checks + 726 tests, exit 0**, and takes about
+As of 2026-09-26 the gate is **394 checks + 730 tests, exit 0**, and takes about
 seven minutes: most of that is re-deriving the claimed terms from cold, which is
-the point of it. Two of the 726 skip: a claimed term is held either to lying
+the point of it. Two of the 730 skip: a claimed term is held either to lying
 strictly beyond the published b-file or, once OEIS has approved it, to being
 served upstream exactly as claimed, and no term is ever in both states at once.
+The ten Phase 1 terms are too expensive to re-derive here (a(11) alone is most
+of an hour), so the staged b-files are instead held to the problem's own
+identities at every n they carry: black plus white equals the full board, and
+the two colours agree on even boards. The upstream comparison cannot catch a
+term that was already wrong when it was sent, because upstream is a copy of
+what was sent; the identities can.
 One of the 394 checks is a tamper check: it corrupts a rook-coordinate mapping
 in memory and confirms `verify_isomorphism` still rejects it, so a gutted
 reduction check fails inside the gate's first second rather than nowhere at
