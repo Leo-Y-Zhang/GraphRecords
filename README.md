@@ -61,7 +61,9 @@ of an hour), so the staged b-files are instead held to the problem's own
 identities at every n they carry: black plus white equals the full board, and
 the two colours agree on even boards. The upstream comparison cannot catch a
 term that was already wrong when it was sent, because upstream is a copy of
-what was sent; the identities can.
+what was sent; the identities can. Two of the ten have no identity to meet:
+a(9) of A289145 and of A289169 sit on an odd board, where the colours differ
+and no sum applies, so for those the upstream comparison is the only check.
 One of the 394 checks is a tamper check: it corrupts a rook-coordinate mapping
 in memory and confirms `verify_isomorphism` still rejects it, so a gutted
 reduction check fails inside the gate's first second rather than nowhere at
