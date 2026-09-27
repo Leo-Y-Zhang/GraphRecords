@@ -40,14 +40,27 @@ def _aid(path):
     return "A" + path.stem[1:]
 
 
+# One row of a b-file: the index, one space, the term, in plain base-10 with no
+# sign other than a leading minus and no leading zero. Parsing the row with
+# split() and int() alone is far looser than that: int() accepts "+5", "05",
+# " 5" and digit separators ("2_065_546_517_563"), and split() accepts tabs and
+# runs of spaces, so a row OEIS would reject read back here as the right number.
+_BFILE_ROW = re.compile(r"(-?(?:0|[1-9][0-9]*)) (-?(?:0|[1-9][0-9]*))")
+
+
 def _staged_values(path):
-    """The staged b-file as {index: term}."""
+    """The staged b-file as {index: term}. Raises on a row that is not spec-clean."""
     values = {}
     for row in path.read_text(encoding="ascii").splitlines():
         if not row.strip():
             continue
-        idx, val = row.split()
-        values[int(idx)] = int(val)
+        m = _BFILE_ROW.fullmatch(row)
+        if m is None:
+            raise ValueError(f"{path.name}: row {row!r} is not '<n> <a(n)>' in plain base 10")
+        idx, val = int(m.group(1)), int(m.group(2))
+        if idx in values:
+            raise ValueError(f"{path.name}: index {idx} appears twice")
+        values[idx] = val
     return values
 
 
@@ -76,6 +89,68 @@ def test_bfile_indices_and_published_terms(path):
     for n, term in terms_by_n(aid).items():
         assert values[n] == term, (
             f"{path.name} altered published term a({n}): {values[n]} != {term}"
+        )
+
+
+def _staged(aid):
+    path = STAGE / f"b{aid[1:]}.txt"
+    return _staged_values(path) if path.is_file() else None
+
+
+def test_bfile_row_parser_is_strict(tmp_path):
+    """Every row form int() and split() would forgive has to be refused."""
+    for row in ("9 2_065_546_517_563", "9 +2065546517563", "09 2065546517563",
+                "9 02065546517563", "9  2065546517563", "9\t2065546517563",
+                " 9 2065546517563", "9 2065546517563 "):
+        bad = tmp_path / "b000000.txt"
+        bad.write_text(f"8 3852814320\n{row}\n", encoding="ascii")
+        with pytest.raises(ValueError):
+            _staged_values(bad)
+    dup = tmp_path / "b000001.txt"
+    dup.write_text("1 1\n1 1\n", encoding="ascii")
+    with pytest.raises(ValueError):
+        _staged_values(dup)
+
+
+# L4 on the staged terms themselves. The gate's identities run over the
+# published snapshot in data/targets.json, which stops where the published
+# data stopped, so they never touch the ten terms this repository added. Every
+# other check on those terms compares a staged file with the probed upstream
+# b-file, and upstream is a copy of what was sent: a wrong term that was staged
+# and submitted agrees with itself. These identities are facts about the
+# problem, not the code, and cost nothing, so they are held on every staged n.
+
+
+@pytest.mark.skipif(not STAGED, reason="nothing staged yet")
+def test_staged_full_board_is_black_plus_white():
+    """Connected induced subgraphs of a disconnected graph add over its two
+    components: A291595(n) = A290719(n) + A290769(n), with A290769(1) = 0."""
+    full, black, white = _staged("A291595"), _staged("A290719"), _staged("A290769")
+    if full is None or black is None or white is None:
+        pytest.skip("the three connected-induced b-files are not all staged")
+    assert set(full) == set(black), "A291595 and A290719 stage different n"
+    for n in sorted(full):
+        assert full[n] == black[n] + white.get(n, 0), (
+            f"staged a({n}): A291595 {full[n]} != A290719 {black[n]} "
+            f"+ A290769 {white.get(n, 0)}"
+        )
+
+
+@pytest.mark.skipif(not STAGED, reason="nothing staged yet")
+@pytest.mark.parametrize("black_aid, white_aid", [("A290719", "A290769"),
+                                                  ("A289145", "A289169")])
+def test_staged_colours_agree_on_even_boards(black_aid, white_aid):
+    """On an even board a reflection swaps the colours, so the black and white
+    bishop graphs are isomorphic and every count agrees."""
+    black, white = _staged(black_aid), _staged(white_aid)
+    if black is None or white is None:
+        pytest.skip(f"{black_aid}/{white_aid} not both staged")
+    shared = sorted(n for n in set(black) & set(white) if n % 2 == 0)
+    assert shared, f"{black_aid}/{white_aid}: no even n staged in both"
+    for n in shared:
+        assert black[n] == white[n], (
+            f"staged a({n}) on an even board: {black_aid} {black[n]} != "
+            f"{white_aid} {white[n]}"
         )
 
 
