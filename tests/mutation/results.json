@@ -1,0 +1,640 @@
+{
+  "M01": {
+    "module": "graphrecords/independent_check.py",
+    "function": "check_certificate",
+    "original": "if set(mapping) != set(source):",
+    "replacement": "if False:",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 108 passed in 0.11s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_a_missing_vertex_is_rejected - K..."
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 108 passed in 0.12s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_a_missing_vertex_is_rejected - K..."
+      ]
+    }
+  },
+  "M02": {
+    "module": "graphrecords/independent_check.py",
+    "function": "check_certificate",
+    "original": "set(mapping) != set(source)",
+    "replacement": "not set(source) <= set(mapping)",
+    "before": {
+      "killed": false,
+      "summary": "116 passed in 0.08s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 122 passed in 0.12s",
+      "failures": [
+        "FAILED tests/test_certificate_boundaries.py::test_independent_check_rejects_incomplete_or_extra_certificates[extra-bishop]"
+      ]
+    }
+  },
+  "M03": {
+    "module": "graphrecords/independent_check.py",
+    "function": "check_certificate",
+    "original": "if len(set(images)) != len(images):",
+    "replacement": "if False:",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 109 passed in 0.10s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_a_collision_is_rejected_as_non_injective"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 109 passed in 0.22s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_a_collision_is_rejected_as_non_injective"
+      ]
+    }
+  },
+  "M04": {
+    "module": "graphrecords/independent_check.py",
+    "function": "check_certificate",
+    "original": "if set(images) != set(target):",
+    "replacement": "if False:",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 110 passed in 0.12s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_one_moved_entry_is_rejected_by_the_onto_half"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 110 passed in 0.30s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_one_moved_entry_is_rejected_by_the_onto_half"
+      ]
+    }
+  },
+  "M05": {
+    "module": "graphrecords/independent_check.py",
+    "function": "check_certificate",
+    "original": "if adjacent(a, b) != share_a_line(mapping[a], mapping[b]):",
+    "replacement": "if False:",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 111 passed in 0.10s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_two_swapped_entries_are_rejected_by_the_adjacency_half"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 111 passed in 0.32s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_two_swapped_entries_are_rejected_by_the_adjacency_half"
+      ]
+    }
+  },
+  "M06": {
+    "module": "graphrecords/independent_check.py",
+    "function": "check_bishop_certificate",
+    "original": "if coords is None:",
+    "replacement": "if not coords:",
+    "before": {
+      "killed": false,
+      "summary": "116 passed in 0.07s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 118 passed in 0.20s",
+      "failures": [
+        "FAILED tests/test_certificate_boundaries.py::test_independent_check_rejects_incomplete_or_extra_certificates[empty-bishop]"
+      ]
+    }
+  },
+  "M07": {
+    "module": "graphrecords/independent_check.py",
+    "function": "check_honeycomb_certificate",
+    "original": "if coords is None:",
+    "replacement": "if not coords:",
+    "before": {
+      "killed": false,
+      "summary": "116 passed in 0.08s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 119 passed in 0.25s",
+      "failures": [
+        "FAILED tests/test_certificate_boundaries.py::test_independent_check_rejects_incomplete_or_extra_certificates[empty-honeycomb]"
+      ]
+    }
+  },
+  "M08": {
+    "module": "graphrecords/reduction.py",
+    "function": "verify_isomorphism",
+    "original": "if len(set(coords.values())) != len(coords):",
+    "replacement": "if False:",
+    "before": {
+      "killed": false,
+      "summary": "168 passed in 0.11s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 168 passed in 0.26s",
+      "failures": [
+        "FAILED tests/test_certificate_boundaries.py::test_smallest_edge_certificate_and_colliding_images[black]"
+      ]
+    }
+  },
+  "M09": {
+    "module": "graphrecords/reduction.py",
+    "function": "verify_isomorphism",
+    "original": "if bishop_adjacent(a, b) != rook:",
+    "replacement": "if False:",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 166 passed in 0.13s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_verify_isomorphism_rejects_what_the_independent_check_rejects[moved_certificate]"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 166 passed in 0.23s",
+      "failures": [
+        "FAILED tests/test_independent_check.py::test_verify_isomorphism_rejects_what_the_independent_check_rejects[moved_certificate]"
+      ]
+    }
+  },
+  "M10": {
+    "module": "graphrecords/reduction.py",
+    "function": "verify_isomorphism",
+    "original": "== coords[b][0] or",
+    "replacement": "== coords[b][0] and",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 1 passed in 0.10s",
+      "failures": [
+        "FAILED tests/test_reduction.py::test_bishop_graph_is_a_rook_graph[black-2] - ..."
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 1 passed in 0.09s",
+      "failures": [
+        "FAILED tests/test_reduction.py::test_bishop_graph_is_a_rook_graph[black-2] - ..."
+      ]
+    }
+  },
+  "M11": {
+    "module": "graphrecords/brute.py",
+    "function": "minimal_dominating_count",
+    "original": "if not dominates(mask):",
+    "replacement": "if False:",
+    "before": {
+      "killed": false,
+      "summary": "2 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_reference_counters_on_hand_counted_graphs[singleton]"
+      ]
+    }
+  },
+  "M12": {
+    "module": "graphrecords/brute.py",
+    "function": "minimal_dominating_count",
+    "original": "minimal = False",
+    "replacement": "minimal = True",
+    "before": {
+      "killed": false,
+      "summary": "2 passed in 0.01s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 6 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_reference_counters_on_hand_counted_graphs[edge]"
+      ]
+    }
+  },
+  "M13": {
+    "module": "graphrecords/brute.py",
+    "function": "minimal_dominating_count",
+    "original": "if dominates(mask ^ bit):",
+    "replacement": "if not dominates(mask ^ bit):",
+    "before": {
+      "killed": false,
+      "summary": "2 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_reference_counters_on_hand_counted_graphs[singleton]"
+      ]
+    }
+  },
+  "M14": {
+    "module": "graphrecords/brute.py",
+    "function": "minimal_dominating_count",
+    "original": "dominates(mask ^ bit)",
+    "replacement": "dominates(mask | bit)",
+    "before": {
+      "killed": false,
+      "summary": "2 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_reference_counters_on_hand_counted_graphs[singleton]"
+      ]
+    }
+  },
+  "M15": {
+    "module": "graphrecords/torus.py",
+    "function": "_cover",
+    "original": "covered |=",
+    "replacement": "covered &=",
+    "before": {
+      "killed": true,
+      "summary": "1 failed in 0.04s",
+      "failures": [
+        "FAILED tests/test_torus_profile.py::test_profile_agrees_with_brute_force[3]"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed in 0.05s",
+      "failures": [
+        "FAILED tests/test_torus_profile.py::test_profile_agrees_with_brute_force[3]"
+      ]
+    }
+  },
+  "M16": {
+    "module": "graphrecords/torus.py",
+    "function": "_connected",
+    "original": "return False",
+    "replacement": "return True",
+    "before": {
+      "killed": false,
+      "summary": "1 passed in 0.01s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 8 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_torus_connectivity_stays_inside_the_selected_vertices[0-False]"
+      ]
+    }
+  },
+  "M17": {
+    "module": "graphrecords/torus.py",
+    "function": "_connected",
+    "original": "return seen == mask",
+    "replacement": "return seen != mask",
+    "before": {
+      "killed": false,
+      "summary": "1 passed in 0.01s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 9 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_torus_connectivity_stays_inside_the_selected_vertices[1-True]"
+      ]
+    }
+  },
+  "M18": {
+    "module": "graphrecords/torus.py",
+    "function": "_connected",
+    "original": "reached & mask & ~seen",
+    "replacement": "reached & ~seen",
+    "before": {
+      "killed": false,
+      "summary": "1 passed in 0.01s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 9 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_torus_connectivity_stays_inside_the_selected_vertices[1-True]"
+      ]
+    }
+  },
+  "M19": {
+    "module": "graphrecords/torus.py",
+    "function": "brute_connected_dominating",
+    "original": "== full and _connected",
+    "replacement": "== full or _connected",
+    "before": {
+      "killed": false,
+      "summary": "1 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 15 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_torus_counters_against_set_based_enumeration[brute_connected_dominating-325]"
+      ]
+    }
+  },
+  "M20": {
+    "module": "graphrecords/torus.py",
+    "function": "brute_minimal_dominating",
+    "original": "minimal = False",
+    "replacement": "minimal = True",
+    "before": {
+      "killed": false,
+      "summary": "1 passed in 0.01s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 16 passed in 0.08s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_torus_counters_against_set_based_enumeration[brute_minimal_dominating-48]"
+      ]
+    }
+  },
+  "M21": {
+    "module": "tools/probe_upstream_bfiles.py",
+    "function": "probe",
+    "original": "return None, None, None",
+    "replacement": "return 0, None, {}",
+    "before": {
+      "killed": false,
+      "summary": "4 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 10 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_upstream_probe.py::test_failed_fetch_is_unknown_even_for_404[timeout]"
+      ]
+    }
+  },
+  "M22": {
+    "module": "tools/probe_upstream_bfiles.py",
+    "function": "probe",
+    "original": "if \"<html\" in body[:200].lower():",
+    "replacement": "if False:",
+    "before": {
+      "killed": false,
+      "summary": "4 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 7 passed in 0.05s",
+      "failures": [
+        "FAILED tests/test_upstream_probe.py::test_empty_or_html_response_is_unknown[<HTML>rate limited</HTML>]"
+      ]
+    }
+  },
+  "M23": {
+    "module": "tools/probe_upstream_bfiles.py",
+    "function": "probe",
+    "original": "print(f\"  {aid}: unreadable b-file row {ln!r} - UNKNOWN\")\n            return None, None, None",
+    "replacement": "continue",
+    "before": {
+      "killed": false,
+      "summary": "4 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 8 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_upstream_probe.py::test_truncated_row_invalidates_the_entire_response[2 5\\n3]"
+      ]
+    }
+  },
+  "M24": {
+    "module": "tools/probe_upstream_bfiles.py",
+    "function": "probe",
+    "original": "print(f\"  {aid}: b-file fetched but contained no index rows - UNKNOWN\")\n        return None, None, None",
+    "replacement": "return 0, None, {}",
+    "before": {
+      "killed": false,
+      "summary": "4 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 5 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_upstream_probe.py::test_empty_or_html_response_is_unknown[]"
+      ]
+    }
+  },
+  "M25": {
+    "module": "tools/probe_upstream_bfiles.py",
+    "function": "probe",
+    "original": "max(values)",
+    "replacement": "min(values)",
+    "before": {
+      "killed": false,
+      "summary": "4 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_upstream_probe.py::test_probe_preserves_indices_values_and_row_count"
+      ]
+    }
+  },
+  "M26": {
+    "module": "tools/probe_upstream_bfiles.py",
+    "function": "probe",
+    "original": "rows += 1",
+    "replacement": "rows += 0",
+    "before": {
+      "killed": false,
+      "summary": "4 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_upstream_probe.py::test_probe_preserves_indices_values_and_row_count"
+      ]
+    }
+  },
+  "M27": {
+    "module": "graphrecords/targets.py",
+    "function": "bfile_terms_by_n",
+    "original": "int(n): int(v)",
+    "replacement": "n: int(v)",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 9 passed in 0.08s",
+      "failures": [
+        "FAILED tests/test_honeycomb.py::test_approved_terms_are_served_upstream_exactly_as_claimed[A290783]"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 9 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_honeycomb.py::test_approved_terms_are_served_upstream_exactly_as_claimed[A290783]"
+      ]
+    }
+  },
+  "M28": {
+    "module": "graphrecords/targets.py",
+    "function": "bfile_terms_by_n",
+    "original": "int(n): int(v)",
+    "replacement": "int(n): v",
+    "before": {
+      "killed": false,
+      "summary": "11 passed in 0.04s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 14 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_target_indexing.py::test_bfile_indices_and_values_are_integers"
+      ]
+    }
+  },
+  "M29": {
+    "module": "graphrecords/targets.py",
+    "function": "terms_by_n",
+    "original": "start + i",
+    "replacement": "start - i",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_staged_bfiles.py::test_bfile_indices_and_published_terms[b289145.txt]"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_staged_bfiles.py::test_bfile_indices_and_published_terms[b289145.txt]"
+      ]
+    }
+  },
+  "M30": {
+    "module": "graphrecords/targets.py",
+    "function": "offset_start",
+    "original": ".split(\",\")[0]",
+    "replacement": ".split(\",\")[-1]",
+    "before": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_staged_bfiles.py::test_bfile_indices_and_published_terms[b289145.txt]"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 4 passed in 0.07s",
+      "failures": [
+        "FAILED tests/test_staged_bfiles.py::test_bfile_indices_and_published_terms[b289145.txt]"
+      ]
+    }
+  },
+  "M31": {
+    "module": "graphrecords/connected.py",
+    "function": "_canonical",
+    "original": "remap = {0: 0}",
+    "replacement": "remap = {0: 1}",
+    "before": {
+      "killed": true,
+      "summary": "1 failed in 0.05s",
+      "failures": [
+        "FAILED tests/test_connected_frontier.py::test_agrees_with_the_peeling_counter[black-3]"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed in 0.05s",
+      "failures": [
+        "FAILED tests/test_connected_frontier.py::test_agrees_with_the_peeling_counter[black-3]"
+      ]
+    }
+  },
+  "M32": {
+    "module": "graphrecords/connected.py",
+    "function": "_frontier_run",
+    "original": "(stranded and active)",
+    "replacement": "(stranded or active)",
+    "before": {
+      "killed": true,
+      "summary": "1 failed in 0.05s",
+      "failures": [
+        "FAILED tests/test_connected_frontier.py::test_agrees_with_the_peeling_counter[black-3]"
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed in 0.05s",
+      "failures": [
+        "FAILED tests/test_connected_frontier.py::test_agrees_with_the_peeling_counter[black-3]"
+      ]
+    }
+  },
+  "M33": {
+    "module": "graphrecords/domination.py",
+    "function": "_dominating_run",
+    "original": "if (r & done) & ~(h & done):",
+    "replacement": "if False:",
+    "before": {
+      "killed": true,
+      "summary": "1 failed in 0.06s",
+      "failures": [
+        "FAILED tests/test_domination.py::test_agrees_with_brute_force[black-3] - Asse..."
+      ]
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed in 0.06s",
+      "failures": [
+        "FAILED tests/test_domination.py::test_agrees_with_brute_force[black-3] - Asse..."
+      ]
+    }
+  },
+  "M34": {
+    "module": "graphrecords/domination.py",
+    "function": "_inc2",
+    "original": "c >= 2",
+    "replacement": "c > 2",
+    "before": {
+      "killed": false,
+      "summary": "2 passed in 0.02s",
+      "failures": []
+    },
+    "after": {
+      "killed": true,
+      "summary": "1 failed, 2 passed in 0.06s",
+      "failures": [
+        "FAILED tests/test_reference_counts.py::test_population_fields_saturate_without_changing_neighbours"
+      ]
+    }
+  }
+}
